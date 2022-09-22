@@ -12,4 +12,19 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onChangeTheme() {
+    localStorage.setItem(
+      'theme',
+      !localStorage.getItem('theme') ? 'dark-theme' : ''
+    );
+    this.onSetTheme();
+  }
+
+  onSetTheme() {
+    document.body.classList.toggle(
+      'dark-theme',
+      !!localStorage.getItem('theme')
+    );
+  }
+
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { maximizeWindow } from '../state/minimizeds/minimizeds.actions';
+import { addWindow } from '../state/windows/windows.actions';
 
 @Component({
   selector: 'app-bar',
@@ -19,6 +20,15 @@ export class BarComponent implements OnInit {
 
   onMaximize(window : string) {
     this.store.dispatch(maximizeWindow({window}))
+  }
+
+  onOpenSettings(minimizeds : any) {
+    if (minimizeds.includes('settings')) {
+      this.store.dispatch(maximizeWindow({ window : 'settings' }))
+    }
+    else {
+      this.store.dispatch(addWindow({ window : 'settings' }))
+    }
   }
 
 }

@@ -1,6 +1,6 @@
 .window {
     position: absolute;
-    background-color: white;
+    background-color: var(--bg-color-primary);
     width: 700px;
     height: 500px;
     border-radius: 5px;
@@ -10,7 +10,7 @@
         display: flex;
         align-items: center;
         padding: .5rem;
-        background-color: #ccc;
+        background-color: var(--bg-color-secondary);
         gap: .3rem;
     }
     &__close-button, &__full-screen-button, &__minimalize-button {
