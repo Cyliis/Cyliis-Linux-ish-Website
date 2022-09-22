@@ -1,0 +1,11 @@
+<div class="window" cdkDrag #window>
+    <div class="window__top-bar" cdkDragHandle>
+        <div class="window__close-button" (click)="onClose()"></div>
+        <div class="window__full-screen-button" (click)="onFullScreen()"></div>
+        <div class="window__minimalize-button" (click)="onMinimalize()"></div>
+        <span class="window__name">{{ name }}</span>
+    </div>
+    <div class="window__content">
+        <ng-content></ng-content>
+    </div>
+</div>

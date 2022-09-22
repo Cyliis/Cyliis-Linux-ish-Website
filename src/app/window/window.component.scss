@@ -1,0 +1,35 @@
+.window {
+    background-color: white;
+    width: 700px;
+    height: 500px;
+    border-radius: 5px;
+    overflow: hidden;
+    &__top-bar {
+        display: flex;
+        align-items: center;
+        padding: .5rem;
+        background-color: #ccc;
+        gap: .3rem;
+    }
+    &__close-button, &__full-screen-button, &__minimalize-button {
+        background-color: red;
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    &__full-screen-button {
+        background-color: yellow;
+    }
+    &__minimalize-button {
+        background-color: rgb(29, 194, 29);
+    }
+    &__name {
+        margin-left: .3rem;
+        font-weight: 500;
+    }
+    &__content {
+        box-sizing: border-box;
+        padding: .5rem;
+    }
+}

@@ -1,0 +1,26 @@
+.bar {
+    border-radius: 10px;
+    background-color: rgba(0, 255, 255, .8);
+    height: 100%;
+}
+
+
+.bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: .5rem;
+    box-sizing: border-box;
+    align-items: center;
+    &__left-side {
+        display: flex;
+    }
+    &__menu {
+        cursor: pointer;
+        height: 40px;
+    }
+    &__settings {
+        cursor: pointer;
+        width: 50px;
+    }
+}

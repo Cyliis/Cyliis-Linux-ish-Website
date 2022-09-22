@@ -1,0 +1,22 @@
+:host {
+    padding-left: 1rem;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+
+.folder {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: max-content;
+    cursor: pointer;
+    &__image {
+        width: 80px;
+    }
+    &__name {
+        margin-top: -10px;
+        color: white;
+        font-weight: bold;
+    }
+}

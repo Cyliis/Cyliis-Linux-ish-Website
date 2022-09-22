@@ -1,0 +1,17 @@
+.app {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    padding: 1vw;
+    box-sizing: border-box;
+    background-image: url("https://i1.wp.com/mir-s3-cdn-cf.behance.net/project_modules/1400/9bc27292880429.5e569ff84e4d0.gif");
+}
+
+app-desktop {
+    width: 96%;
+    flex-shrink: 0;
+}
+
+app-bar {
+    width: 4%;
+}

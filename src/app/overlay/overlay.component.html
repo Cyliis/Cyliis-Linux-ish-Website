@@ -1,0 +1,5 @@
+<ng-container *ngIf="windows$ | async as windows">
+    <app-gallery *ngIf="windows.includes('gallery')"></app-gallery>
+    <app-team *ngIf="windows.includes('team')"></app-team>
+    <app-alumni *ngIf="windows.includes('alumni')"></app-alumni>
+</ng-container>
