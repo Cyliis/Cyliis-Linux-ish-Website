@@ -1,5 +1,6 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { minimizeWindow } from '../state/minimizeds/minimizeds.actions';
 import { removeWindow } from '../state/windows/windows.actions';
 
 @Component({
@@ -15,7 +16,14 @@ export class WindowComponent implements OnInit {
 
   @Input() name! : string
 
+  fullscreen : boolean = false
+
   ngOnInit(): void {
+    let marginTop = Math.floor(Math.random() * 10);
+    let marginLeft = Math.floor(Math.random() * 10) + 30
+    let window: any = document.querySelector(`app-${this.name.toLowerCase()} .window`)
+    window.style.transform = `translateX(${marginLeft}vw)` 
+    window.style.transform += `translateY(${marginTop}vh)` 
   }
 
   onClose() {
@@ -23,10 +31,12 @@ export class WindowComponent implements OnInit {
   }
 
   onFullScreen() {
+    this.fullscreen = !this.fullscreen
+    document.querySelector(`app-${this.name.toLowerCase()} .window`)?.classList.toggle('fullscreen')
   }
 
   onMinimalize() {
-
+    this.store.dispatch(minimizeWindow({window : this.name.toLowerCase()}))
   }
 
 }

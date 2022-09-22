@@ -1,9 +1,11 @@
 .window {
+    position: absolute;
     background-color: white;
     width: 700px;
     height: 500px;
     border-radius: 5px;
     overflow: hidden;
+    z-index: 5;
     &__top-bar {
         display: flex;
         align-items: center;
@@ -33,3 +35,12 @@
         padding: .5rem;
     }
 }
+
+.fullscreen {
+    left: 0;
+    top: 0;
+    width: 98vw!important;
+    height: 96vh!important;
+    border-radius: 0;
+    transform: none!important;
+  }

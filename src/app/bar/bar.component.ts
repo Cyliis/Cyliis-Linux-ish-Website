@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { maximizeWindow } from '../state/minimizeds/minimizeds.actions';
 
 @Component({
   selector: 'app-bar',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<any>) { }
 
+  minimizeds$ = this.store.select("minimizeds")
+  
   ngOnInit(): void {
+
+  }
+
+  onMaximize(window : string) {
+    this.store.dispatch(maximizeWindow({window}))
   }
 
 }

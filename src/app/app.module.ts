@@ -13,6 +13,8 @@ import { TeamComponent } from './team/team.component';
 import { AlumniComponent } from './alumni/alumni.component';
 import { StoreModule } from '@ngrx/store';
 import { appState } from './state/app.state';
+import { ClComponent } from './cl/cl.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { appState } from './state/app.state';
     WindowComponent,
     GalleryComponent,
     TeamComponent,
-    AlumniComponent
+    AlumniComponent,
+    ClComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,9 @@
-<ng-container *ngIf="windows$ | async as windows">
-    <app-gallery *ngIf="windows.includes('gallery')"></app-gallery>
-    <app-team *ngIf="windows.includes('team')"></app-team>
-    <app-alumni *ngIf="windows.includes('alumni')"></app-alumni>
+<ng-container
+  *ngIf="{
+    windows: windows$ | async,
+    minimalizeds: minimizeds$ | async
+  } as vs">
+  <app-gallery *ngIf="vs.windows.includes('gallery')" [class.hide]="vs.minimalizeds.includes('gallery')"></app-gallery>
+  <app-team *ngIf="vs.windows.includes('team')" [class.hide]="vs.minimalizeds.includes('team')"></app-team>
+  <app-alumni *ngIf="vs.windows.includes('alumni')" [class.hide]="vs.minimalizeds.includes('alumni')"></app-alumni>
 </ng-container>
