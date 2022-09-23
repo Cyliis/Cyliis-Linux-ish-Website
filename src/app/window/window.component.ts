@@ -1,24 +1,25 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { minimizeWindow } from '../state/minimizeds/minimizeds.actions';
-import { removeWindow } from '../state/windows/windows.actions';
+import { removeWindow, setInFront } from '../state/windows/windows.actions';
 
 @Component({
   selector: 'app-window',
   templateUrl: './window.component.html',
   styleUrls: ['./window.component.scss']
 })
-export class WindowComponent implements OnInit {
+export class WindowComponent implements AfterViewInit {
 
   constructor(private store: Store<any>) { }
   
   @ViewChild('window') window! : ElementRef
 
-  @Input() name! : string
+  windows$ = this.store.select('windows')
 
+  @Input() name! : string
   fullscreen : boolean = false
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     let marginTop = Math.floor(Math.random() * 10);
     let marginLeft = Math.floor(Math.random() * 10) + 30
     let window: any = document.querySelector(`app-${this.name.toLowerCase()} .window`)
@@ -39,4 +40,8 @@ export class WindowComponent implements OnInit {
     this.store.dispatch(minimizeWindow({window : this.name.toLowerCase()}))
   }
 
+  onSetInFront() {
+    console.log('a')
+    this.store.dispatch(setInFront({window : this.name.toLowerCase()}))
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { minimizeWindow } from '../state/minimizeds/minimizeds.actions';
 import { removeWindow } from '../state/windows/windows.actions';
@@ -9,11 +9,12 @@ import { timer } from 'rxjs';
   templateUrl: './cl.component.html',
   styleUrls: ['./cl.component.scss']
 })
-export class ClComponent implements OnInit {
+export class ClComponent implements OnInit, AfterViewInit {
 
   constructor(private store: Store<any>) { }
   
   @ViewChild('window') window! : ElementRef
+  @ViewChild('consoleInput') consoleInput! : ElementRef
 
   content : string = `
   CyOS [Version 10.0.22000.978]<br>
@@ -29,6 +30,15 @@ export class ClComponent implements OnInit {
     let window: any = document.querySelector(`app-cl .window`)
     window.style.transform = `translateX(${marginLeft}vw)` 
     window.style.transform += `translateY(${marginTop}vh)` 
+  }
+
+  ngAfterViewInit(): void {
+    timer(10).subscribe(() => this.setInputFocus())
+  }
+
+  setInputFocus() {
+    console.log('a')
+    this.consoleInput.nativeElement.focus()
   }
 
   onClose() {

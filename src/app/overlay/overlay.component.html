@@ -3,6 +3,7 @@
     windows: windows$ | async,
     minimalizeds: minimizeds$ | async
   } as vs">
+  <!-- <pre>{{ vs.windows }}</pre> -->
   <app-settings *ngIf="vs.windows.includes('settings')" [class.hide]="vs.minimalizeds.includes('settings')"></app-settings>
   <app-gallery *ngIf="vs.windows.includes('gallery')" [class.hide]="vs.minimalizeds.includes('gallery')"></app-gallery>
   <app-team *ngIf="vs.windows.includes('team')" [class.hide]="vs.minimalizeds.includes('team')"></app-team>

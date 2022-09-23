@@ -3,9 +3,12 @@
     background-color: var(--bg-color-primary);
     width: 700px;
     height: 500px;
+    min-width: 350px;
+    min-height: 230px;
     border-radius: 5px;
-    overflow: hidden;
+    resize: both;
     z-index: 5;
+    overflow: auto;
     &__top-bar {
         display: flex;
         align-items: center;
@@ -43,4 +46,5 @@
     height: 96vh!important;
     border-radius: 0;
     transform: none!important;
-  }
+    resize: none;
+}

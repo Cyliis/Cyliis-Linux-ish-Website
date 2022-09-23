@@ -3,8 +3,11 @@
     background-color: #000;
     width: 700px;
     height: 500px;
+    min-width: 350px;
+    min-height: 230px;
     border-radius: 5px;
-    overflow: hidden;
+    overflow: auto;
+    resize: both;
     z-index: 5;
     &__top-bar {
         display: flex;
@@ -32,9 +35,12 @@
         font-weight: 500;
     }
     &__content {
+        height: inherit;
         box-sizing: border-box;
+        overflow: hidden;
         padding: .5rem;
-        font-family: "consolas";;
+        font-family: "consolas";
+        color: #fff;
     }
 }
 
@@ -45,6 +51,7 @@
     height: 96vh!important;
     border-radius: 0;
     transform: none!important;
+    resize: none;
 }
 .console-input {
     background-color: transparent;

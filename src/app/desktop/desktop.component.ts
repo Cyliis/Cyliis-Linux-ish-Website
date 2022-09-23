@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { maximizeWindow } from '../state/minimizeds/minimizeds.actions';
-import { addWindow } from '../state/windows/windows.actions';
+import { addWindow, setInFront } from '../state/windows/windows.actions';
 
 @Component({
   selector: 'app-desktop',
@@ -25,6 +25,7 @@ export class DesktopComponent implements OnInit {
     else {
       this.store.dispatch(addWindow({ window }))
     }
+    this.store.dispatch(setInFront({ window }))
   }
 
 }

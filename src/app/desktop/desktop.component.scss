@@ -12,6 +12,7 @@
     width: max-content;
     cursor: pointer;
     z-index: 4;
+    user-select: none;
     &__image {
         width: 80px;
     }

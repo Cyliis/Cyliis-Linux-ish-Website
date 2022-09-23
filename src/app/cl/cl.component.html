@@ -5,7 +5,7 @@
         <div class="window__minimalize-button" (click)="onMinimalize()"></div>
         <span class="window__name">CyCL</span>
     </div>
-    <div class="window__content" (click)="consoleInput.focus()">
+    <div class="window__content" (click)="setInputFocus()">
         <div class="content" [innerHTML]="content"></div>
         <p *ngIf="init"></p>
         <span>{{dir}}</span><input #consoleInput class="console-input" spellcheck="false" (keydown)="onInput($event)">

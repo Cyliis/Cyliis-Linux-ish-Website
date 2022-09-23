@@ -9,3 +9,8 @@ export const removeWindow = createAction(
     '[Overlay] remove Window',
     props<{ window : string }>()
 )
+
+export const setInFront = createAction(
+    '[Overlay] Set in front Window',
+    props<{ window : string }>()
+)
