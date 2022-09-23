@@ -1,3 +1,9 @@
 <app-window name="Settings">
     <button aria-label="schimbă tema" class="change-theme-button hide-on-mob" mat-icon-button (click)="onChangeTheme()"><mat-icon>brightness_4</mat-icon></button>
+    <div class="bg-images" >
+        <button mat-raised-button color="accent" (click)="onSetBackgroundImage(backgroundImage)" *ngFor="let backgroundImage of backgroundImages">{{backgroundImage}}</button>
+    </div>
+    <div class="colors">
+        <button mat-raised-button color="accent" (click)="onSetPrimaryColor(color)" *ngFor="let color of colors">{{color}}</button>
+    </div>
 </app-window>

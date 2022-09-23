@@ -1,5 +1,5 @@
 <div class="window mat-elevation-z2"  cdkDrag [cdkDragDisabled]="fullscreen" #window>
-    <div class="window__top-bar" cdkDragHandle>
+    <div class="window__top-bar" cdkDragHandle (dblclick)="onFullScreen()">
         <div class="window__close-button" (click)="onClose()"></div>
         <div class="window__full-screen-button" (click)="onFullScreen()"></div>
         <div class="window__minimalize-button" (click)="onMinimalize()"></div>

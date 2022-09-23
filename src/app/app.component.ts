@@ -10,6 +10,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.onSetTheme()
+    this.onSetBackgroundImage()
+    this.onSetPrimaryColor()
   }
 
   onSetTheme() {
@@ -17,5 +19,15 @@ export class AppComponent implements OnInit {
       'dark-theme',
       !!localStorage.getItem('theme')
     );
+  }
+
+  onSetBackgroundImage() {
+    let index = +localStorage.getItem('bg')!;
+    document.body.classList.add(`background-image-${index}`)
+  }
+
+  onSetPrimaryColor() {
+    let index = +localStorage.getItem('color')!;
+    document.body.classList.add(`primary-color-${index}`)
   }
 }

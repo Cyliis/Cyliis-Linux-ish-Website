@@ -1,16 +1,6 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @use "@angular/material" as mat;
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
 $cyliis-primary: mat.define-palette(mat.$indigo-palette);
 $cyliis-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
@@ -31,9 +21,9 @@ $cyliis-theme: mat.define-light-theme(
 :root {
   --bg-color-primary: #fff;
   --bg-color-secondary: #ccc;
-  --primary-color: blue;
-  --secondary-color: teal;
+  --primary-color: cyan;
   --text-color: #212121;
+  --bg-image: url("https://i1.wp.com/mir-s3-cdn-cf.behance.net/project_modules/1400/9bc27292880429.5e569ff84e4d0.gif");
 }
 
 .dark-theme {
@@ -42,6 +32,47 @@ $cyliis-theme: mat.define-light-theme(
   --text-color: #fff;
 }
 
+.background-image {
+  &-0 {
+    --bg-image: url("https://i1.wp.com/mir-s3-cdn-cf.behance.net/project_modules/1400/9bc27292880429.5e569ff84e4d0.gif");
+  }
+  &-1 {
+    --bg-image: url("https://www.gifcen.com/wp-content/uploads/2022/04/wallpaper-gif-4.gif");
+  }
+  &-2 {
+    --bg-image: url("https://i.pinimg.com/originals/5d/16/b2/5d16b293438a635ecfcfa78596cad135.gif");
+  }
+  &-3 {
+    --bg-image: url("https://c.tenor.com/zMdZBjJ7gPkAAAAd/aesthetic-wallpaper.gif");
+  }
+  &-4 {
+    --bg-image: url("https://wallpapercave.com/wp/wp3684404.gif");
+  }
+  &-5 {
+    --bg-image: url("https://i.pinimg.com/originals/d7/33/34/d733345e4f11231904e7634a04439e21.gif");
+  }
+}
+
+.primary-color {
+  &-0 {
+    --primary-color: cyan;
+  }
+  &-1 {
+    --primary-color: green;
+  }
+  &-2 {
+    --primary-color: red;
+  }
+  &-3 {
+    --primary-color: blue;
+  }
+  &-4 {
+    --primary-color: purple;
+  }
+  &-5 {
+    --primary-color: orange;
+  }
+}
 
 html,
 body {
@@ -53,7 +84,10 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  color: var(--text-color)
+  color: var(--text-color);
+  background-image: var(--bg-image);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .hide {
