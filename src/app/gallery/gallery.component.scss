@@ -1,0 +1,39 @@
+.gallery {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap : wrap;
+    gap: .5rem;
+    &__item {
+        width: 200px;
+        height: auto;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+
+.preview {
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    img {
+        width: 100%;
+        height: auto;
+    }
+    &__arrow-back, &__arrow-forward {
+        font-size: 6rem;
+        cursor: pointer;
+        position: absolute;
+    }
+    &__arrow-back {
+        left: 2%;
+    }
+    &__arrow-forward {
+        right: 10%;
+    }
+}

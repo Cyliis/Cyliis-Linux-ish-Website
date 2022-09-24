@@ -1,7 +1,12 @@
 <app-window name="Gallery">
-    <div class="gallery">
-        <div *ngFor="let item of galleryItems">
-            <p>{{ item }}</p>
+    <div class="preview" *ngIf="selected">
+        <img [src]="selected" (dblclick)="selected = ''">
+        <mat-icon class="preview__arrow-back" (click)="previous()">arrow_back</mat-icon>
+        <mat-icon class="preview__arrow-forward" (click)="next()">arrow_forward</mat-icon>
+    </div>
+    <div class="gallery" *ngIf="!selected">
+        <div class="gallery__item" *ngFor="let item of galleryItems;">
+            <img [src]="item" (click)="selected = item">
         </div>
     </div>
 </app-window>

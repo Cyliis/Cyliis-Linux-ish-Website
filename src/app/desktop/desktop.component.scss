@@ -10,9 +10,9 @@
     flex-direction: column;
     text-align: center;
     width: max-content;
-    cursor: pointer;
     z-index: 4;
     user-select: none;
+    padding: 0 .2rem;
     &__image {
         width: 80px;
     }
@@ -20,5 +20,11 @@
         margin-top: -10px;
         color: white;
         font-weight: bold;
+    }
+    &:hover {
+        background-color: hsla(240, 100%, 50%, 0.1);
+    }
+    &:focus {
+        background-color: hsla(240, 100%, 50%, 0.3);
     }
 }

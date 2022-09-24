@@ -17,6 +17,7 @@ export class WindowComponent implements AfterViewInit {
   windows$ = this.store.select('windows')
 
   @Input() name! : string
+  @Input() console : boolean = false
   fullscreen : boolean = false
 
   ngAfterViewInit(): void {

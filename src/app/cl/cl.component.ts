@@ -12,8 +12,7 @@ import { timer } from 'rxjs';
 export class ClComponent implements OnInit, AfterViewInit {
 
   constructor(private store: Store<any>) { }
-  
-  @ViewChild('window') window! : ElementRef
+
   @ViewChild('consoleInput') consoleInput! : ElementRef
 
   content : string = `
@@ -39,19 +38,6 @@ export class ClComponent implements OnInit, AfterViewInit {
   setInputFocus() {
     console.log('a')
     this.consoleInput.nativeElement.focus()
-  }
-
-  onClose() {
-    this.store.dispatch(removeWindow({window : 'cl'}))
-  }
-
-  onFullScreen() {
-    this.fullscreen = !this.fullscreen
-    document.querySelector(`app-cl .window`)?.classList.toggle('fullscreen')
-  }
-
-  onMinimalize() {
-    this.store.dispatch(minimizeWindow({window : 'cl'}))
   }
 
   onInput(e : any) {

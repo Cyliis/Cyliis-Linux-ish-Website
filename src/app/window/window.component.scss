@@ -48,3 +48,15 @@
     transform: none!important;
     resize: none;
 }
+
+.window.console {
+    background-color: #000;
+    .window__top-bar {
+        background-color: #212121;
+        color: #fff;
+    }
+    .window__content {
+        font-family: "consolas";
+        color: #fff;
+    }
+}

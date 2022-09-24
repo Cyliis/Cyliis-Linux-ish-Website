@@ -1,9 +1,9 @@
 <ng-container *ngIf="minimizeds$ | async as minimizeds">
     <div class="bar">
-        <div class="bar__left-side">
+        <div class="bar__left-side" cdkDropList (cdkDropListDropped)="drop($event)">
             <img class="bar__menu" src="https://cyliis.ro/assets/LogoCyliis.png">
-            <div (click)="onMaximize(minimized)" *ngFor="let minimized of minimizeds">
-                {{ minimized }}
+            <div class="app" [class.app--selected]="minimizeds.indexOf(minimized) == minimizeds.length - 1" (click)="onMaximize(minimized)" *ngFor="let minimized of list" cdkDrag>
+                <img class="app__img" [matTooltip]="minimized" matTooltipPosition="right" [src]="getImgUrl(minimized)">
             </div>
         </div>
         <div class="bar__right-side">

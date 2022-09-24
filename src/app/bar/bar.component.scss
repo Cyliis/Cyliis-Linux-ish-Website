@@ -15,14 +15,30 @@
     &__left-side {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
     }
     &__menu {
         cursor: pointer;
         height: 40px;
+        margin-bottom: 1rem;
     }
     &__settings {
         cursor: pointer;
         width: 50px;
+    }
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    padding: 0 .2rem;
+    box-sizing: border-box;
+    &__img {
+        width: 50px;
+    }
+    &:hover {
+        background-color: hsla(240, 100%, 50%, 0.1);
+    }
+    &--selected {
+        background-color: hsla(240, 100%, 50%, 0.3);
     }
 }

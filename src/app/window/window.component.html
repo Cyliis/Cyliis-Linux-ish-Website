@@ -1,5 +1,5 @@
 <ng-container *ngIf="windows$ | async as windows ">
-    <div class="window mat-elevation-z2" (mousedown)="onSetInFront()" [style.z-index]="windows.indexOf(name.toLowerCase()) + 10" cdkDrag [cdkDragDisabled]="fullscreen" #window>
+    <div class="window mat-elevation-z2" [class.console]="console" (mousedown)="onSetInFront()" [style.z-index]="windows.indexOf(name.toLowerCase()) + 10" cdkDrag [cdkDragDisabled]="fullscreen" #window>
         <div class="window__top-bar" cdkDragHandle (dblclick)="onFullScreen()">
             <div class="window__close-button" (click)="onClose()"></div>
             <div class="window__full-screen-button" (click)="onFullScreen()"></div>

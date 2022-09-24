@@ -15,6 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import { appState } from './state/app.state';
 import { ClComponent } from './cl/cl.component';
 import { SettingsComponent } from './settings/settings.component';
+import { EventsComponent } from './events/events.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SettingsComponent } from './settings/settings.component';
     TeamComponent,
     AlumniComponent,
     ClComponent,
-    SettingsComponent
+    SettingsComponent,
+    EventsComponent,
   ],
   imports: [
     BrowserModule,

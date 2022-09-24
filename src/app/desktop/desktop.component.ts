@@ -15,6 +15,35 @@ export class DesktopComponent implements OnInit {
 
   minimizeds$ = this.store.select("minimizeds")
 
+  files = [
+    {
+      name : 'gallery',
+      imageUrl : 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1024px-OneDrive_Folder_Icon.svg.png',
+      showName : 'Gallery'
+    },
+    {
+      name : 'team',
+      imageUrl : 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1024px-OneDrive_Folder_Icon.svg.png',
+      showName : 'Team'
+    },
+    {
+      name : 'alumni',
+      imageUrl : 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1024px-OneDrive_Folder_Icon.svg.png',
+      showName : 'Alumni'
+    },
+    {
+      name : 'events',
+      imageUrl : 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1024px-OneDrive_Folder_Icon.svg.png',
+      showName : 'Events'
+    },
+    {
+      name : 'cl',
+      imageUrl : 'https://cdn.icon-icons.com/icons2/2148/PNG/512/terminal_icon_131942.png',
+      showName : 'CyCL'
+    },
+    
+  ]
+
   ngOnInit(): void {
   }
 
