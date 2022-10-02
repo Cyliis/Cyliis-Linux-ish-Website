@@ -1,3 +1,10 @@
-<app-window name="Alumni">
-    <h1>Hello Alumni</h1>
-</app-window>
+<ng-container *ngIf="minimizeds$ | async as minimizeds">
+    <app-window name="Alumni">
+        <div class="alumni-wrapper">
+            <div class="alumni" *ngFor="let member of alumni" (dblclick)="onOpen(member, minimizeds)" tabindex="-1">
+                <img class="alumni__image" [src]="member.imageUrl">
+                <span class="alumni__name">{{ member.name }}</span>
+            </div>
+        </div>
+    </app-window>
+</ng-container>

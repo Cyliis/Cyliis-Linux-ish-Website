@@ -16,6 +16,8 @@ import { appState } from './state/app.state';
 import { ClComponent } from './cl/cl.component';
 import { SettingsComponent } from './settings/settings.component';
 import { EventsComponent } from './events/events.component';
+import { ImageComponent } from './image/image.component';
+import { PortfolioComponent } from './portfolio/portfolio.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { EventsComponent } from './events/events.component';
     ClComponent,
     SettingsComponent,
     EventsComponent,
+    ImageComponent,
+    PortfolioComponent,
   ],
   imports: [
     BrowserModule,

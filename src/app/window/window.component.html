@@ -1,13 +1,22 @@
-<ng-container *ngIf="windows$ | async as windows ">
-    <div class="window mat-elevation-z2" [class.console]="console" (mousedown)="onSetInFront()" [style.z-index]="windows.indexOf(name.toLowerCase()) + 10" cdkDrag [cdkDragDisabled]="fullscreen" #window>
-        <div class="window__top-bar" cdkDragHandle (dblclick)="onFullScreen()">
-            <div class="window__close-button" (click)="onClose()"></div>
-            <div class="window__full-screen-button" (click)="onFullScreen()"></div>
-            <div class="window__minimalize-button" (click)="onMinimalize()"></div>
-            <span class="window__name">{{ name }}</span>
-        </div>
-        <div class="window__content">
-            <ng-content></ng-content>
-        </div>
+<ng-container *ngIf="windows$ | async as windows">
+  <div
+    class="window mat-elevation-z2"
+    [class.console]="console"
+    [class.portfolio]="name == 'Portfolio'"
+    [style.z-index]="windows.indexOf(name.toLowerCase()) + 10"
+    (mousedown)="onSetInFront()"
+    cdkDrag
+    (cdkDragStarted)="onDragStart()"
+    #window
+  >
+    <div class="window__top-bar" cdkDragHandle (dblclick)="onFullScreen()">
+      <div class="window__close-button" (click)="onClose()"></div>
+      <div class="window__full-screen-button" (click)="onFullScreen()"></div>
+      <div class="window__minimalize-button" (click)="onMinimalize()"></div>
+      <span class="window__name">{{ name }}</span>
     </div>
+    <div class="window__content">
+      <ng-content></ng-content>
+    </div>
+  </div>
 </ng-container>

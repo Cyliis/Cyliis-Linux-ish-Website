@@ -1,0 +1,5 @@
+<ng-container *ngIf="image$ | async as image">
+    <app-window name="Image">
+        <img class="image" [src]="image">
+    </app-window>
+</ng-container>

@@ -54,7 +54,11 @@ export class BarComponent implements OnInit {
       case 'events':
         return 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1024px-OneDrive_Folder_Icon.svg.png'
       case 'cl':
-        return 'https://cdn.icon-icons.com/icons2/2148/PNG/512/terminal_icon_131942.png'
+        return 'https://www.freeiconspng.com/thumbs/command-line-icon/command-line-icon-1.png'
+      case 'image':
+        return 'https://www.freeiconspng.com/uploads/multimedia-photo-icon-31.png'
+      case 'portfolio':
+        return 'https://cdn-icons-png.flaticon.com/512/1454/1454827.png'
       default:
         return 'https://www.iconpacks.net/icons/2/free-settings-icon-3110-thumb.png'
     }

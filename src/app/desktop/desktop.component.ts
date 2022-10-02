@@ -38,7 +38,7 @@ export class DesktopComponent implements OnInit {
     },
     {
       name : 'cl',
-      imageUrl : 'https://cdn.icon-icons.com/icons2/2148/PNG/512/terminal_icon_131942.png',
+      imageUrl : 'https://www.freeiconspng.com/thumbs/command-line-icon/command-line-icon-1.png',
       showName : 'CyCL'
     },
     

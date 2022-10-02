@@ -42,7 +42,13 @@ export class WindowComponent implements AfterViewInit {
   }
 
   onSetInFront() {
-    console.log('a')
     this.store.dispatch(setInFront({window : this.name.toLowerCase()}))
+  }
+
+  onDragStart() {
+    if (this.fullscreen) {
+      this.fullscreen = false
+      document.querySelector(`app-${this.name.toLowerCase()} .window`)?.classList.remove('fullscreen')
+    }
   }
 }

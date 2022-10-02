@@ -2,7 +2,7 @@
     position: absolute;
     background-color: var(--bg-color-primary);
     width: 700px;
-    height: 500px;
+    // height: 500px;
     min-width: 350px;
     min-height: 230px;
     border-radius: 5px;
@@ -34,8 +34,8 @@
         font-weight: 500;
     }
     &__content {
-        box-sizing: border-box;
-        padding: .5rem;
+        max-height: 90vh;
+        overflow-y: auto;
     }
 }
 
@@ -44,7 +44,6 @@
     top: 0;
     width: 98vw!important;
     height: 96vh!important;
-    border-radius: 0;
     transform: none!important;
     resize: none;
 }
@@ -59,4 +58,10 @@
         font-family: "consolas";
         color: #fff;
     }
+}
+
+.portfolio {
+    min-width: 200px;
+    width: 150px;
+    resize: none;
 }

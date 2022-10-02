@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { GalleryItem } from '../models/gallery-item.model';
+import { setImage } from '../state/image/image.actions';
+import { maximizeWindow } from '../state/minimizeds/minimizeds.actions';
+import { addWindow, setInFront } from '../state/windows/windows.actions';
 
 @Component({
   selector: 'app-gallery',
@@ -8,7 +12,9 @@ import { GalleryItem } from '../models/gallery-item.model';
 })
 export class GalleryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store : Store<any>) { }
+
+  minimizeds$ = this.store.select("minimizeds")
 
   galleryItems : string[] = [
     "https://www.mercurynews.com/wp-content/uploads/2021/06/SJM-L-WEDJOAN-0623-01_85738846.jpg",
@@ -18,16 +24,17 @@ export class GalleryComponent implements OnInit {
     "https://media.4-paws.org/6/f/6/3/6f632736659b7a71ccdedabb3d62b4f409d09d10/VIER%20PFOTEN_2016-06-15_074-3428x1793-600x314.jpg"
   ];
 
-  selected = ''
-
   ngOnInit(): void {
   }
 
-  next() {
-    this.selected = this.galleryItems[(this.galleryItems.indexOf(this.selected) + 1) % (this.galleryItems.length)]
-  }
-
-  previous() {
-    this.selected = this.galleryItems[this.galleryItems.indexOf(this.selected) == 0 ? this.galleryItems.length - 1 : this.galleryItems.indexOf(this.selected) - 1]
+  onOpenImage(image : string, minimizeds : any) {
+    if (minimizeds.includes('image')) {
+      this.store.dispatch(maximizeWindow({ window : 'image' }))
+    }
+    else {
+      this.store.dispatch(addWindow({ window : 'image' }))
+    }
+    this.store.dispatch(setImage({ image }))
+    this.store.dispatch(setInFront({ window : 'image' }))
   }
 }
