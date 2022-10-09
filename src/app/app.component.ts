@@ -6,12 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'cyliis';
 
+  loaded = !!localStorage.getItem('boot')
+  
   ngOnInit() {
     this.onSetTheme()
     this.onSetBackgroundImage()
     this.onSetPrimaryColor()
+  }
+
+  onBoot() {
+    this.loaded = true
+    localStorage.setItem('boot', '1')
   }
 
   onSetTheme() {

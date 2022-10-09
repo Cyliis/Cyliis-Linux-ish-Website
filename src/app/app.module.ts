@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -18,6 +18,16 @@ import { SettingsComponent } from './settings/settings.component';
 import { EventsComponent } from './events/events.component';
 import { ImageComponent } from './image/image.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
+import { AboutComponent } from './about/about.component';
+import { EventComponent } from './event/event.component';
+import { DocumentsComponent } from './documents/documents.component';
+import { ImagesComponent } from './images/images.component';
+import { VideosComponent } from './videos/videos.component';
+import { MusicComponent } from './music/music.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { BootScreenComponent } from './boot-screen/boot-screen.component';
+import { FormsModule } from '@angular/forms';
+import { WindowsService } from './windows.service';
 
 @NgModule({
   declarations: [
@@ -34,14 +44,26 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
     EventsComponent,
     ImageComponent,
     PortfolioComponent,
+    AboutComponent,
+    EventComponent,
+    DocumentsComponent,
+    ImagesComponent,
+    VideosComponent,
+    MusicComponent,
+    AccessDeniedComponent,
+    BootScreenComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FormsModule,
     StoreModule.forRoot(appState)
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private injector: Injector) {
+    WindowsService.injector = injector;
+  }
+}

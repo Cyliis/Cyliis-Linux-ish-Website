@@ -1,16 +1,8 @@
 .app {
-    display: flex;
+    display: grid;
+    grid-template-columns: 58px auto;
     width: 100vw;
     height: 100vh;
     padding: 1vw;
     box-sizing: border-box;
-}
-
-app-desktop {
-    width: 96%;
-    flex-shrink: 0;
-}
-
-app-bar {
-    width: 4%;
 }

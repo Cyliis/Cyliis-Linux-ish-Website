@@ -1,15 +1,33 @@
-<ng-container *ngIf="minimizeds$ | async as minimizeds">
-    <div class="bar">
-        <div class="bar__left-side" cdkDropList (cdkDropListDropped)="drop($event)">
-            <img class="bar__menu" src="https://cyliis.ro/assets/LogoCyliis.png">
-            <div class="bar__apps">
-                <div class="app" [class.app--selected]="minimizeds.indexOf(minimized) == minimizeds.length - 1" (click)="onMaximize(minimized)" *ngFor="let minimized of list" cdkDrag cdkDragBoundary=".bar__apps">
-                    <img class="app__img" [matTooltip]="minimized" matTooltipPosition="right" [src]="getImgUrl(minimized)">
-                </div>
-            </div>
+<ng-container *ngIf="{ windows: windows$ | async, minimizeds: minimizeds$ | async } as vs">
+  <div class="bar">
+    <div class="bar__left-side" cdkDropList (cdkDropListDropped)="drop($event)">
+      <img
+        (click)="onOpenAbout(vs.windows)"
+        class="bar__menu"
+        src="https://cyliis.ro/assets/LogoCyliis.png"/>
+      <div class="bar__apps">
+        <div
+          class="app"
+          [class.app--selected]="vs.windows.indexOf(minimized) == vs.windows.length - 1"
+          [class.app--minimized]="vs.minimizeds.includes(minimized)"
+          *ngFor="let minimized of list"
+          cdkDrag
+          cdkDragBoundary=".bar__apps">
+          <mat-icon class="app__close-button" (click)="onClose(minimized)">close</mat-icon>
+          <img
+            class="app__img"
+            [matTooltip]="minimized"
+            matTooltipPosition="right"
+            [src]="getImgUrl(minimized)"
+            (click)="onMaximize(minimized, vs.minimizeds)"/>
         </div>
-        <div class="bar__right-side">
-            <img (click)="onOpenSettings(minimizeds)" class="bar__settings" src="https://www.iconpacks.net/icons/2/free-settings-icon-3110-thumb.png">
-        </div>
+      </div>
     </div>
+    <div class="bar__right-side">
+      <img
+        (click)="onOpenSettings(vs.windows)"
+        class="bar__settings"
+        src="https://www.iconpacks.net/icons/2/free-settings-icon-3110-thumb.png"/>
+    </div>
+  </div>
 </ng-container>

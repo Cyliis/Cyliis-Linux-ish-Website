@@ -1,0 +1,13 @@
+.content {
+    box-sizing: border-box;
+    padding: .5rem;
+}
+
+.sponsors {
+    display: flex;
+    gap: .5rem;
+    img {
+        height: 100px;
+        width: auto;
+    }
+}

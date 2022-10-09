@@ -1,4 +1,5 @@
-<main class="app">
+<app-boot-screen *ngIf="!loaded" (boot)="onBoot()"></app-boot-screen>
+<main class="app" *ngIf="loaded">
   <app-overlay></app-overlay>
   <app-bar></app-bar>
   <app-desktop></app-desktop>

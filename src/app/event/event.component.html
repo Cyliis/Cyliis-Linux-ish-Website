@@ -1,0 +1,12 @@
+<ng-container *ngIf="event$ | async as event">
+    <app-window name="Event" [showName]="event.title">
+        <div class="event">
+            <div class="event__details">
+                <span class="event__date">{{ event.date }}</span>
+                <h1 class="event__title">{{ event.title }}</h1>
+                <a [href]="event.url" target="_blank"><button mat-button color="primary">Event Information >></button></a>
+            </div>
+            <img class="event__image" [src]="event.imageUrl">
+        </div>
+    </app-window>
+</ng-container>

@@ -1,0 +1,10 @@
+<ng-container *ngIf="minimizeds$ | async as minimizeds">
+    <app-window name="Images">
+        <div class="folder-content">
+            <div class="file" *ngFor="let item of images;" tabindex="-1">
+                <img class="file__image" [src]="item.imageUrl" (dblclick)="onOpenImage(item.imageUrl, minimizeds)">
+                <p>{{ item.name }}.img</p>
+            </div>
+        </div>
+    </app-window>
+</ng-container>

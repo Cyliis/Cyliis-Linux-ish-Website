@@ -1,12 +1,12 @@
 <ng-container *ngIf="member$ | async as member">
-    <app-window name="Portfolio">
+    <app-window name="Portfolio" [showName]="member.name">
         <div class="member">
             <img class="member__image" [src]="member.imageUrl">
             <div class="member__details">
                 <h1>{{ member.name }}</h1>
                 <p>{{ member.quote }}</p>
             </div>
-            <div class="member__social-links-wrapper">
+            <div class="member__social-links-w rapper">
                 <a class="fa fa-facebook" *ngIf="member.Facebook?.trim()" [href]="member.Facebook" target="_blank"></a>
                 <a class="fa fa-github" *ngIf="member.Github?.trim()" [href]="member.Github" target="_blank"></a>
                 <a class="fa fa-instagram" *ngIf="member.Instagram?.trim()" [href]="member.Instagram" target="_blank"></a>

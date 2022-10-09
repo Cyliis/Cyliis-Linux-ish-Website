@@ -1,7 +1,85 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: .5rem;
+  padding-top: 1rem;
+}
+
 .bg-images {
-    display: flex;
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
 }
 
 .colors {
-    display: flex;
+  margin-bottom: 1.2rem;
+  display: flex;
+  gap: .5rem;
+}
+
+.color {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  cursor: pointer;
+  &-0 {
+    background-color: cyan;
+  }
+  &-1 {
+    background-color: green;
+  }
+  &-2 {
+    background-color: red;
+  }
+  &-3 {
+    background-color: blue;
+  }
+  &-4 {
+    background-color: purple;
+  }
+  &-5 {
+    background-color: orange;
+  }
+  &:hover {
+    filter: brightness(.7);
+  }
+}
+
+h1 {
+  line-height: .6;
+}
+
+.change-theme-button {
+  float: right;
+}
+
+.background-image {
+  width: 150px;
+  height: 105px;
+  cursor: pointer;
+  object-fit: contain;
+  overflow: hidden;
+  border-radius: 12px;
+  &-0 {
+    background-image: url("https://i1.wp.com/mir-s3-cdn-cf.behance.net/project_modules/1400/9bc27292880429.5e569ff84e4d0.gif");
+  }
+  &-1 {
+    background-image: url("https://www.gifcen.com/wp-content/uploads/2022/04/wallpaper-gif-4.gif");
+  }
+  &-2 {
+    background-image: url("https://i.pinimg.com/originals/5d/16/b2/5d16b293438a635ecfcfa78596cad135.gif");
+  }
+  &-3 {
+    background-image: url("https://c.tenor.com/zMdZBjJ7gPkAAAAd/aesthetic-wallpaper.gif");
+  }
+  &-4 {
+    background-image: url("https://wallpapercave.com/wp/wp3684404.gif");
+  }
+  &-5 {
+    background-image: url("https://i.pinimg.com/originals/d7/33/34/d733345e4f11231904e7634a04439e21.gif");
+  }
+  &:hover {
+    filter: brightness(.7);
+  }
 }

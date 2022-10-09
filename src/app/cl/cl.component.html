@@ -1,5 +1,7 @@
-<app-window name="cl" [console]="true">
-    <div class="content" [innerHTML]="content"></div>
-    <p *ngIf="init"></p>
-    <span>{{dir}}</span><input #consoleInput class="console-input" spellcheck="false" (keydown)="onInput($event)">
+<app-window name="cl" [showName]="title" [console]="true">
+    <div class="cl">
+        <div class="content" [innerHTML]="content"></div>
+        <p *ngIf="init"></p>
+        <span>{{dir$ | async}}</span><input #consoleInput [(ngModel)]="inputs[indexOfInput]" class="console-input" spellcheck="false" (keydown)="onInput($event)">
+    </div>
 </app-window>

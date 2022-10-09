@@ -6,6 +6,6 @@ export const setMember = createAction(
 )
 
 export const clearMember = createAction(
-    '[Image Member] Clear Member'
+    '[Portfolio Window] Clear Member'
 )
 

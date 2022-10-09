@@ -21,7 +21,7 @@ $cyliis-theme: mat.define-light-theme(
 :root {
   --bg-color-primary: #fff;
   --bg-color-secondary: #ccc;
-  --primary-color: cyan;
+  --primary-color: 0, 255, 255;
   --text-color: #212121;
   --bg-image: url("https://i1.wp.com/mir-s3-cdn-cf.behance.net/project_modules/1400/9bc27292880429.5e569ff84e4d0.gif");
 }
@@ -55,22 +55,22 @@ $cyliis-theme: mat.define-light-theme(
 
 .primary-color {
   &-0 {
-    --primary-color: cyan;
+    --primary-color: 0, 255, 255;
   }
   &-1 {
-    --primary-color: green;
+    --primary-color: 0, 128, 0;
   }
   &-2 {
-    --primary-color: red;
+    --primary-color: 255, 0, 0;
   }
   &-3 {
-    --primary-color: blue;
+    --primary-color: 0, 0, 255;
   }
   &-4 {
-    --primary-color: purple;
+    --primary-color: 128, 0, 128;
   }
   &-5 {
-    --primary-color: orange;
+    --primary-color: 255, 165, 0;
   }
 }
 
@@ -112,4 +112,41 @@ pre {
 
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.folder-content {
+  display: flex;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: .5rem;
+  gap: .5rem;
+}
+
+.file {
+  text-align: center;
+  user-select: none;
+  width: 90px;
+  padding: .5rem;
+  border-radius: 10px;
+  height: fit-content;
+  position: relative;
+  &__image {
+    object-fit: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 90px;
+    border-radius: 10px;
+    transition: .2s;
+  }
+  &:hover {
+    .file__image {
+      border-radius: 16px;
+    }
+    background-color: rgba(var(--primary-color), 0.2);
+  }
+  &:focus {
+    background-color: rgba(var(--primary-color), 0.3);
+    user-select: initial;
+  }
 }

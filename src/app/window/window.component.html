@@ -3,6 +3,7 @@
     class="window mat-elevation-z2"
     [class.console]="console"
     [class.portfolio]="name == 'Portfolio'"
+    [class.unresizble]="isUnresizeble()"
     [style.z-index]="windows.indexOf(name.toLowerCase()) + 10"
     (mousedown)="onSetInFront()"
     cdkDrag
@@ -13,9 +14,21 @@
       <div class="window__close-button" (click)="onClose()"></div>
       <div class="window__full-screen-button" (click)="onFullScreen()"></div>
       <div class="window__minimalize-button" (click)="onMinimalize()"></div>
-      <span class="window__name">{{ name }}</span>
+      <img class="window__icon" [src]="getImgUrl(name)">
+      <span class="window__name">{{ showName ?? name }}</span>
     </div>
-    <div class="window__content">
+    <div class="window__content" [class.window__content--extended]="isFolder()">
+      <ng-container *ngIf="isFolder()">
+        <div class="window__navigation-pane" *ngIf="minimizeds$ | async as minimizeds">
+          <div
+            class="window__navigation-pane-item"
+            *ngFor="let navigationPaneItem of navigationPaneItems"
+            (click)="onOpenNavigationPaneItem(navigationPaneItem.name, minimizeds)">
+              <img [src]="getImgUrl(navigationPaneItem.name)">
+              {{ navigationPaneItem.showName }}
+          </div>
+        </div>
+      </ng-container>
       <ng-content></ng-content>
     </div>
   </div>

@@ -1,6 +1,6 @@
 .bar {
     border-radius: 10px;
-    background-color: var(--primary-color);
+    background-color: rgb(var(--primary-color));
     height: 100%;
 }
 
@@ -9,16 +9,18 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: .5rem;
-    box-sizing: border-box;
     align-items: center;
     &__left-side {
+        width: 100%;
         display: flex;
         flex-direction: column;
     }
     &__menu {
+        box-sizing: border-box;
+        padding: .5rem .2rem 0;
         cursor: pointer;
-        height: 40px;
+        height: auto;
+        width: 100%;
         margin-bottom: 1rem;
     }
     &__settings {
@@ -31,14 +33,39 @@
     display: flex;
     flex-direction: column;
     padding: 0 .2rem;
+    position: relative;
     box-sizing: border-box;
     &__img {
         width: 50px;
     }
+    &__close-button {
+        position: absolute;
+        right: -5px;
+        top: -5px;
+        background-color: red;
+        padding: 3px;
+        border-radius: 50%;
+        color: #fff;
+        transform: scale(0);
+        cursor: pointer;
+        transition: .2s cubic-bezier(.175, .885, .32, 1.275);
+    }
     &:hover {
-        background-color: hsla(240, 100%, 50%, 0.1);
+        .app__close-button {
+            transform: scale(.5);
+        }
+        background-color: rgba(0, 0, 255, .1);
     }
     &--selected {
-        background-color: hsla(240, 100%, 50%, 0.3);
+        background-color: rgba(0, 0, 255, .3);
+    }
+    &:hover.app--selected {
+        background-color: rgba(0, 0, 255, .5);
+    }
+    &--minimized {
+        background-color: transparent;
+    }
+    &:hover.app--minimized.app--selected {
+        background-color: rgba(0, 0, 255, .3);
     }
 }
