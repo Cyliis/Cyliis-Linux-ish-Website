@@ -22,8 +22,6 @@ import { AboutComponent } from './about/about.component';
 import { EventComponent } from './event/event.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { ImagesComponent } from './images/images.component';
-import { VideosComponent } from './videos/videos.component';
-import { MusicComponent } from './music/music.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { BootScreenComponent } from './boot-screen/boot-screen.component';
 import { FormsModule } from '@angular/forms';
@@ -48,8 +46,6 @@ import { WindowsService } from './windows.service';
     EventComponent,
     DocumentsComponent,
     ImagesComponent,
-    VideosComponent,
-    MusicComponent,
     AccessDeniedComponent,
     BootScreenComponent,
   ],

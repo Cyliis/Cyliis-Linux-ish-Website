@@ -1,10 +1,8 @@
 <app-window name="Events">
-    <ng-container *ngIf="minimizeds$ | async as minimizeds">
-        <div class="folder-content">
-            <div class="file" [class.file--new]="event.actual" *ngFor="let event of events" (dblclick)="onOpen(event, minimizeds)" tabindex="-1">
-                <img class="file__image" [src]="event.imageUrl">
-                <p class="file__name">{{ event.title }}.evnt</p>
-            </div>
+    <div class="folder-content">
+        <div class="file" [class.file--new]="event.actual" *ngFor="let event of events" (dblclick)="onOpen(event)" tabindex="-1">
+            <img class="file__image" [src]="event.imageUrl">
+            <p class="file__name">{{ event.title }}.evnt</p>
         </div>
-    </ng-container>
+    </div>
 </app-window>

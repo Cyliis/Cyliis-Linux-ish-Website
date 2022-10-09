@@ -4,6 +4,7 @@
     [class.console]="console"
     [class.portfolio]="name == 'Portfolio'"
     [class.unresizble]="isUnresizeble()"
+    [class.error]="error"
     [style.z-index]="windows.indexOf(name.toLowerCase()) + 10"
     (mousedown)="onSetInFront()"
     cdkDrag
@@ -18,17 +19,15 @@
       <span class="window__name">{{ showName ?? name }}</span>
     </div>
     <div class="window__content" [class.window__content--extended]="isFolder()">
-      <ng-container *ngIf="isFolder()">
-        <div class="window__navigation-pane" *ngIf="minimizeds$ | async as minimizeds">
-          <div
-            class="window__navigation-pane-item"
-            *ngFor="let navigationPaneItem of navigationPaneItems"
-            (click)="onOpenNavigationPaneItem(navigationPaneItem.name, minimizeds)">
-              <img [src]="getImgUrl(navigationPaneItem.name)">
-              {{ navigationPaneItem.showName }}
-          </div>
+      <div class="window__navigation-pane" *ngIf="isFolder()">
+        <div
+          class="window__navigation-pane-item"
+          *ngFor="let navigationPaneItem of navigationPaneItems"
+          (click)="onOpenNavigationPaneItem(navigationPaneItem.name)">
+            <img [src]="getImgUrl(navigationPaneItem.name)">
+            {{ navigationPaneItem.showName }}
         </div>
-      </ng-container>
+      </div>
       <ng-content></ng-content>
     </div>
   </div>

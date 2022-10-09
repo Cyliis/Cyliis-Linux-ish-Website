@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { maximizeWindow } from '../state/minimizeds/minimizeds.actions';
 import { addWindow, setInFront } from '../state/windows/windows.actions';
+import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'app-desktop',
@@ -11,9 +12,7 @@ import { addWindow, setInFront } from '../state/windows/windows.actions';
 })
 export class DesktopComponent implements OnInit {
 
-  constructor(private store: Store<AppState>) { }
-
-  minimizeds$ = this.store.select("minimizeds")
+  constructor(private windowsService : WindowsService) { }
 
   files = [
     {
@@ -47,14 +46,8 @@ export class DesktopComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onOpen(window : string, minimizeds : any) {
-    if (minimizeds.includes(window)) {
-      this.store.dispatch(maximizeWindow({ window }))
-    }
-    else {
-      this.store.dispatch(addWindow({ window }))
-    }
-    this.store.dispatch(setInFront({ window }))
+  onOpen(window : string) {
+    this.windowsService.openWindow(window)
   }
 
 }

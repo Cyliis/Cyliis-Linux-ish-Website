@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '
 import { Store } from '@ngrx/store';
 import { maximizeWindow, minimizeWindow } from '../state/minimizeds/minimizeds.actions';
 import { addWindow, removeWindow, setInFront } from '../state/windows/windows.actions';
+import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'app-window',
@@ -10,7 +11,7 @@ import { addWindow, removeWindow, setInFront } from '../state/windows/windows.ac
 })
 export class WindowComponent implements AfterViewInit {
 
-  constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>, private windowsService : WindowsService) { }
   
   @ViewChild('window') window! : ElementRef
 
@@ -19,6 +20,7 @@ export class WindowComponent implements AfterViewInit {
 
   @Input() name! : string
   @Input() showName! : string
+  @Input() error : boolean = false
   @Input() console : boolean = false
   fullscreen : boolean = false
 
@@ -34,14 +36,6 @@ export class WindowComponent implements AfterViewInit {
     {
       showName : 'Images',
       name : 'images',
-    },
-    {
-      showName : 'Videos',
-      name : 'videos',
-    },
-    {
-      showName : 'Music',
-      name : 'music',
     },
     {
       showName : 'System',
@@ -86,15 +80,8 @@ export class WindowComponent implements AfterViewInit {
     }
   }
 
-  onOpenNavigationPaneItem(item : string, minimizeds : any) : any {
-    if (['downloads', 'system', 'sd'].includes(item)) return this.onOpenNavigationPaneItem('access-denied', minimizeds)
-    if (minimizeds.includes(window)) {
-      this.store.dispatch(maximizeWindow({ window : item }))
-    }
-    else {
-      this.store.dispatch(addWindow({ window : item }))
-    }
-    this.store.dispatch(setInFront({ window : item }))
+  onOpenNavigationPaneItem(item : string) {
+    this.windowsService.openWindow(item)
   }
 
   isFolder() {
@@ -104,37 +91,15 @@ export class WindowComponent implements AfterViewInit {
       'events',
       'gallery',
       'images',
-      'music',
       'team',
-      'videos'
     ].includes(this.name.toLowerCase())
   }
 
   getImgUrl(name : string) {
-    switch (name.toLowerCase()) {
-      case 'gallery':
-      case 'team':
-      case 'alumni':
-      case 'events':
-      case 'documents':
-      case 'images':
-      case 'music':
-      case 'videos':
-        return 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1024px-OneDrive_Folder_Icon.svg.png'
-      case 'cl':
-        return 'https://www.freeiconspng.com/thumbs/command-line-icon/command-line-icon-1.png'
-      case 'image':
-        return 'https://www.freeiconspng.com/uploads/multimedia-photo-icon-31.png'
-      case 'portfolio':
-        return 'https://cdn-icons-png.flaticon.com/512/1454/1454827.png'
-      case 'about':
-        return 'https://cyliis.ro/assets/LogoCyliis.png'
-      default:
-        return 'https://www.iconpacks.net/icons/2/free-settings-icon-3110-thumb.png'
-    }
+    return this.windowsService.getIcon(name)
   }
   
   isUnresizeble() {
-    return ['portfolio', 'event'].includes(this.name.toLowerCase()) 
+    return ['portfolio', 'event', 'access-denied'].includes(this.name.toLowerCase()) 
   }
 }

@@ -27,7 +27,7 @@ export class OverlayComponent implements OnInit {
   )
 
 
-  onClose(exception : string, notificationRef : any) {
+  onClose(exception : string, notificationRef : any, res : boolean = true) {
     let exceptionsRaw = localStorage.getItem('notifications')
     let exceptions : any = JSON.parse(exceptionsRaw ? exceptionsRaw : '[]')
     if (!Array.isArray(exceptions)) exceptions = []
@@ -35,18 +35,28 @@ export class OverlayComponent implements OnInit {
       JSON.stringify([...exceptions, exception])
     )
     notificationRef.remove()
+    return res
   }
 
 
   ngOnInit(): void {
     this.notificationsSubject.next(
-      [{
-        title: 'CyQuiz',
-        imageUrl: '/assets/events/9.png',
-        body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, ut?',
-        url: 'https://forms.gle/A1qLzVcnAJxYFCMy6',
-        id: '23r53242'
-      }]
+      [
+        {
+          title: 'CyQuiz',
+          imageUrl: '/assets/events/9.png',
+          body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, ut?',
+          url: 'https://forms.gle/A1qLzVcnAJxYFCMy6',
+          id: '23r53242'
+        },
+        {
+          title: 'CyQuiz',
+          imageUrl: '/assets/events/9.png',
+          body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, ut?',
+          url: 'https://forms.gle/A1qLzVcnAJxYFCMy6',
+          id: '23r53242'
+        },
+      ]
     )
   }
 

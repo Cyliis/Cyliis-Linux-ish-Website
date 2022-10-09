@@ -5,6 +5,7 @@ import { setMember } from '../state/member/member.actions';
 import { maximizeWindow } from '../state/minimizeds/minimizeds.actions';
 import { addWindow, setInFront } from '../state/windows/windows.actions';
 import { team } from '../team/team.data';
+import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'app-documents',
@@ -13,24 +14,16 @@ import { team } from '../team/team.data';
 })
 export class DocumentsComponent implements OnInit {
 
-  constructor(private store : Store<any>) { }
+  constructor(private windowsService : WindowsService) { }
 
-  minimizeds$ = this.store.select("minimizeds")
 
   documents = [...team, ...alumni]
 
   ngOnInit(): void {
   }
 
-  onOpen(member : any, minimizeds : any) {
-    if (minimizeds.includes('portfolio')) {
-      this.store.dispatch(maximizeWindow({ window : 'portfolio' }))
-    }
-    else {
-      this.store.dispatch(addWindow({ window : 'portfolio' }))
-    }
-    this.store.dispatch(setMember({ member }))
-    this.store.dispatch(setInFront({ window : 'portfolio' }))
+  onOpen(member : any) {
+    this.windowsService.openPortfolio(member)
   }
 
 }

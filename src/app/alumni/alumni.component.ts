@@ -4,6 +4,7 @@ import { setImage } from '../state/image/image.actions';
 import { setMember } from '../state/member/member.actions';
 import { maximizeWindow } from '../state/minimizeds/minimizeds.actions';
 import { addWindow, setInFront } from '../state/windows/windows.actions';
+import { WindowsService } from '../windows.service';
 import { alumni } from './alumni.data';
 
 @Component({
@@ -13,23 +14,15 @@ import { alumni } from './alumni.data';
 })
 export class AlumniComponent implements OnInit {
 
-  constructor(private store : Store<any>) { }
+  constructor(private windowsService : WindowsService) { }
 
   alumni = [...alumni]
-  minimizeds$ = this.store.select("minimizeds")
 
   ngOnInit(): void {
   }
 
-  onOpen(member : any, minimizeds : any) {
-    if (minimizeds.includes('portfolio')) {
-      this.store.dispatch(maximizeWindow({ window : 'portfolio' }))
-    }
-    else {
-      this.store.dispatch(addWindow({ window : 'portfolio' }))
-    }
-    this.store.dispatch(setMember({ member }))
-    this.store.dispatch(setInFront({ window : 'portfolio' }))
+  onOpen(member : any) {
+    this.windowsService.openPortfolio(member)
   }
 
 }

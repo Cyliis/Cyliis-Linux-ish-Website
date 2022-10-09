@@ -1,7 +1,44 @@
+import { alumni } from "../alumni/alumni.data"
+import { events } from "../events/events.data"
+import { gallery } from "../gallery/gallery.data"
+import { team } from "../team/team.data"
 import { WindowsService } from "../windows.service"
-import { documents } from "./documents.data"
-import { events } from "./events.data"
-import { gallery } from "./gallery.data"
+
+let eventsStruct = events.map((event : any) => {
+    return {
+        showText: `${event.title}.evnt`,
+        access: true,
+        name: 'event',
+        indexOfDir: 5,
+        type: '.evnt',
+        folder: false,
+        exec: () => WindowsService.injector.get(WindowsService).openEvent(event)
+    }
+})
+
+let documentStruct = [...team, ...alumni].map((member : any) => {
+    return {
+        showText: `${member.name}.prtfl`,
+        access: true,
+        name: 'portofolio',
+        indexOfDir: 5,
+        type: '.prtfl',
+        folder: false,
+        exec: () => WindowsService.injector.get(WindowsService).openPortfolio(member)
+    }
+})
+
+let galleryStruct = gallery.map((image : any) => {
+    return {
+        showText : `${image.name}.img`,
+        access: true,
+        name: 'image',
+        indexOfDir: 5,
+        type: '.img',
+        folder: false,
+        exec: () => WindowsService.injector.get(WindowsService).openImage(image.imageUrl)
+    }
+})
 
 export let structure = [
     {
@@ -132,25 +169,11 @@ export let structure = [
                 folder: true,
             },
             {
-                showText : 'Music',
-                indexOfDir : 8,
-                access: true,
-                folder: true,
-                exec : () => WindowsService.injector.get(WindowsService).openWindow('music')
-            },
-            {
                 showText : 'Images',
                 indexOfDir : 9,
                 access: true,
                 folder: true,
                 exec : () => WindowsService.injector.get(WindowsService).openWindow('images')
-            },
-            {
-                showText : 'Videos',
-                indexOfDir : 10,
-                access: true,
-                folder: true,
-                exec : () => WindowsService.injector.get(WindowsService).openWindow('videos')
             },
         ],
     },
@@ -250,7 +273,7 @@ export let structure = [
                 access: true,
                 folder: true,
             },
-            ...documents
+            ...documentStruct
         ]
     },
     {
@@ -336,7 +359,7 @@ export let structure = [
                 access: true,
                 folder: true,
             },
-            ...gallery
+            ...galleryStruct
         ]
     },
     {
@@ -354,7 +377,7 @@ export let structure = [
                 access: true,
                 folder: true,
             },
-            ...documents.slice(0, 18)
+            ...documentStruct.slice(0, 18)
         ]
     },
     {
@@ -372,7 +395,7 @@ export let structure = [
                 access: true,
                 folder: true,
             },
-            ...documents.slice(18, 62)
+            ...documentStruct.slice(18, 62)
         ]
     },
     {
@@ -390,7 +413,7 @@ export let structure = [
                 access: true,
                 folder: true,
             },
-            ...events
+            ...eventsStruct
         ]
     },
 ]

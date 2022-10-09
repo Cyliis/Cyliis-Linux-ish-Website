@@ -15,17 +15,15 @@
   <app-event *ngIf="vs.windows.includes('event')" [class.hide]="vs.minimalizeds.includes('event')"></app-event>
   <app-documents *ngIf="vs.windows.includes('documents')" [class.hide]="vs.minimalizeds.includes('documents')"></app-documents>
   <app-images *ngIf="vs.windows.includes('images')" [class.hide]="vs.minimalizeds.includes('images')"></app-images>
-  <app-music *ngIf="vs.windows.includes('music')" [class.hide]="vs.minimalizeds.includes('music')"></app-music>
-  <app-videos *ngIf="vs.windows.includes('videos')" [class.hide]="vs.minimalizeds.includes('videos')"></app-videos>
   <app-access-denied *ngIf="vs.windows.includes('access-denied')" [class.hide]="vs.minimalizeds.includes('access-denied')"></app-access-denied>
 </ng-container>
 <div class="notifications" *ngIf="notifications$ | async as notifications">
-  <div class="notification mat-elevation-z8" *ngFor="let notification of notifications" #notificationRef>
+  <a [href]="notification.url" target="_blank" (click)="onClose(notification.id, notificationRef)" [style.animation-delay.s]="i * .05" class="notification mat-elevation-z8" *ngFor="let notification of notifications; let i = index" #notificationRef>
     <img class="notification__image" [src]="notification.imageUrl">
     <div class="notification__content-wrapper">
-      <mat-icon class="notification__close-button" (click)="onClose(notification.id, notificationRef)">close</mat-icon>
+      <mat-icon class="notification__close-button" (click)="onClose(notification.id, notificationRef, false)">close</mat-icon>
       <b class="notification__title">{{ notification.title }}</b>
       <p class="notification__body">{{ notification.body }}</p>
     </div>
-  </div>
+  </a>
 </div>

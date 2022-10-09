@@ -2,7 +2,7 @@
     position: absolute;
     background-color: var(--bg-color-primary);
     width: 700px;
-    // height: 500px;
+    height: 500px;
     min-width: 350px;
     min-height: 230px;
     border-radius: 5px;
@@ -51,6 +51,7 @@
         flex-direction: column;
         padding: .5rem;
         box-sizing: border-box;
+        height: inherit;
     }
     &__navigation-pane-item {
         display: flex;
@@ -102,6 +103,12 @@
     min-width: 200px;
     width: 150px;
     resize: none;
+}
+
+.error {
+    width: 75px;
+    min-height: initial;
+    height: fit-content;
 }
 
 .unresizble {

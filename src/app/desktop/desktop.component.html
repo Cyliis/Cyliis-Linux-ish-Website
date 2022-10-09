@@ -1,6 +1,4 @@
-<div class="desktop" *ngIf="minimizeds$ | async as minimizeds">
-    <div class="folder" *ngFor="let file of files" (dblclick)="onOpen(file.name,  minimizeds)" tabindex="-1">
-        <img class="folder__image" [src]="file.imageUrl">
-        <p class="folder__name">{{ file.showName }}</p>
-    </div>
+<div class="folder" *ngFor="let file of files" (dblclick)="onOpen(file.name)" tabindex="-1">
+    <img class="folder__image" [src]="file.imageUrl">
+    <p class="folder__name">{{ file.showName }}</p>
 </div>

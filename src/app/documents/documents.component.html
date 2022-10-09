@@ -1,10 +1,8 @@
-<ng-container *ngIf="minimizeds$ | async as minimizeds">
-    <app-window name="Documents">
-        <div class="folder-content">
-            <div class="file" [ngClass]="{'lead' : member.teamLead, 'mentor' : member.mentor}"  *ngFor="let member of documents" (dblclick)="onOpen(member, minimizeds)" tabindex="-1">
-                <img class="file__image" [src]="member.imageUrl">
-                <span class="file__name">{{ member.name }}.prtfl</span>
-            </div>
+<app-window name="Documents">
+    <div class="folder-content">
+        <div class="file" [ngClass]="{'lead' : member.teamLead, 'mentor' : member.mentor}"  *ngFor="let member of documents" (dblclick)="onOpen(member)" tabindex="-1">
+            <img class="file__image" [src]="member.imageUrl">
+            <span class="file__name">{{ member.name }}.prtfl</span>
         </div>
-    </app-window>
-</ng-container>
+    </div>
+</app-window>

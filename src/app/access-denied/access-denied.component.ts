@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { removeWindow } from '../state/windows/windows.actions';
 
 @Component({
   selector: 'app-access-denied',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccessDeniedComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
   }
+
+  onClose() {
+    this.store.dispatch(removeWindow({ window : 'access-denied' }))
+  }
+
+
 
 }
