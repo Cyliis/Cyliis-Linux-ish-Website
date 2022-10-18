@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-boot-screen',
@@ -8,9 +9,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class BootScreenComponent implements OnInit {
 
   constructor() { }
-  @Input() loaded! : any
   @Output() boot = new EventEmitter()
 
+  loaded : boolean = false
+
+  content! : string
   ngOnInit(): void {
   }
 

@@ -40,24 +40,15 @@ export class OverlayComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.notificationsSubject.next(
-      [
-        {
-          title: 'CyQuiz',
-          imageUrl: '/assets/events/9.png',
-          body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, ut?',
-          url: 'https://forms.gle/A1qLzVcnAJxYFCMy6',
-          id: '23r53242'
-        },
-        {
-          title: 'CyQuiz',
-          imageUrl: '/assets/events/9.png',
-          body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, ut?',
-          url: 'https://forms.gle/A1qLzVcnAJxYFCMy6',
-          id: '23r53242'
-        },
-      ]
-    )
+    this.notificationsSubject.next([
+      {
+        title: 'CyQuiz',
+        imageUrl: '/assets/events/9.png',
+        body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, ut?',
+        url: 'https://forms.gle/A1qLzVcnAJxYFCMy6',
+        id: '23r53242'
+      }
+    ])
   }
 
 }

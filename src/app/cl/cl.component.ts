@@ -21,7 +21,7 @@ export class ClComponent implements OnInit, AfterViewInit {
   `
 
   folderStructure = structure
-  folderIndex : any = 0
+  folderIndex : any = 2
   init = true
   dir$ = new BehaviorSubject(this.folderStructure[this.folderIndex].dir)
   title = "CyCL"
@@ -69,13 +69,15 @@ export class ClComponent implements OnInit, AfterViewInit {
     if (app?.exec) app?.exec()
     else if (command == 'bgimage') this.changeDesktopImage(commands)
     else if (command == 'cd') this.cd(commands.join(""))
-    else if (command == 'cls') this.content = `<p></p>`
+    else if (command == 'clear') this.content = `<p></p>`
     else if (command == 'color') this.changeSystemColor(commands)
     else if (command == 'echo') this.content += commands.join(" ")
     else if (command == 'exit') this.store.dispatch(removeWindow({window : 'cl'}))
     else if (command == 'ftype') this.ftype(commands)
     else if (command == 'help') this.content += this.help()
+    else if (command == 'history') this.content += this.history()
     else if (command == 'ls') this.ls()
+    else if (command == 'neofetch') this.content += this.neoFetch()
     else if (command == 'shutdown') this.shutdown()
     else if (command == 'title') this.title = commands.join(" ")
     else if (command == 'time') this.content += new Date()
@@ -149,6 +151,10 @@ export class ClComponent implements OnInit, AfterViewInit {
     }
   }
 
+  history() {
+    return `lorem ipsum dolor sit amet`
+  }
+
   changeDesktopImage(commands : any) {
     if (commands[0] ) {
       if (commands[0] >= 0 && commands[0] < 7) this.setBackgroundImage(commands[0])
@@ -169,7 +175,7 @@ export class ClComponent implements OnInit, AfterViewInit {
     return `
       <pre>BGIMAGE    Sets desktop background image.</pre>
       <pre>CD         Displays the name of or changes the current directory.</pre>
-      <pre>CLS        Clears the screen.</pre>
+      <pre>CLEAR      Clears the screen.</pre>
       <pre>COLOR      Sets system color.</pre>
       <pre>DEL        Deletes one or more files.</pre>
       <pre>ECHO       Displays messages, or turns command echoing on or off.</pre>
@@ -178,6 +184,7 @@ export class ClComponent implements OnInit, AfterViewInit {
       <pre>FORMAT     Formats a disk for use with CyOS.</pre>
       <pre>FTYPE      Displays or modifies file types used in file extension associations.</pre>
       <pre>HELP       Provides Help information for CyOS commands.</pre>
+      <pre>LS         Displays a list of files and subdirectories in a directory.</pre>
       <pre>MD         Creates a directory.</pre>
       <pre>MKDIR      Creates a directory.</pre>
       <pre>MKLINK     Creates Symbolic Links and Hard Links.</pre>
@@ -191,6 +198,24 @@ export class ClComponent implements OnInit, AfterViewInit {
 
   onOpen(window : any) {
     this.store.dispatch(addWindow({window}))
+  }
+
+  neoFetch() {
+    return `
+    <pre>
+      ,clllllllllc'           cyliis@cyliis.ro
+   .:llllllllllllllll:        OS: Cyliis 2017.6.9
+ .clllll'        ;lllll'      Shell: cycl
+'cllll                        Resolution: 1920x975
+llllll                        Theme: Yaru-dark [GTK2/3]
+llllll                        Icons: Yaru[GTK2/3]
+;lllll            .......     CPU: Intel i9-12900HX (16) @ 5.00GHz
+'lllll'          .......      GPU: NVIDIA GeForce RTX 4090
+  llllll        .......       Memory: 82MiB / 19043MiB
+   lclllll...........         Number: 19043
+      ;:::::::::::::'
+        '''''''''''
+    </pre>` 
   }
 
   setBackgroundImage(index : number) {

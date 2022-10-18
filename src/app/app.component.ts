@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WindowsService } from './windows.service';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
+  constructor(private windowsService : WindowsService) {}
   loaded = !!localStorage.getItem('boot')
   
   ngOnInit() {
     this.onSetTheme()
     this.onSetBackgroundImage()
     this.onSetPrimaryColor()
+    document.onkeydown = (e) => {
+      if (e.ctrlKey && e.altKey && e.key == 't') this.windowsService.openWindow('cl')
+    };
   }
 
   onBoot() {

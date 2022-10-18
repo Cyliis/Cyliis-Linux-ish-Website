@@ -39,6 +39,10 @@
         margin-left: .3rem;
         font-weight: 500;
     }
+    &__content {
+        height: 100%;
+        overflow-y: auto;
+    }
     &__content--extended {
         display: grid;
         grid-template-columns: 140px auto;
@@ -92,8 +96,6 @@
         color: #fff;
     }
     .window__content {
-        max-height: 85vh;
-        overflow-y: scroll;
         font-family: "consolas";
         color: #fff;
     }
@@ -112,6 +114,7 @@
 }
 
 .unresizble {
+    height: fit-content;
     resize: none;
     .window__full-screen-button {
         display: none;

@@ -1,0 +1,8 @@
+<app-window name="folder" [showName]="name">
+    <div class="folder-content">
+        <div class="file" *ngFor="let file of files[name.toLowerCase()];" tabindex="-1">
+            <img class="file__image" [src]="file.imageUrl" (dblclick)="onOpen(file.imageUrl)">
+            <p>{{ file.name }}.img</p>
+        </div>
+    </div>
+</app-window>
