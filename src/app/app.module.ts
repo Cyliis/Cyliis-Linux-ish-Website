@@ -26,7 +26,6 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { BootScreenComponent } from './boot-screen/boot-screen.component';
 import { FormsModule } from '@angular/forms';
 import { WindowsService } from './windows.service';
-import { FolderComponent } from './folder/folder.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +48,6 @@ import { FolderComponent } from './folder/folder.component';
     ImagesComponent,
     AccessDeniedComponent,
     BootScreenComponent,
-    FolderComponent,
   ],
   imports: [
     BrowserModule,

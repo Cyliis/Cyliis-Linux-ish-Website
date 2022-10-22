@@ -8,6 +8,7 @@
     [style.z-index]="windows.indexOf(name.toLowerCase()) + 10"
     (mousedown)="onSetInFront()"
     cdkDrag
+    cdkDragBoundary="main"
     (cdkDragStarted)="onDragStart()"
     #window
   >
@@ -18,17 +19,19 @@
       <img class="window__icon" [src]="getImgUrl(name)">
       <span class="window__name">{{ showName ?? name }}</span>
     </div>
-    <div class="window__content" [class.window__content--extended]="isFolder()">
+    <div class="window__inner">
       <div class="window__navigation-pane" *ngIf="isFolder()">
         <div
           class="window__navigation-pane-item"
           *ngFor="let navigationPaneItem of navigationPaneItems"
-          (click)="onOpenNavigationPaneItem(navigationPaneItem.name)">
-            <img [src]="getImgUrl(navigationPaneItem.name)">
+          (mouseup)="onOpenNavigationPaneItem(navigationPaneItem.name, $event)">
+            <img src="assets/icons/folder.png">
             {{ navigationPaneItem.showName }}
         </div>
       </div>
-      <ng-content></ng-content>
+      <div class="window__content">
+        <ng-content></ng-content>
+      </div>
     </div>
   </div>
 </ng-container>

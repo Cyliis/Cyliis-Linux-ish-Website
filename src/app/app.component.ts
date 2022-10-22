@@ -9,15 +9,17 @@ import { WindowsService } from './windows.service';
 export class AppComponent implements OnInit {
 
   constructor(private windowsService : WindowsService) {}
-  loaded = !!localStorage.getItem('boot')
+  loaded = false 
   
   ngOnInit() {
+    this.loaded = !!localStorage.getItem('boot')
     this.onSetTheme()
     this.onSetBackgroundImage()
     this.onSetPrimaryColor()
     document.onkeydown = (e) => {
       if (e.ctrlKey && e.altKey && e.key == 't') this.windowsService.openWindow('cl')
     };
+    this.resolveUrl()
   }
 
   onBoot() {
@@ -40,5 +42,21 @@ export class AppComponent implements OnInit {
   onSetPrimaryColor() {
     let index = +localStorage.getItem('color')!;
     document.body.classList.add(`primary-color-${index}`)
+  }
+
+  resolveUrl() {
+    let paths = [...location.pathname.split('/')]
+    paths.shift()
+    if ([
+      'gallery',
+      'team',
+      'alumni',
+      'events',
+      'documents',
+      'images',
+      'about',
+      'cl',
+      'settings'
+    ].includes(paths[0])) this.windowsService.openWindow(paths[0])
   }
 }

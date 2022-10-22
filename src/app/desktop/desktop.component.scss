@@ -1,4 +1,5 @@
 :host {
+    padding-top: .2rem;
     padding-left: 1rem;
     box-sizing: border-box;
     flex-shrink: 0;
@@ -12,19 +13,26 @@
     width: max-content;
     z-index: 4;
     user-select: none;
-    padding: 0 .2rem;
+    padding: .2rem;
+    border-radius: 6px;
     &__image {
+        padding: .5rem;
         width: 80px;
+        transition: .1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     &__name {
-        margin-top: -10px;
         color: white;
         font-weight: bold;
     }
     &:hover {
-        background-color: hsla(240, 100%, 50%, 0.1);
+        background-color: rgba(var(--primary-color), .2);
+    }
+    &:active {
+        .folder__image {
+            transform: scale(.9);
+        }
     }
     &:focus {
-        background-color: hsla(240, 100%, 50%, 0.3);
+        background-color: rgba(var(--primary-color), .4);
     }
 }

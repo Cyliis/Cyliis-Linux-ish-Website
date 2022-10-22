@@ -4,5 +4,5 @@
     <div class="option" (click)="boot.emit()">New Site</div>
 </div>
 <div *ngIf="!loaded" class="boot-screen">
-    <div [innerHTML]="content"></div>
+    <pre [innerHTML]="content"></pre>
 </div>

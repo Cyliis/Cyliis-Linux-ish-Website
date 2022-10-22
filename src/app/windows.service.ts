@@ -4,45 +4,54 @@ import { setEvent } from './state/event/event.actions';
 import { setImage } from './state/image/image.actions';
 import { setMember } from './state/member/member.actions';
 import { maximizeWindow } from './state/minimizeds/minimizeds.actions';
-import { addWindow, setInFront } from './state/windows/windows.actions';
+import {
+  addWindow,
+  removeWindow,
+  setInFront,
+} from './state/windows/windows.actions';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WindowsService {
   static injector: Injector;
-  minimizeds : any
-  constructor(private store : Store<any>) {
-    this.store.select('minimizeds').subscribe((m) => this.minimizeds = m)
+  minimizeds: any;
+  constructor(private store: Store<any>) {
+    this.store.select('minimizeds').subscribe((m) => (this.minimizeds = m));
   }
-  
-  openWindow(window : any) : any {
-    if (['downloads', 'system', 'sd'].includes(window)) return this.openWindow('access-denied')
+
+  closeWindow(window: any) {
+    this.store.dispatch(removeWindow({ window: window.toLowerCase() }));
+  }
+
+  openWindow(window: any): void {
+    if (!this.isWindow(window)) return
+    if (['downloads', 'system', 'sd'].includes(window))
+      return this.openWindow('access-denied');
     if (this.minimizeds.includes(window)) {
-      this.store.dispatch(maximizeWindow({ window }))
+      this.store.dispatch(maximizeWindow({ window }));
+    } else {
+      this.store.dispatch(addWindow({ window }));
     }
-    else {
-      this.store.dispatch(addWindow({ window }))
-    }
-    this.store.dispatch(setInFront({ window }))
+    this.store.dispatch(setInFront({ window }));
   }
 
-  openImage(image : any) {
-      this.openWindow('image')
-      this.store.dispatch(setImage({image}))
+  openImage(image: any) {
+    this.openWindow('image');
+    this.store.dispatch(setImage({ image }));
   }
 
-  openEvent(event : any) {
-      this.openWindow('event')
-      this.store.dispatch(setEvent({event}))
+  openEvent(event: any) {
+    this.openWindow('event');
+    this.store.dispatch(setEvent({ event }));
   }
 
-  openPortfolio(portfolio : any) {
-      this.openWindow('portfolio')
-      this.store.dispatch(setMember({member : portfolio}))
+  openPortfolio(portfolio: any) {
+    this.openWindow('portfolio');
+    this.store.dispatch(setMember({ member: portfolio }));
   }
 
-  getIcon(name : string) {
+  getIcon(name: string) {
     switch (name.toLowerCase()) {
       case 'gallery':
       case 'team':
@@ -50,19 +59,37 @@ export class WindowsService {
       case 'events':
       case 'documents':
       case 'images':
-        return 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1024px-OneDrive_Folder_Icon.svg.png'
+        return 'assets/icons/folder.png';
       case 'cl':
-        return 'https://www.freeiconspng.com/thumbs/command-line-icon/command-line-icon-1.png'
+        return 'assets/icons/cl.png';
       case 'image':
-        return 'https://www.freeiconspng.com/uploads/multimedia-photo-icon-31.png'
+        return 'assets/icons/image.png';
       case 'portfolio':
-        return 'https://cdn-icons-png.flaticon.com/512/1454/1454827.png'
+        return 'https://cdn-icons-png.flaticon.com/512/1454/1454827.png';
       case 'about':
-        return 'https://cyliis.ro/assets/LogoCyliis.png'
+        return 'assets/icons/info.png';
       case 'access-denied':
-        return 'https://cdn-icons-png.flaticon.com/512/221/221755.png'
+        return 'https://cdn-icons-png.flaticon.com/512/221/221755.png';
       default:
-        return 'https://www.iconpacks.net/icons/2/free-settings-icon-3110-thumb.png'
+        return 'assets/icons/settings.png';
     }
+  }
+
+  isWindow(window : string) {
+    return [
+      'gallery',
+      'team',
+      'alumni',
+      'events',
+      'event',
+      'documents',
+      'images',
+      'cl',
+      'image',
+      'portfolio',
+      'about',
+      'access-denied',
+      'settings'
+    ].includes(window)
   }
 }

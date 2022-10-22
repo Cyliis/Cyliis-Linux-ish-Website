@@ -39,15 +39,14 @@
         margin-left: .3rem;
         font-weight: 500;
     }
-    &__content {
+    &__inner {
+        display: flex;
         height: 100%;
-        overflow-y: auto;
     }
-    &__content--extended {
-        display: grid;
-        grid-template-columns: 140px auto;
-        max-height: 90vh;
-        overflow-y: auto;
+    &__content {
+        width: 100%;
+        height: calc(100% - 36px);
+        box-sizing: border-box;
     }
     &__navigation-pane {
         border-right: 1px solid #ccc;

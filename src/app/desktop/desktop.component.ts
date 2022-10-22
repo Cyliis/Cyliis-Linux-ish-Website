@@ -17,27 +17,27 @@ export class DesktopComponent implements OnInit {
   files = [
     {
       name : 'gallery',
-      imageUrl : 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1024px-OneDrive_Folder_Icon.svg.png',
+      imageUrl : 'assets/icons/folder.png',
       showName : 'Gallery'
     },
     {
       name : 'team',
-      imageUrl : 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1024px-OneDrive_Folder_Icon.svg.png',
+      imageUrl : 'assets/icons/folder.png',
       showName : 'Team'
     },
     {
       name : 'alumni',
-      imageUrl : 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1024px-OneDrive_Folder_Icon.svg.png',
+      imageUrl : 'assets/icons/folder.png',
       showName : 'Alumni'
     },
     {
       name : 'events',
-      imageUrl : 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1024px-OneDrive_Folder_Icon.svg.png',
+      imageUrl : 'assets/icons/folder.png',
       showName : 'Events'
     },
     {
       name : 'cl',
-      imageUrl : 'https://www.freeiconspng.com/thumbs/command-line-icon/command-line-icon-1.png',
+      imageUrl : 'assets/icons/cl.png',
       showName : 'CyCL'
     },
     

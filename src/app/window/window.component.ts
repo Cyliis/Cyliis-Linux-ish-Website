@@ -56,7 +56,7 @@ export class WindowComponent implements AfterViewInit {
   }
 
   onClose() {
-    this.store.dispatch(removeWindow({window : this.name.toLowerCase()}))
+    this.windowsService.closeWindow(this.name)
   }
 
   onFullScreen() {
@@ -80,7 +80,8 @@ export class WindowComponent implements AfterViewInit {
     }
   }
 
-  onOpenNavigationPaneItem(item : string) {
+  onOpenNavigationPaneItem(item : string, e : MouseEvent) {
+    if (e.which != 2) this.windowsService.closeWindow(this.name)
     this.windowsService.openWindow(item)
   }
 
