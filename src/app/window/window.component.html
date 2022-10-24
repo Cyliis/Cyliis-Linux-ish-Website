@@ -25,7 +25,7 @@
           class="window__navigation-pane-item"
           *ngFor="let navigationPaneItem of navigationPaneItems"
           (mouseup)="onOpenNavigationPaneItem(navigationPaneItem.name, $event)">
-            <img src="assets/icons/folder.png">
+            <img [src]="navigationPaneItem.imageUrl">
             {{ navigationPaneItem.showName }}
         </div>
       </div>

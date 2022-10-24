@@ -56,11 +56,13 @@ export class WindowsService {
       case 'team':
       case 'alumni':
       case 'events':
-      case 'documents':
-      case 'images':
         return 'assets/icons/folder.png';
+      case 'images':
+        return 'assets/icons/image.png';
       case 'cl':
         return 'assets/icons/cl.png';
+      case 'documents':
+        return 'assets/icons/documents.png';
       case 'image':
         return 'assets/icons/image.png';
       case 'portfolio':

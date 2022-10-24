@@ -28,22 +28,32 @@ export class WindowComponent implements AfterViewInit {
     {
       showName : 'Downloads',
       name : 'downloads',
+      imageUrl : 'assets/icons/downloads.png'
     },
     {
       showName : 'Documents',
       name : 'documents',
+      imageUrl : 'assets/icons/documents.png'
     },
     {
       showName : 'Images',
       name : 'images',
+      imageUrl : 'assets/icons/image.png'
     },
     {
-      showName : 'System',
+      showName : 'Disk Cy',
       name : 'system',
+      imageUrl : 'assets/icons/disk-cy.png'
+    }, 
+    {
+      showName : 'Disk D',
+      name : 'system',
+      imageUrl : 'assets/icons/disk-d.png'
     },
     {
       showName : 'SD Card',
       name : 'sd',
+      imageUrl : 'assets/icons/folder.png'
     },
   ]
 
