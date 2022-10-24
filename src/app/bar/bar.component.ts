@@ -34,8 +34,9 @@ export class BarComponent implements OnInit {
       })
   }
 
-  onMaximize(window : string, minimizeds : any) {
-    if (minimizeds.includes(window)) this.store.dispatch(maximizeWindow({window}))
+  onMaximize(window : string, minimizeds : any, selected : any, e : MouseEvent) {
+    if (e.which == 2) return this.windowsService.closeWindow(window)
+    if (minimizeds.includes(window) || !selected) this.store.dispatch(maximizeWindow({window}))
     else this.store.dispatch(minimizeWindow({window}))
     this.store.dispatch(setInFront({ window }))
   }

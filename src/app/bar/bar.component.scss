@@ -10,32 +10,83 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    padding: .2rem;
+    box-sizing: border-box;
     &__left-side {
         width: 100%;
         display: flex;
         flex-direction: column;
     }
     &__menu {
-        box-sizing: border-box;
-        padding: .5rem .2rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
+        box-sizing: border-box;
+        aspect-ratio: 1;
+        flex-direction: column;
+        margin: .1rem 0 .5rem;
+        border-radius: 6px;
+        &:hover {
+            background-color: rgba(255, 255, 255, .3);
+        }
+        &:active {
+            background-color: rgba(255, 255, 255, .5);
+            .bar__menu-img {
+                transform: scale(.9);
+            }
+        }
+    }
+    &__menu-img {
+        box-sizing: border-box;
+        padding: .3rem;
         height: auto;
         width: 100%;
-        margin-bottom: 1rem;
+    }
+    &__apps {
+        display: flex;
+        flex-direction: column;
+        gap: .2rem;
     }
     &__settings {
+        display: flex;
+        padding: 0 .1rem;
+        justify-content: center;
+        box-sizing: border-box;
+        border-radius: 6px;
+        flex-direction: column;
+        aspect-ratio: 1/1;
         cursor: pointer;
         width: 50px;
+        &:hover {
+            background-color: rgba(255, 255, 255, .3);
+        }
+        &:active {
+            background-color: rgba(255, 255, 255, .5);
+            .bar__settings-img {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    &__settings-img {
+        box-sizing: border-box;
+        padding: .3rem;
+        height: auto;
+        width: 100%;
+        transition: .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 }
 
 .app {
     display: flex;
     flex-direction: column;
-    padding: 0 .2rem;
+    padding: 0 .1rem;
+    justify-content: center;
     position: relative;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    aspect-ratio: 1/1;
     &__img {
         padding: .4rem;
         transition: .2s cubic-bezier(.175, .885, .32, 1.275);
@@ -65,12 +116,12 @@
     &:hover.app--selected {
         background-color: rgba(255, 255, 255, 0.7);
     }
-    &--minimized {
-        background-color: transparent;
-    }
     &:active &__img {
         transform: scale(.9);
     }
+    &--minimized {
+        background-color:  rgba(255, 255, 255, .1);
+    }    
     &:hover.app--minimized.app--selected {
         background-color: rgba(255, 255, 255, 0.5);
     }

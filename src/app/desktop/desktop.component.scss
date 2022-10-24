@@ -14,10 +14,12 @@
     z-index: 4;
     user-select: none;
     padding: .2rem;
-    border-radius: 6px;
+    height: fit-content;
+    border-radius: 2px;
+    margin: .1rem 0;
     &__image {
         padding: .5rem;
-        width: 80px;
+        width: 75px;
         transition: .1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     &__name {
@@ -29,7 +31,7 @@
     }
     &:active {
         .folder__image {
-            transform: scale(.9);
+            opacity: .8;
         }
     }
     &:focus {

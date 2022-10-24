@@ -47,6 +47,7 @@
         width: 100%;
         height: calc(100% - 36px);
         box-sizing: border-box;
+        overflow-y: auto;
     }
     &__navigation-pane {
         border-right: 1px solid #ccc;
@@ -70,10 +71,10 @@
             width: auto;
         }
         &:hover {
-            background-color: hsla(240, 100%, 50%, 0.1);
+            background-color: rgba(var(--primary-color), .1);
         }
         &:active {
-            background-color: hsla(240, 100%, 50%, 0.3);
+            background-color: rgba(var(--primary-color), .3);
             user-select: initial;
         }
     }

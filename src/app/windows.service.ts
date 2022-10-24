@@ -25,7 +25,6 @@ export class WindowsService {
   }
 
   openWindow(window: any): void {
-    if (!this.isWindow(window)) return
     if (['downloads', 'system', 'sd'].includes(window))
       return this.openWindow('access-denied');
     if (this.minimizeds.includes(window)) {
@@ -65,31 +64,15 @@ export class WindowsService {
       case 'image':
         return 'assets/icons/image.png';
       case 'portfolio':
-        return 'https://cdn-icons-png.flaticon.com/512/1454/1454827.png';
+        return 'assets/icons/portfolio.png';;
       case 'about':
         return 'assets/icons/info.png';
+      case 'event':
+        return 'assets/icons/event.png';
       case 'access-denied':
-        return 'https://cdn-icons-png.flaticon.com/512/221/221755.png';
+        return 'assets/icons/error.png';
       default:
         return 'assets/icons/settings.png';
     }
-  }
-
-  isWindow(window : string) {
-    return [
-      'gallery',
-      'team',
-      'alumni',
-      'events',
-      'event',
-      'documents',
-      'images',
-      'cl',
-      'image',
-      'portfolio',
-      'about',
-      'access-denied',
-      'settings'
-    ].includes(window)
   }
 }
