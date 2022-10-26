@@ -6,7 +6,7 @@
       <div class="bar__menu" (click)="onOpenAbout()">
         <img
           class="bar__menu-img"
-          src="https://cyliis.ro/assets/LogoCyliis.png"
+          src="/assets/icons/cyliis.png"
         />
       </div>
       <div class="bar__apps">
@@ -40,9 +40,18 @@
         </div>
       </div>
     </div>
-    <div class="bar__right-side">
-      <div class="bar__settings" (click)="onOpenSettings()">
-        <img class="bar__settings-img" src="assets/icons/settings.png" />
+    <div class="bar__right-side" *ngIf="time$ | async as time" >
+      <div class="bar__time" tabindex="-1">
+        <p class="bar__time-hour">
+          {{ getTime(time) }}<br>
+          <b class="bar__time-day">{{ getDayName(time) }}</b>
+        </p>
+        <div class="bar__info">
+          <img class="bar__settings-img" src="assets/icons/settings.png" (click)="onOpenSettings()" />
+          <b class="bar__info-hour">{{ getTime(time) }}</b>
+          <p>{{ getDate(time) }}</p>
+        </div>
+        
       </div>
     </div>
   </div>

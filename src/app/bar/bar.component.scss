@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 .bar {
     border-radius: 10px;
     background-color: rgb(var(--primary-color));
@@ -48,32 +50,61 @@
         flex-direction: column;
         gap: .2rem;
     }
-    &__settings {
-        display: flex;
-        padding: 0 .1rem;
-        justify-content: center;
-        box-sizing: border-box;
+    &__time {
         border-radius: 6px;
-        flex-direction: column;
         aspect-ratio: 1/1;
+        text-align: center;
         cursor: pointer;
         width: 50px;
+        box-sizing: border-box;
+        position: relative;
         &:hover {
             background-color: rgba(255, 255, 255, .3);
         }
-        &:active {
+        &:focus {
             background-color: rgba(255, 255, 255, .5);
-            .bar__settings-img {
-                transform: rotate(180deg);
+            .bar__info {
+                display: flex!important;
             }
         }
     }
-    &__settings-img {
+    &__time-hour {
+        mix-blend-mode: hard-light;
+        padding-top: .3rem;
+    }
+    &__info {
+        z-index: 99999999;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         box-sizing: border-box;
-        padding: .3rem;
-        height: auto;
-        width: 100%;
-        transition: .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        padding: 1.6rem 1.2rem 1.2rem;
+        left: 4.5rem;
+        top: -57px;
+        gap: .3rem;
+        position: absolute;
+        background-color: rgb(var(--primary-color), .7);
+        width: 180px;
+        height: 110px;
+        border-radius: 6px;
+        @include mat.elevation(10);
+    }
+    &__info-hour {
+        font-size: 2rem;
+        line-height: normal;
+        mix-blend-mode: hard-light;
+    }
+    &__settings-img {
+        position: absolute;
+        right: .5rem;
+        top: .5rem;
+        width: 20px;
+        height: 20px;
+        transition: .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        &:active {
+            transform: scale(.9);
+        }
     }
 }
 

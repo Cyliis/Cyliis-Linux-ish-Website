@@ -1,9 +1,9 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, tap } from 'rxjs';
+import { BehaviorSubject, interval } from 'rxjs';
 import { maximizeWindow, minimizeWindow } from '../state/minimizeds/minimizeds.actions';
-import { addWindow, removeWindow, setInFront } from '../state/windows/windows.actions';
+import { removeWindow, setInFront } from '../state/windows/windows.actions';
 import { WindowsService } from '../windows.service';
 
 @Component({
@@ -18,8 +18,11 @@ export class BarComponent implements OnInit {
   windows$ = this.store.select("windows")
   minimizeds$ = this.store.select("minimizeds")
 
+  time$ = new BehaviorSubject(new Date())
+
   list : string[] = []
   ngOnInit(): void {
+    interval(1000).subscribe(() => this.time$.next(new Date()))
     this.windows$.subscribe(
       (res) => {
         if (!this.list.length) this.list = [...res]
@@ -59,5 +62,19 @@ export class BarComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.list, event.previousIndex, event.currentIndex);
+  }
+
+  getTime(time : Date) : string {
+    return `${time.getHours()}:${time.getMinutes().toString().length == 1  ? '0' : '' }${time.getMinutes()}`
+  }
+
+  getDayName(time : Date) : string {
+    let days = ['Sun.', 'Mon.', 'Tues.', 'Wed.', 'Thurs.', 'Fri.', 'Sat.']
+    return  days[time.getDay()]
+  }
+
+  getDate(time : Date) : string {
+    let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    return  `${time.getDate()} ${days[time.getDay()]} ${time.getFullYear()}`
   }
 }
