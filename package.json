@@ -21,7 +21,6 @@
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
     "@ngrx/store": "^13.2.0",
-    "hammerjs": "^2.0.8",
     "interactjs": "^1.10.17",
     "moveable": "^0.36.1",
     "ngx-moveable": "^0.33.1",
