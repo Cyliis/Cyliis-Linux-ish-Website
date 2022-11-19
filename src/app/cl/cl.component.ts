@@ -14,6 +14,7 @@ export class ClComponent implements OnInit, AfterViewInit {
   constructor(private store: Store<any>) { }
 
   @ViewChild('consoleInput') consoleInput! : ElementRef
+  @ViewChild('cl') clRef! : ElementRef
 
   content : string = `
   CyOS [Version 10.0.22000.978]<br>
@@ -86,6 +87,7 @@ export class ClComponent implements OnInit, AfterViewInit {
     else if (['del', 'erase', 'format', 'md', 'mkdir', 'rd', 'rmdir'].includes(command)) this.content += 'Access Denied'
     else this.content += `'${command}' is not recognized as an internal or external command, operable program or batch file.`
     this.content += "<p></p>"
+    timer(0).subscribe(() =>this.clRef.nativeElement.scrollTop = this.clRef.nativeElement.scrollHeight)
   }
 
   cd(path : string) {

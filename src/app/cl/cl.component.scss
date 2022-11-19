@@ -3,13 +3,14 @@
     padding: .5rem;
     max-height: 100%;
     overflow: auto;
+    scroll-behavior: smooth;
 }
 
 .console-input {
     background-color: transparent;
     border: none;
     outline: none;
-    font-family: "consolas";
+    font-family: 'Roboto Mono', monospace;
     color: #fff;
     font-size: 14px;
     padding-left: 0;

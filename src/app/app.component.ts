@@ -9,7 +9,8 @@ import { WindowsService } from './windows.service';
 export class AppComponent implements OnInit {
 
   constructor(private windowsService : WindowsService) {}
-  loaded = false 
+  
+  loaded = this.windowsService.isMobile()
   
   ngOnInit() {
     this.loaded = !!localStorage.getItem('boot')

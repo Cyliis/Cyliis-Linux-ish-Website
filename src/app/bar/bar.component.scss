@@ -163,3 +163,8 @@
     }
 }
 
+@media only screen and (max-width: 600px) {
+    .bar {
+        max-height: 95vh;
+    }
+}

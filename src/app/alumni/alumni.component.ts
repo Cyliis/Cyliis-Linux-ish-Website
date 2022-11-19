@@ -18,4 +18,8 @@ export class AlumniComponent {
     this.windowsService.openPortfolio(member)
   }
 
+  onOpenMob(member : string) {
+    if (this.windowsService.isMobile()) this.windowsService.openPortfolio(member)
+  }
+
 }

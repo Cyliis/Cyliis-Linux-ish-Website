@@ -1,7 +1,14 @@
-<app-window name="cl" [showName]="title">
-    <div class="cl">
-        <div class="content" [innerHTML]="content"></div>
-        <p *ngIf="init"></p>
-        <span>{{dir$ | async}}</span><input #consoleInput [(ngModel)]="inputs[indexOfInput]" class="console-input" spellcheck="false" (keydown)="onInput($event)">
-    </div>
+<app-window name="cl" [showName]="title" (click)="consoleInput.focus()">
+  <div class="cl" #cl>
+    <div class="content" [innerHTML]="content"></div>
+    <p *ngIf="init"></p>
+    <span>{{ dir$ | async }}</span>
+    <input
+      #consoleInput
+      [(ngModel)]="inputs[indexOfInput]"
+      class="console-input"
+      spellcheck="false"
+      (keydown)="onInput($event)"
+      cdkTrapFocus/>
+  </div>
 </app-window>

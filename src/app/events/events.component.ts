@@ -18,4 +18,8 @@ export class EventsComponent {
     this.windowsService.openEvent(event)
   }
 
+  onOpenMob(event : any) {
+    if (this.windowsService.isMobile()) this.windowsService.openEvent(event)
+  }
+
 }

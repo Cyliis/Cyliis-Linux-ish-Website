@@ -1,4 +1,3 @@
-import { Platform } from '@angular/cdk/platform';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { setInFront } from '../state/windows/windows.actions';
@@ -12,7 +11,7 @@ import { WindowsService } from '../windows.service';
 })
 export class WindowComponent implements AfterViewInit {
 
-  constructor(private store: Store<any>, private windowsService : WindowsService, private platform: Platform) { }
+  constructor(private store: Store<any>, private windowsService : WindowsService) { }
   
   @ViewChild('window') window! : ElementRef
 
@@ -63,7 +62,7 @@ export class WindowComponent implements AfterViewInit {
     let window: any = document.querySelector(`app-${this.name.toLowerCase()} .window`)
     window.style.transform = `translateX(${marginLeft}vw)` 
     window.style.transform += `translateY(${marginTop}vh)`
-    if (this.platform.ANDROID || this.platform.IOS) this.onFullScreen()
+    if (this.windowsService.isMobile()) this.onFullScreen()
   }
 
   onClose() {
@@ -71,7 +70,7 @@ export class WindowComponent implements AfterViewInit {
   }
 
   onFullScreen() {
-    if (this.platform.ANDROID || this.platform.IOS) return
+    if (this.windowsService.isMobile()) return
     if (this.isUnresizeble()) return
     this.fullscreen = !this.fullscreen
     document.querySelector(`app-${this.name.toLowerCase()} .window`)?.classList.toggle('fullscreen')
@@ -86,7 +85,7 @@ export class WindowComponent implements AfterViewInit {
   }
 
   onDragStart() {
-    if (this.platform.ANDROID || this.platform.IOS) return
+    if (this.windowsService.isMobile()) return
     if (this.fullscreen) {
       this.fullscreen = false
       document.querySelector(`app-${this.name.toLowerCase()} .window`)?.classList.remove('fullscreen')

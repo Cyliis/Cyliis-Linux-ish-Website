@@ -1,8 +1,8 @@
 <div class="boot-screen" *ngIf="loaded">
     <h1 class="title">Boot Options:</h1>
     <div class="options">
-        <div class="option" [class.option--selected]="!selected" (click)="openOldSite()">Old site</div>
-        <div class="option"  [class.option--selected]="selected" (click)="boot.emit()">New Site</div>
+        <div class="option" (mouseover)="selected = 0" [class.option--selected]="!selected" (click)="openOldSite()">Old site</div>
+        <div class="option" (mouseover)="selected = 1" [class.option--selected]="selected" (click)="boot.emit()">New Site</div>
     </div>
 </div>
 <div *ngIf="!loaded" class="boot-screen">

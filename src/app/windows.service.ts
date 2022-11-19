@@ -1,3 +1,4 @@
+import { Platform } from '@angular/cdk/platform';
 import { Injectable, Injector } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { timer } from 'rxjs';
@@ -17,7 +18,7 @@ import {
 export class WindowsService {
   static injector: Injector;
   minimizeds: any;
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<any>, private platform : Platform) {
     this.store.select('minimizeds').subscribe((m) => (this.minimizeds = m));
   }
 
@@ -108,5 +109,9 @@ export class WindowsService {
       default:
         return `assets/icons/${theme}settings.webp`;
     }
+  }
+
+  isMobile() {
+    return this.platform.ANDROID || this.platform.IOS
   }
 }

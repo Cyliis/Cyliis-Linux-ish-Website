@@ -5,11 +5,13 @@
 
 .notifications {
     position: absolute;
-    transform: translateX(75vw);
+    transform: translateX(77vw);
     display: flex;
     flex-direction: column-reverse;
     gap: .5rem;
-    height: 94vh;
+    max-height: 94vh;
+    height: fit-content;
+    bottom: -94vh;
     z-index: 999;
 }
 

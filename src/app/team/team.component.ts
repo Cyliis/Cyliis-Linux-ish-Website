@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { setMember } from '../state/member/member.actions';
-import { maximizeWindow } from '../state/minimizeds/minimizeds.actions';
-import { addWindow, setInFront } from '../state/windows/windows.actions';
+import { WindowsService } from '../windows.service';
 import { team } from './team.data';
 
 @Component({
@@ -13,20 +11,15 @@ import { team } from './team.data';
 })
 export class TeamComponent {
 
-  constructor(private store : Store<any>) { }
+  constructor(private store : Store<any>, private windowsService : WindowsService) { }
 
   team = [...team]
-  minimizeds$ = this.store.select("minimizeds")
 
-  onOpen(member : any, minimizeds : any) {
-    if (minimizeds.includes('portfolio')) {
-      this.store.dispatch(maximizeWindow({ window : 'portfolio' }))
-    }
-    else {
-      this.store.dispatch(addWindow({ window : 'portfolio' }))
-    }
-    this.store.dispatch(setMember({ member }))
-    this.store.dispatch(setInFront({ window : 'portfolio' }))
+  onOpen(member : any) {
+    this.windowsService.openPortfolio(member)
   }
 
+  onOpenMob(member : string) {
+    if (this.windowsService.isMobile()) this.windowsService.openPortfolio(member)
+  }
 }

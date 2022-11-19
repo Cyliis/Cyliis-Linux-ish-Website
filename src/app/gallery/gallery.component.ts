@@ -17,4 +17,8 @@ export class GalleryComponent {
   onOpenImage(image : any) {
     this.windowsService.openImage(image)
   }
+
+  onOpenMob(image : any) {
+    if (this.windowsService.isMobile()) this.windowsService.openImage(image)
+  }
 }
