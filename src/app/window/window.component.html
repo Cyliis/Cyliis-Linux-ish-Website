@@ -11,6 +11,7 @@
     [class.unactive]="vs.windows.indexOf(name.toLowerCase()) != vs.windows.length - 1"
     [style.z-index]="vs.windows.indexOf(name.toLowerCase()) + 10"
     (mousedown)="onSetInFront()"
+    (swiperight)="onClose()"
     cdkDrag 
     cdkDragBoundary="main" 
     (cdkDragStarted)="onDragStart()"
