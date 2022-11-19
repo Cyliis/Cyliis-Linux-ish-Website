@@ -73,3 +73,14 @@ h1 {
 .selected .done {
     display: block;
 }
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    line-height: normal;
+  }
+
+  .background-image {
+    width: 130px;
+    height: 100px;
+  }
+}
