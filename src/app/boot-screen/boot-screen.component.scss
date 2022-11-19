@@ -1,6 +1,7 @@
 .boot-screen {
     width: 100vw;
     height: 100vh;
+    font-family: "consolas";
     background-color: black;
     box-sizing: border-box;
     color: #fff;
@@ -10,13 +11,25 @@
     z-index: 99999999999;
 }
 
+.title {
+    font-family: "consolas";
+}
+
+.options {
+    display: grid;
+    border: 1px solid #fff;
+    padding: .5rem .5rem 10rem .5rem;
+    box-sizing: border-box;
+}
+
 .option {
     width: 100%;
     padding: .5rem;
     text-decoration: none;
     color:#fff;
+    box-sizing: border-box;
     cursor: default;
-    &:hover {
+    &:hover, &--selected {
         background-color: #fff;
         color: black;
     }

@@ -1,26 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { gallery } from '../gallery/gallery.data';
-import { setImage } from '../state/image/image.actions';
-import { maximizeWindow } from '../state/minimizeds/minimizeds.actions';
-import { addWindow, setInFront } from '../state/windows/windows.actions';
 import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'app-images',
   templateUrl: './images.component.html',
-  styleUrls: ['./images.component.scss']
+  styleUrls: ['./images.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ImagesComponent implements OnInit {
+export class ImagesComponent {
 
   constructor(private windowsService : WindowsService) { }
 
   images = [...gallery]
 
-  ngOnInit(): void {
-  }
-
-  onOpenImage(image : string) {
+  onOpenImage(image : any) {
     this.windowsService.openImage(image)
   }
 

@@ -1,5 +1,13 @@
-<ng-container *ngIf="image$ | async as image">
-    <app-window name="Image">
-        <img class="image" [src]="image">
+<ng-container *ngIf="{ index : imageIndex$ | async} as vs">
+    <app-window name="Image" [showName]="images[vs.index].name + '.img'">
+        <div class="image-wrapper">
+            <div class="left" (click)="previous(vs.index)">
+                <mat-icon>chevron_left</mat-icon>
+            </div>
+            <img class="image" [src]="images[vs.index].imageUrl">
+            <div class="right" (click)="next(vs.index)">
+                <mat-icon>chevron_right</mat-icon>
+            </div>
+        </div>
     </app-window>
 </ng-container>

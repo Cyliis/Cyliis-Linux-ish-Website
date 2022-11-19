@@ -1,9 +1,10 @@
 import { Injectable, Injector } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { timer } from 'rxjs';
 import { setEvent } from './state/event/event.actions';
 import { setImage } from './state/image/image.actions';
 import { setMember } from './state/member/member.actions';
-import { maximizeWindow } from './state/minimizeds/minimizeds.actions';
+import { maximizeWindow, minimizeWindow } from './state/minimizeds/minimizeds.actions';
 import {
   addWindow,
   removeWindow,
@@ -21,11 +22,15 @@ export class WindowsService {
   }
 
   closeWindow(window: any) {
-    this.store.dispatch(removeWindow({ window: window.toLowerCase() }));
+    let windowRef = document.querySelector(`app-${window} .window`)
+    windowRef!.classList.add('close')
+    timer(250).subscribe(() => {
+      this.store.dispatch(removeWindow({ window: window.toLowerCase() }));
+    })
   }
 
   openWindow(window: any): void {
-    if (['downloads', 'system', 'sd'].includes(window))
+    if (['downloads', 'disk-cy', 'disk-d'].includes(window))
       return this.openWindow('access-denied');
     if (this.minimizeds.includes(window)) {
       this.store.dispatch(maximizeWindow({ window }));
@@ -45,36 +50,63 @@ export class WindowsService {
     this.store.dispatch(setEvent({ event }));
   }
 
+  minimize(window : any) {
+    let windowRef = document.querySelector(`app-${window} .window`)
+    windowRef!.classList.remove('maximize')
+    windowRef!.classList.add('minimize')
+    timer(250).subscribe(() => {
+      this.store.dispatch(minimizeWindow({window : window}))
+    })
+  }
+
+  maximize(window : any) {
+    let windowRef = document.querySelector(`app-${window} .window`)
+    windowRef!.classList.remove('minimize')
+    windowRef!.classList.add('maximize')
+    timer(250).subscribe(() => {
+      this.store.dispatch(maximizeWindow({window : window.toLowerCase()}))
+    })
+  }
+
   openPortfolio(portfolio: any) {
     this.openWindow('portfolio');
     this.store.dispatch(setMember({ member: portfolio }));
   }
 
   getIcon(name: string) {
+    let theme = localStorage.getItem('icons') ?? ''
     switch (name.toLowerCase()) {
       case 'gallery':
       case 'team':
       case 'alumni':
       case 'events':
-        return 'assets/icons/folder.png';
+        return `assets/icons/${theme}folder.webp`;
       case 'images':
-        return 'assets/icons/image.png';
+        return `assets/icons/${theme}image.webp`;
       case 'cl':
-        return 'assets/icons/cl.png';
+        return `assets/icons/${theme}cl.webp`;
       case 'documents':
-        return 'assets/icons/documents.png';
+        return `assets/icons/${theme}documents.webp`;
       case 'image':
-        return 'assets/icons/image.png';
+        return `assets/icons/${theme}image.webp`;
       case 'portfolio':
-        return 'assets/icons/portfolio.png';;
+        return `assets/icons/${theme}portfolio.webp`;
       case 'about':
-        return 'assets/icons/info.png';
+        return `assets/icons/${theme}info.webp`;
       case 'event':
-        return 'assets/icons/event.png';
+        return `assets/icons/${theme}event.webp`;
+      case 'cyliis':
+        return `assets/icons/${theme}cyliis.webp`;
       case 'access-denied':
-        return 'assets/icons/error.png';
+        return `assets/icons/${theme}error.webp`;
+      case 'downloads':
+        return `assets/icons/${theme}downloads.webp`;
+      case 'disk-cy':
+        return `assets/icons/${theme}disk-cy.webp`;
+      case 'disk-d':
+        return `assets/icons/${theme}disk-d.webp`;
       default:
-        return 'assets/icons/settings.png';
+        return `assets/icons/${theme}settings.webp`;
     }
   }
 }

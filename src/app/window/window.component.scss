@@ -9,25 +9,38 @@
     resize: both;
     z-index: 5;
     overflow: hidden;
+    animation: maximize .3s cubic-bezier(0, 0, .1, 1);
     &__top-bar {
         display: flex;
-        align-items: center;
-        padding: .5rem;
+        justify-content: space-between;
         background-color: var(--bg-color-secondary);
+        padding: .5rem 1rem .5rem .5rem;
+    }
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: .3rem;
+    }
+    &__description {
+        display: flex;
+        align-items: center;
         gap: .3rem;
     }
     &__close-button, &__full-screen-button, &__minimalize-button {
-        background-color: red;
-        height: 10px;
-        width: 10px;
-        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 20px;
+        width: 20px;
+        border-radius: 6px;
         cursor: pointer;
-    }
-    &__full-screen-button {
-        background-color: yellow;
-    }
-    &__minimalize-button {
-        background-color: rgb(29, 194, 29);
+        transition: .2s;
+        mat-icon {
+            transform: scale(.6);
+        }
+        &:hover {
+            background-color: rgba(var(--primary-color), .3);
+        }
     }
     &__icon {
         height: 20px;
@@ -80,7 +93,11 @@
     }
 }
 
-.fullscreen {
+.unactive {
+    filter: contrast(.8);
+}
+
+.fullscreen  {
     left: 0;
     top: 0;
     width: 98vw!important;
@@ -102,9 +119,18 @@
 }
 
 .portfolio {
-    min-width: 200px;
-    width: 150px;
+    min-width: 350px;
+    width: 350px;
     resize: none;
+    min-height: 100px;
+}
+
+.image .window__content {
+    overflow: hidden;
+}
+
+.event {
+    width: 500px;
 }
 
 .error {
@@ -118,5 +144,55 @@
     resize: none;
     .window__full-screen-button {
         display: none;
+    }
+}
+
+.minimize {
+    animation: minimize .3s cubic-bezier(0, 0, .1, 1);
+}
+
+.maximize {
+    animation: maximize .3s cubic-bezier(0, 0, .1, 1);    
+}
+
+.close {
+    animation: close .3s cubic-bezier(0, 0, .1, 1);    
+}
+
+@keyframes minimize {
+    to {
+        opacity: 0;
+        transform: translateX(-20vw) scale(.2);
+    }
+}
+
+@keyframes close {
+    to {
+        opacity: 0;
+        transform: translateX(100vw) scale(.2);
+    }
+}
+
+@keyframes maximize {
+    from {
+        opacity: 0;
+        scale: 0;
+    }
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .window {
+        left: 0;
+        top: 0;
+        width: 98vw!important;
+        transform: none!important;
+        resize: none;
+        &__full-screen-button, &__minimalize-button {
+            display: none;
+        }
     }
 }

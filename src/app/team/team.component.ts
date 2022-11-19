@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { setMember } from '../state/member/member.actions';
 import { maximizeWindow } from '../state/minimizeds/minimizeds.actions';
@@ -8,17 +8,15 @@ import { team } from './team.data';
 @Component({
   selector: 'app-team',
   templateUrl: './team.component.html',
-  styleUrls: ['./team.component.scss']
+  styleUrls: ['./team.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TeamComponent implements OnInit {
+export class TeamComponent {
 
   constructor(private store : Store<any>) { }
 
   team = [...team]
   minimizeds$ = this.store.select("minimizeds")
-
-  ngOnInit(): void {
-  }
 
   onOpen(member : any, minimizeds : any) {
     if (minimizeds.includes('portfolio')) {

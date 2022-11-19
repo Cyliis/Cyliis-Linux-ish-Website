@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: .5rem;
+  padding: 1rem;
   padding-top: 1rem;
 }
 
@@ -23,31 +23,17 @@
   height: 40px;
   border-radius: 12px;
   cursor: pointer;
-  &-0 {
-    background-color: cyan;
-  }
-  &-1 {
-    background-color: green;
-  }
-  &-2 {
-    background-color: red;
-  }
-  &-3 {
-    background-color: blue;
-  }
-  &-4 {
-    background-color: purple;
-  }
-  &-5 {
-    background-color: orange;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
   &:hover {
     filter: brightness(.7);
   }
 }
 
 h1 {
-  line-height: .6;
+  line-height: .7;
 }
 
 .change-theme-button {
@@ -61,25 +47,29 @@ h1 {
   object-fit: contain;
   overflow: hidden;
   border-radius: 12px;
-  &-0 {
-    background-image: url("https://i1.wp.com/mir-s3-cdn-cf.behance.net/project_modules/1400/9bc27292880429.5e569ff84e4d0.gif");
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    object-fit: cover;
   }
-  &-1 {
-    background-image: url("https://www.gifcen.com/wp-content/uploads/2022/04/wallpaper-gif-4.gif");
-  }
-  &-2 {
-    background-image: url("https://i.pinimg.com/originals/5d/16/b2/5d16b293438a635ecfcfa78596cad135.gif");
-  }
-  &-3 {
-    background-image: url("https://c.tenor.com/zMdZBjJ7gPkAAAAd/aesthetic-wallpaper.gif");
-  }
-  &-4 {
-    background-image: url("https://wallpapercave.com/wp/wp3684404.gif");
-  }
-  &-5 {
-    background-image: url("https://i.pinimg.com/originals/d7/33/34/d733345e4f11231904e7634a04439e21.gif");
+  .done {
+    position: absolute;
+    z-index: 5;
+    color: rgb(var(--primary-color));
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(3)
   }
   &:hover {
     filter: brightness(.7);
   }
+}
+.done {
+  display: none;
+}
+
+.selected .done {
+    display: block;
 }

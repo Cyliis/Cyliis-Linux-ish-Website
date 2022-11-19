@@ -1,23 +1,30 @@
-<ng-container *ngIf="windows$ | async as windows">
+
+<ng-container *ngIf="{ windows: windows$ | async, minimizeds: minimizeds$ | async } as vs" >
   <div
     class="window mat-elevation-z2"
-    [class.console]="console"
+    [class.console]="name == 'cl'"
     [class.portfolio]="name == 'Portfolio'"
+    [class.image]="name == 'Image'"
+    [class.event]="name == 'Event'"
     [class.unresizble]="isUnresizeble()"
     [class.error]="error"
-    [style.z-index]="windows.indexOf(name.toLowerCase()) + 10"
+    [class.unactive]="vs.windows.indexOf(name.toLowerCase()) != vs.windows.length - 1"
+    [style.z-index]="vs.windows.indexOf(name.toLowerCase()) + 10"
     (mousedown)="onSetInFront()"
-    cdkDrag
-    cdkDragBoundary="main"
+    cdkDrag 
+    cdkDragBoundary="main" 
     (cdkDragStarted)="onDragStart()"
-    #window
-  >
+    #window>
     <div class="window__top-bar" cdkDragHandle (dblclick)="onFullScreen()">
-      <div class="window__close-button" (click)="onClose()"></div>
-      <div class="window__full-screen-button" (click)="onFullScreen()"></div>
-      <div class="window__minimalize-button" (click)="onMinimalize()"></div>
-      <img class="window__icon" [src]="getImgUrl(name)">
-      <span class="window__name">{{ showName ?? name }}</span>
+      <section class="window__description">
+        <img class="window__icon" [src]="getImgUrl(name)">
+        <span class="window__name">{{ showName ?? name }}</span>
+      </section>
+      <section class="window__actions">
+        <div class="window__minimalize-button" (click)="onMinimalize()"><mat-icon>minimize</mat-icon></div>
+        <div class="window__full-screen-button" (click)="onFullScreen()"><mat-icon>fullscreen{{ fullscreen ? '_exit' : '' }}</mat-icon></div>
+        <div class="window__close-button" (click)="onClose()"><mat-icon>close</mat-icon></div>
+      </section>
     </div>
     <div class="window__inner">
       <div class="window__navigation-pane" *ngIf="isFolder()">
@@ -25,7 +32,7 @@
           class="window__navigation-pane-item"
           *ngFor="let navigationPaneItem of navigationPaneItems"
           (mouseup)="onOpenNavigationPaneItem(navigationPaneItem.name, $event)">
-            <img [src]="navigationPaneItem.imageUrl">
+            <img [src]="getImgUrl(navigationPaneItem.name)">
             {{ navigationPaneItem.showName }}
         </div>
       </div>

@@ -1,4 +1,4 @@
-<div class="folder" *ngFor="let file of files" (dblclick)="onOpen(file.name)" tabindex="-1">
+<div class="folder" *ngFor="let file of files" (dblclick)="onOpen(file.name)" tabindex="-1" cdkDrag cdkDragBoundary="app-desktop">
     <img class="folder__image" [src]="file.imageUrl">
     <p class="folder__name">{{ file.showName }}</p>
 </div>

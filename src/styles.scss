@@ -23,7 +23,6 @@ $cyliis-theme: mat.define-light-theme(
   --bg-color-secondary: #ccc;
   --primary-color: 0, 255, 255;
   --text-color: #212121;
-  --bg-image: url("https://i1.wp.com/mir-s3-cdn-cf.behance.net/project_modules/1400/9bc27292880429.5e569ff84e4d0.gif");
 }
 
 .dark-theme {
@@ -34,7 +33,7 @@ $cyliis-theme: mat.define-light-theme(
 
 .background-image {
   &-0 {
-    --bg-image: url("https://i1.wp.com/mir-s3-cdn-cf.behance.net/project_modules/1400/9bc27292880429.5e569ff84e4d0.gif");
+    --bg-image: url("/assets/bg/bg-1.webp");
   }
   &-1 {
     --bg-image: url("https://www.gifcen.com/wp-content/uploads/2022/04/wallpaper-gif-4.gif");
@@ -55,22 +54,22 @@ $cyliis-theme: mat.define-light-theme(
 
 .primary-color {
   &-0 {
-    --primary-color: 0, 255, 255;
+    --primary-color: 0, 188, 212;
   }
   &-1 {
-    --primary-color: 0, 128, 0;
+    --primary-color: 76, 175, 80;
   }
   &-2 {
-    --primary-color: 255, 0, 0;
+    --primary-color: 244, 67, 54;
   }
   &-3 {
-    --primary-color: 0, 0, 255;
+    --primary-color: 33, 150, 243;
   }
   &-4 {
-    --primary-color: 128, 0, 128;
+    --primary-color: 156, 39, 176;
   }
   &-5 {
-    --primary-color: 255, 165, 0;
+    --primary-color: 255, 152, 0;
   }
 }
 
@@ -101,9 +100,6 @@ pre {
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .cdk-drag-placeholder {
@@ -152,4 +148,9 @@ pre {
     background-color: rgba(var(--primary-color), .3);
     user-select: initial;
   }
+}
+
+@keyframes appear {
+  from { transform: scale(0);}
+  to { transform: scale(1);}
 }

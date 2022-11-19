@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { removeWindow } from '../state/windows/windows.actions';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'app-access-denied',
   templateUrl: './access-denied.component.html',
-  styleUrls: ['./access-denied.component.scss']
+  styleUrls: ['./access-denied.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AccessDeniedComponent implements OnInit {
+export class AccessDeniedComponent {
 
-  constructor(private store: Store) { }
+  constructor(private windowsService : WindowsService) { }
 
-  ngOnInit(): void {
+  getIcon() {
+    return this.windowsService.getIcon('access-denied')
   }
 
   onClose() {
-    this.store.dispatch(removeWindow({ window : 'access-denied' }))
+    this.windowsService.closeWindow('access-denied')
   }
 
 

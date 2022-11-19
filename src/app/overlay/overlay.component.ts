@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, filter, map, Subject, tap, timer } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Component({
   selector: 'app-overlay',
   templateUrl: './overlay.component.html',
-  styleUrls: ['./overlay.component.scss']
+  styleUrls: ['./overlay.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OverlayComponent implements OnInit {
 
@@ -14,8 +15,9 @@ export class OverlayComponent implements OnInit {
   windows$ = this.store.select("windows")
   minimizeds$ = this.store.select("minimizeds")
   
-  notificationsSubject = new BehaviorSubject<any>([])
-  notifications$ = this.notificationsSubject.pipe(
+  notificationsSubject$ = new BehaviorSubject<any>([])
+
+  notifications$ = this.notificationsSubject$.pipe(
     map((item : any) : any => {
       let exceptionsRaw = localStorage.getItem('exceptions')
       let exceptions : any = JSON.parse(exceptionsRaw ? exceptionsRaw : '[]')
@@ -40,7 +42,7 @@ export class OverlayComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.notificationsSubject.next([
+    this.notificationsSubject$.next([
       {
         title: 'CyQuiz',
         imageUrl: '/assets/events/9.png',

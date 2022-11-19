@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.scss']
+  styleUrls: ['./event.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventComponent implements OnInit {
+export class EventComponent {
 
   constructor(private store : Store<any>) { }
 
   event$ = this.store.select('event')
 
-  ngOnInit(): void {
+  onAction(url : any) {
+    window.open(url);
   }
-
 }

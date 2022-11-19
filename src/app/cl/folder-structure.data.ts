@@ -28,7 +28,7 @@ let documentStruct = [...team, ...alumni].map((member : any) => {
     }
 })
 
-let galleryStruct = gallery.map((image : any) => {
+let galleryStruct = gallery.map((image : any, i : number) => {
     return {
         showText : `${image.name}.img`,
         access: true,
@@ -36,7 +36,7 @@ let galleryStruct = gallery.map((image : any) => {
         indexOfDir: 5,
         type: '.img',
         folder: false,
-        exec: () => WindowsService.injector.get(WindowsService).openImage(image.imageUrl)
+        exec: () => WindowsService.injector.get(WindowsService).openImage(i)
     }
 })
 
@@ -328,7 +328,7 @@ export let structure = [
         ]
     },
     {
-        dir : "CyOS:\\>Users>Public>Videos>",
+        dir : "CyOS:\\>Users>Public>Images>",
         folders : [
             {
                 showText : '.',
@@ -342,6 +342,7 @@ export let structure = [
                 access: true,
                 folder: true,
             },
+            ...galleryStruct
         ]
     },
     {

@@ -76,6 +76,7 @@ export class ClComponent implements OnInit, AfterViewInit {
     else if (command == 'ftype') this.ftype(commands)
     else if (command == 'help') this.content += this.help()
     else if (command == 'history') this.content += this.history()
+    else if (command == 'icon') this.setIcon(commands)
     else if (command == 'ls') this.ls()
     else if (command == 'neofetch') this.content += this.neoFetch()
     else if (command == 'shutdown') this.shutdown()
@@ -126,6 +127,17 @@ export class ClComponent implements OnInit, AfterViewInit {
     this.folderStructure[this.folderIndex].folders.forEach((el) => {
       this.content += `<pre>26/02/2004  01:25 PM    ${el.folder ? 'DIR' : '   '}          ${el.showText}</pre>`
     })
+  }
+
+  setIcon(commands : any) {
+    switch (commands[0]) {
+      case 'light':
+        return localStorage.setItem('icons', '')
+      case 'dark':
+        return localStorage.setItem('icons', 'dark/')
+      default:
+        break;
+    } 
   }
 
   shutdown() {

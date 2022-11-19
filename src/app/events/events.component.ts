@@ -1,24 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { setEvent } from '../state/event/event.actions';
-import { maximizeWindow } from '../state/minimizeds/minimizeds.actions';
-import { addWindow, setInFront } from '../state/windows/windows.actions';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { WindowsService } from '../windows.service';
 import { events } from './events.data';
 
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.scss']
+  styleUrls: ['./events.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventsComponent implements OnInit {
+export class EventsComponent {
 
   constructor(private windowsService : WindowsService) { }
 
   events = [...events]
-
-  ngOnInit(): void {
-  }
 
   onOpen(event : any) {
     this.windowsService.openEvent(event)

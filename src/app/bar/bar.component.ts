@@ -2,14 +2,13 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, interval } from 'rxjs';
-import { maximizeWindow, minimizeWindow } from '../state/minimizeds/minimizeds.actions';
-import { removeWindow, setInFront } from '../state/windows/windows.actions';
+import { setInFront } from '../state/windows/windows.actions';
 import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'app-bar',
   templateUrl: './bar.component.html',
-  styleUrls: ['./bar.component.scss']
+  styleUrls: ['./bar.component.scss'],
 })
 export class BarComponent implements OnInit {
 
@@ -39,13 +38,13 @@ export class BarComponent implements OnInit {
 
   onMaximize(window : string, minimizeds : any, selected : any, e : MouseEvent) {
     if (e.which == 2) return this.windowsService.closeWindow(window)
-    if (minimizeds.includes(window) || !selected) this.store.dispatch(maximizeWindow({window}))
-    else this.store.dispatch(minimizeWindow({window}))
+    if (minimizeds.includes(window) || !selected) this.windowsService.maximize(window.toLowerCase())
+    else this.windowsService.minimize(window.toLowerCase())
     this.store.dispatch(setInFront({ window }))
   }
 
   onClose(window : string) {
-    this.store.dispatch(removeWindow({window}))
+    this.windowsService.closeWindow(window.toLowerCase())
   }
 
   onOpenSettings() {
@@ -54,10 +53,6 @@ export class BarComponent implements OnInit {
 
   onOpenAbout() {
     this.windowsService.openWindow('about')
-  }
-
-  getImgUrl(window : string) {
-    return this.windowsService.getIcon(window)
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -76,5 +71,9 @@ export class BarComponent implements OnInit {
   getDate(time : Date) : string {
     let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     return  `${time.getDate()} ${days[time.getDay()]} ${time.getFullYear()}`
+  }
+
+  getIcon(window : string) {
+    return this.windowsService.getIcon(window)
   }
 }

@@ -1,7 +1,7 @@
 <app-window name="Gallery">
     <div class="folder-content">
-        <div class="file" *ngFor="let item of galleryItems;" tabindex="-1">
-            <img class="file__image" [src]="item.imageUrl" (dblclick)="onOpenImage(item.imageUrl)">
+        <div class="file" *ngFor="let item of galleryItems; let i = index" tabindex="-1">
+            <img class="file__image" [src]="item.previewImg" (dblclick)="onOpenImage(i)">
             <p>{{ item.name }}.img</p>
         </div>
     </div>

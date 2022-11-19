@@ -27,7 +27,7 @@ export let team: Array<any> = [
         Discord: "",
         quote: "",
         mentor : true,
-        imageUrl: "/assets/members/Mirela Tibu.png",
+        imageUrl: "/assets/members/Mirela Tibu.jpg",
       },
       {
         name: "Vlad Turcuman",

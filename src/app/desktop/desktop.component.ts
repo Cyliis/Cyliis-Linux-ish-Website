@@ -1,14 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.state';
-import { maximizeWindow } from '../state/minimizeds/minimizeds.actions';
-import { addWindow, setInFront } from '../state/windows/windows.actions';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'app-desktop',
   templateUrl: './desktop.component.html',
-  styleUrls: ['./desktop.component.scss']
+  styleUrls: ['./desktop.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DesktopComponent implements OnInit {
 
@@ -17,27 +14,27 @@ export class DesktopComponent implements OnInit {
   files = [
     {
       name : 'gallery',
-      imageUrl : 'assets/icons/folder.png',
+      imageUrl : this.windowsService.getIcon('gallery'),
       showName : 'Gallery'
     },
     {
       name : 'team',
-      imageUrl : 'assets/icons/folder.png',
+      imageUrl : this.windowsService.getIcon('team'),
       showName : 'Team'
     },
     {
       name : 'alumni',
-      imageUrl : 'assets/icons/folder.png',
+      imageUrl : this.windowsService.getIcon('alumni'),
       showName : 'Alumni'
     },
     {
       name : 'events',
-      imageUrl : 'assets/icons/folder.png',
+      imageUrl : this.windowsService.getIcon('events'),
       showName : 'Events'
     },
     {
       name : 'cl',
-      imageUrl : 'assets/icons/cl.png',
+      imageUrl : this.windowsService.getIcon('cl'),
       showName : 'CyCL'
     },
     

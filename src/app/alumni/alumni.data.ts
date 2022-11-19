@@ -64,7 +64,7 @@ export let alumni: Array<any> = [
       quote: '',
     },
     {
-      imageUrl: "/assets/mentors/DanielaGirleanu.png",
+      imageUrl: "/assets/mentors/DanielaGirleanu.jpg",
       name: 'Daniela Girleanu',
       Instagram: '',
       Facebook: '',

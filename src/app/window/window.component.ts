@@ -1,17 +1,18 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Platform } from '@angular/cdk/platform';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { maximizeWindow, minimizeWindow } from '../state/minimizeds/minimizeds.actions';
-import { addWindow, removeWindow, setInFront } from '../state/windows/windows.actions';
+import { setInFront } from '../state/windows/windows.actions';
 import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'app-window',
   templateUrl: './window.component.html',
-  styleUrls: ['./window.component.scss']
+  styleUrls: ['./window.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WindowComponent implements AfterViewInit {
 
-  constructor(private store: Store<any>, private windowsService : WindowsService) { }
+  constructor(private store: Store<any>, private windowsService : WindowsService, private platform: Platform) { }
   
   @ViewChild('window') window! : ElementRef
 
@@ -21,7 +22,6 @@ export class WindowComponent implements AfterViewInit {
   @Input() name! : string
   @Input() showName! : string
   @Input() error : boolean = false
-  @Input() console : boolean = false
   fullscreen : boolean = false
 
   navigationPaneItems = [
@@ -42,17 +42,17 @@ export class WindowComponent implements AfterViewInit {
     },
     {
       showName : 'Disk Cy',
-      name : 'system',
+      name : 'disk-cy',
       imageUrl : 'assets/icons/disk-cy.png'
     }, 
     {
       showName : 'Disk D',
-      name : 'system',
+      name : 'disk-d',
       imageUrl : 'assets/icons/disk-d.png'
     },
     {
-      showName : 'SD Card',
-      name : 'sd',
+      showName : 'Events',
+      name : 'events',
       imageUrl : 'assets/icons/folder.png'
     },
   ]
@@ -62,7 +62,8 @@ export class WindowComponent implements AfterViewInit {
     let marginLeft = Math.floor(Math.random() * 10) + 30
     let window: any = document.querySelector(`app-${this.name.toLowerCase()} .window`)
     window.style.transform = `translateX(${marginLeft}vw)` 
-    window.style.transform += `translateY(${marginTop}vh)` 
+    window.style.transform += `translateY(${marginTop}vh)`
+    if (this.platform.ANDROID || this.platform.IOS) this.onFullScreen()
   }
 
   onClose() {
@@ -70,13 +71,14 @@ export class WindowComponent implements AfterViewInit {
   }
 
   onFullScreen() {
+    if (this.platform.ANDROID || this.platform.IOS) return
     if (this.isUnresizeble()) return
     this.fullscreen = !this.fullscreen
     document.querySelector(`app-${this.name.toLowerCase()} .window`)?.classList.toggle('fullscreen')
   }
 
   onMinimalize() {
-    this.store.dispatch(minimizeWindow({window : this.name.toLowerCase()}))
+    this.windowsService.minimize(this.name.toLowerCase())
   }
 
   onSetInFront() {
@@ -84,6 +86,7 @@ export class WindowComponent implements AfterViewInit {
   }
 
   onDragStart() {
+    if (this.platform.ANDROID || this.platform.IOS) return
     if (this.fullscreen) {
       this.fullscreen = false
       document.querySelector(`app-${this.name.toLowerCase()} .window`)?.classList.remove('fullscreen')
@@ -91,6 +94,7 @@ export class WindowComponent implements AfterViewInit {
   }
 
   onOpenNavigationPaneItem(item : string, e : MouseEvent) {
+    if (item == this.name.toLowerCase()) return
     if (e.which != 2) this.windowsService.closeWindow(this.name)
     this.windowsService.openWindow(item)
   }

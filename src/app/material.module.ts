@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { PlatformModule } from '@angular/cdk/platform';
 
 @NgModule({
   exports: [
@@ -14,7 +14,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTooltipModule
+    MatTooltipModule,
+    PlatformModule
   ]
 })
 export class MaterialModule { }
