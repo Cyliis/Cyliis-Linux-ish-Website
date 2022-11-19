@@ -1,7 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, interval } from 'rxjs';
+import { BehaviorSubject, delay, interval, timer } from 'rxjs';
 import { setInFront } from '../state/windows/windows.actions';
 import { WindowsService } from '../windows.service';
 
@@ -30,7 +30,12 @@ export class BarComponent implements OnInit {
             this.list.push(res[res.length - 1])
           }
           else {
-            this.list = this.list.filter((el : string) => res.includes(el))
+            this.list.forEach((el : string) => {
+              if (!res.includes(el)) document.querySelector('.' + el)?.classList.add('disappear')
+            })
+            timer(1000).subscribe(() => {
+              this.list = this.list.filter((el : string) => res.includes(el))
+            })
           }
         }
       })

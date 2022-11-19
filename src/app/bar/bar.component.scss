@@ -163,6 +163,19 @@
     }
 }
 
+.disappear img {
+    animation: .5s disappear cubic-bezier(0, 0, .1, 1) forwards;
+}
+
+@keyframes disappear {
+    from {
+        scale: 1;
+    }
+    to {
+        scale: 0;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .bar {
         max-height: 90vh;

@@ -8,7 +8,7 @@
       </div>
       <div class="bar__apps">
         <div
-          class="app"
+          class="app {{ minimized }}"
           [class.app--selected]="vs.windows.indexOf(minimized) == vs.windows.length - 1"
           [class.app--minimized]="vs.minimizeds.includes(minimized)"
           *ngFor="let minimized of list"
