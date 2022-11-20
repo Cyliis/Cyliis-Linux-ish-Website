@@ -20,7 +20,6 @@ export class BootScreenComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   onKeyDown(event : any) {
-    console.dir(event)
     if (event.key == "ArrowUp" || event.key == "ArrowDown") this.selected = this.selected ? 0 : 1
     else if (event.key == "Enter") {
       if (this.selected) this.boot.emit()

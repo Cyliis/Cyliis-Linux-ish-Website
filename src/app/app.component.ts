@@ -10,10 +10,10 @@ export class AppComponent implements OnInit {
 
   constructor(private windowsService : WindowsService) {}
   
-  loaded = this.windowsService.isMobile()
+  loaded! : boolean
   
   ngOnInit() {
-    this.loaded = !!localStorage.getItem('boot')
+    this.loaded = !!localStorage.getItem('boot') || this.windowsService.isMobile()
     this.onSetTheme()
     this.onSetBackgroundImage()
     this.onSetPrimaryColor()
