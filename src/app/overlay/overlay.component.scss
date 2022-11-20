@@ -28,6 +28,9 @@
     height: 6.5rem;
     animation: tie-slide-in-left .5s;
     transition: .2s cubic-bezier(0, 0, .1, 1);
+    &__content-wrapper {
+        width: 100%;
+    }
     &__close-button {
         cursor: pointer;
         float: right;

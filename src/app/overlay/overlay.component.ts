@@ -2,6 +2,7 @@ import { Platform } from '@angular/cdk/platform';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, map } from 'rxjs';
+import { events } from '../events/events.data';
 
 @Component({
   selector: 'app-overlay',
@@ -44,22 +45,9 @@ export class OverlayComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.platform.ANDROID || this.platform.IOS) return
-    this.notificationsSubject$.next([
-      {
-        title: 'CyQuiz',
-        imageUrl: '/assets/events/9.png',
-        body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, ut?',
-        url: 'https://forms.gle/A1qLzVcnAJxYFCMy6',
-        id: '23r53242'
-      },
-      {
-        title: 'CyQuiz',
-        imageUrl: '/assets/events/9.png',
-        body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, ut?',
-        url: 'https://forms.gle/A1qLzVcnAJxYFCMy6',
-        id: '23r53242'
-      },
-    ])
+    this.notificationsSubject$.next(
+      [...events].filter((el : any) => el.actual)
+    )
   }
 
 }

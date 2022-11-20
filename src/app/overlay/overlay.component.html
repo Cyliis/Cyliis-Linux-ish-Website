@@ -19,7 +19,7 @@
 </ng-container>
 <div class="notifications" *ngIf="notifications$ | async as notifications">
   <a [href]="notification.url" target="_blank" (click)="onClose(notification.id, notificationRef)" [style.animation-delay.s]="i * .05" class="notification mat-elevation-z8" *ngFor="let notification of notifications; let i = index" #notificationRef>
-    <img class="notification__image" [src]="notification.imageUrl">
+    <img class="notification__image" [src]="notification.previewImg">
     <div class="notification__content-wrapper">
       <mat-icon class="notification__close-button" (click)="onClose(notification.id, notificationRef, false)">close</mat-icon>
       <b class="notification__title">{{ notification.title }}</b>
