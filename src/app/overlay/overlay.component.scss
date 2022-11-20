@@ -45,6 +45,7 @@
         overflow: hidden;
         max-height: 100%;
         border-radius: 6px;
+        aspect-ratio: 1;
     }
     &:active {
         transform: scale(.95);

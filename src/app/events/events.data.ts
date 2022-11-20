@@ -1,6 +1,6 @@
 export let events = [
     {
-      id: 1,
+      id: 8,
       title: 'CyQuiz',
       date: `8.10.2022`,
       imageUrl: '/assets/events/9.png',
@@ -10,6 +10,7 @@ export let events = [
       actual: true
     },
     {
+      id: 7,
       title: 'KICK-OFF FTC',
       date: `10.09.2022 - 11.09.2022`,
       imageUrl: '/assets/events/8.jpg',
@@ -18,6 +19,7 @@ export let events = [
       actual: false,
     },
     {
+      id: 6,
       title: 'House of CyLiis',
       date: `27.08.2022 - 4.09.2022`,
       imageUrl: '/assets/events/7.png',
@@ -26,6 +28,7 @@ export let events = [
       actual: false,
     },
     {
+      id: 5,
       title: 'Interviuri',
       date: `30.06.2022 - 10.08.2022`,
       imageUrl: '/assets/events/6.jpg',
@@ -34,6 +37,7 @@ export let events = [
       actual: false,
     },
     {
+      id: 4,
       title: 'House of Cyliis',
       date: '29.08.2021 - 05.09.2021',
       imageUrl: '/assets/events/1.jpg',
@@ -42,6 +46,7 @@ export let events = [
       actual: false,
     },
     {
+      id: 3,
       title: 'Treasure Hunt',
       date: '04.12.2021',
       imageUrl: '/assets/events/2.jpg',
@@ -50,6 +55,7 @@ export let events = [
       actual: false,
     },
     {
+      id: 2,
       title: 'Cylloween Trick or Print',
       date: '29.10.2021 - 31.10.2021',
       imageUrl: '/assets/events/3.jpg',
@@ -58,6 +64,7 @@ export let events = [
       actual: false,
     },
     {
+      id: 1,
       title: 'CyJam',
       date: '26.02.2022 - 15.03.2022',
       imageUrl: '/assets/events/4.jfif',

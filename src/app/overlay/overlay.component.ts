@@ -32,7 +32,7 @@ export class OverlayComponent implements OnInit {
 
 
   onClose(exception : string, notificationRef : any, res : boolean = true) {
-    let exceptionsRaw = localStorage.getItem('notifications')
+    let exceptionsRaw = localStorage.getItem('exceptions')
     let exceptions : any = JSON.parse(exceptionsRaw ? exceptionsRaw : '[]')
     if (!Array.isArray(exceptions)) exceptions = []
     localStorage.setItem('exceptions',
