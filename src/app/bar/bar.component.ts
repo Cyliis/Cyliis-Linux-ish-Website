@@ -33,7 +33,7 @@ export class BarComponent implements OnInit {
             this.list.forEach((el : string) => {
               if (!res.includes(el)) document.querySelector('.' + el)?.classList.add('disappear')
             })
-            timer(1000).subscribe(() => {
+            timer(400).subscribe(() => {
               this.list = this.list.filter((el : string) => res.includes(el))
             })
           }

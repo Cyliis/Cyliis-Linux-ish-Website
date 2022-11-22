@@ -18,7 +18,7 @@ export class ClComponent implements OnInit, AfterViewInit {
 
   content : string = `
   CyOS [Version 10.0.22000.978]<br>
-  (c) CyLIIS. Toate drepturile rezervate.
+  (c) CyLIIS. All rights reserved.
   `
 
   folderStructure = structure
@@ -77,7 +77,7 @@ export class ClComponent implements OnInit, AfterViewInit {
     else if (command == 'ftype') this.ftype(commands)
     else if (command == 'help') this.content += this.help()
     else if (command == 'history') this.content += this.history()
-    else if (command == 'icon') this.setIcon(commands)
+    else if (command == 'icons') this.setIcons(commands)
     else if (command == 'ls') this.ls()
     else if (command == 'neofetch') this.content += this.neoFetch()
     else if (command == 'shutdown') this.shutdown()
@@ -131,7 +131,12 @@ export class ClComponent implements OnInit, AfterViewInit {
     })
   }
 
-  setIcon(commands : any) {
+  setIcons(commands : any) {
+    if (!commands[0]) {
+      this.content += `
+        light = MAG-Light<br>
+        dark = MAG-Dark<br>`
+    }
     switch (commands[0]) {
       case 'light':
         return localStorage.setItem('icons', '')
@@ -156,12 +161,12 @@ export class ClComponent implements OnInit, AfterViewInit {
     }
     else {
       this.content += `
-        0 = Cyan<br>
-        1 = Green<br>
-        2 = Red<br>
-        3 = Blue<br>
-        4 = Purple<br>
-        5 = Orange`
+        0 = MAG-Cyan<br>
+        1 = MAG-Green<br>
+        2 = MAG-Red<br>
+        3 = MAG-Blue<br>
+        4 = MAG-Purple<br>
+        5 = MAG-Orange`
     }
   }
 
@@ -176,7 +181,7 @@ export class ClComponent implements OnInit, AfterViewInit {
     }
     else {
       this.content += `
-        0 = https://i1.wp.com/mir-s3-cdn-cf.behance.net/project_modules/1400/9bc27292880429.5e569ff84e4d0.gif<br>
+        0 = MAG-Cyliis<br>
         1 = https://www.gifcen.com/wp-content/uploads/2022/04/wallpaper-gif-4.gif<br>
         2 = https://i.pinimg.com/originals/5d/16/b2/5d16b293438a635ecfcfa78596cad135.gif<br>
         3 = https://c.tenor.com/zMdZBjJ7gPkAAAAd/aesthetic-wallpaper.gif<br>
@@ -198,6 +203,7 @@ export class ClComponent implements OnInit, AfterViewInit {
       <pre>FORMAT     Formats a disk for use with CyOS.</pre>
       <pre>FTYPE      Displays or modifies file types used in file extension associations.</pre>
       <pre>HELP       Provides Help information for CyOS commands.</pre>
+      <pre>ICONS      Sets system icon pack.</pre>
       <pre>LS         Displays a list of files and subdirectories in a directory.</pre>
       <pre>MD         Creates a directory.</pre>
       <pre>MKDIR      Creates a directory.</pre>
@@ -215,20 +221,22 @@ export class ClComponent implements OnInit, AfterViewInit {
   }
 
   neoFetch() {
+    let theme = 'MAG-' + ['Cyan', 'Green', 'Red', "Blue", 'Purple', 'Orange'][parseInt(localStorage.getItem('color')!)]
+    let icons = 'MAG-' + localStorage.getItem('icons')
     return `
-    <pre>
-      ,clllllllllc'           cyliis@cyliis.ro
-   .:llllllllllllllll:        OS: Cyliis 2017.6.9
- .clllll'        ;lllll'      Shell: cycl
-'cllll                        Resolution: 1920x975
-llllll                        Theme: Yaru-dark [GTK2/3]
-llllll                        Icons: Yaru[GTK2/3]
-;lllll            .......     CPU: Intel i9-12900HX (16) @ 5.00GHz
-'lllll'          .......      GPU: NVIDIA GeForce RTX 4090
-  llllll        .......       Memory: 82MiB / 19043MiB
-   lclllll...........         Number: 19043
-      ;:::::::::::::'
-        '''''''''''
+<pre>
+<span class="mark">      ,clllllllllc'           cyliis</span>@<span class="mark">cyliis.ro</span>
+<span class="mark">   .:llllllllllllllll:        OS:</span> Cyliis 2017.6.9
+<span class="mark"> .clllll'        ;lllll'      Shell:</span> cycl
+<span class="mark">'cllll                        Resolution:</span> 1920x1280
+<span class="mark">llllll                        Theme:</span> ${theme} [GTK2/3]
+<span class="mark">llllll                        Icons:</span> ${icons}[GTK2/3]
+<span class="mark">;lllll            .......     CPU:</span> Intel i9-12900HX (16) @ 5.00GHz
+<span class="mark">'lllll'          .......      GPU:</span> NVIDIA GeForce RTX 4090
+<span class="mark">  llllll        .......       Memory:</span> 82MiB / 19043MiB
+<span class="mark">    lclllll...........        Number:</span> 19043
+<span class="mark">      ;:::::::::::::'
+        ''''''''''' </span>
     </pre>` 
   }
 
@@ -250,5 +258,19 @@ llllll                        Icons: Yaru[GTK2/3]
     localStorage.setItem(
       'color', index.toString()
     );
+  }
+
+  onSelect(e : any, el : any) {
+    let selectedText = window.getSelection()?.toString()
+    if (selectedText) {
+      navigator.clipboard.writeText(selectedText!);
+      if (this.init) {
+        this.content += `<p></p><p></p>${this.dir$.value}<br>`
+        this.init = false
+      }
+      else this.content += `<p></p>${this.dir$.value}<br>`
+      this.resolveCommand(['echo', `"${selectedText}" copied to clipboard`])
+    }
+    el.focus()
   }
 }

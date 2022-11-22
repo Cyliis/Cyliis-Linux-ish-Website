@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { first } from 'rxjs';
 import { gallery } from '../gallery/gallery.data';
 import { setImage } from '../state/image/image.actions';
 
@@ -9,10 +10,22 @@ import { setImage } from '../state/image/image.actions';
   styleUrls: ['./image.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ImageComponent {
+export class ImageComponent implements OnInit {
 
   constructor(private store : Store<any>) { }
   
+  ngOnInit(): void {
+    
+    document.onkeydown = (e) => {
+      if (e.key == "ArrowLeft") {
+        this.imageIndex$.pipe(first()).subscribe((i) => this.previous(i))
+      }
+      if (e.key == "ArrowRight") {
+        this.imageIndex$.pipe(first()).subscribe((i) => this.next(i)) 
+      }
+    };
+  }
+
   images = [...gallery]
 
   imageIndex$ = this.store.select('image')

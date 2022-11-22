@@ -150,7 +150,22 @@ pre {
   }
 }
 
+.selecto-selection {
+  z-index: 0!important;
+  border: 1px solid rgb(var(--primary-color))!important;
+  background: rgb(var(--primary-color), .5)!important;
+}
+
 @keyframes appear {
   from { transform: scale(0);}
   to { transform: scale(1);}
+}
+
+.mark {
+  color: rgb(var(--primary-color));
+}
+
+::selection {
+  color: #fff;
+  background: rgb(var(--primary-color));
 }

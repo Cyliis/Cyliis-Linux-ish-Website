@@ -1,4 +1,4 @@
-<app-window name="cl" [showName]="title" (click)="consoleInput.focus()">
+<app-window name="cl" [showName]="title" (click)="onSelect($event, consoleInput)">
   <div class="cl" #cl>
     <div class="content" [innerHTML]="content"></div>
     <p *ngIf="init"></p>

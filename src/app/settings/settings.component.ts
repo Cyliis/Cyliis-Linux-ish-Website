@@ -73,4 +73,11 @@ export class SettingsComponent implements OnInit {
     );
   }
 
+  onResetFoldersPosition() {
+    document.querySelectorAll('.folder').forEach((el : any) => {
+      el.style.transform = ''
+      localStorage.setItem(el.dataset['app'] + 'Pos', '')
+    })
+  }
+
 }
