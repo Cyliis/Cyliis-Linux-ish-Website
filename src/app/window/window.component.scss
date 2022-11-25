@@ -138,6 +138,12 @@
     min-height: initial;
     height: fit-content;
 }
+.chess {
+    width: 600px;
+    .window__content {
+        height: 600px!important;
+    }
+}
 
 .unresizble {
     height: fit-content;

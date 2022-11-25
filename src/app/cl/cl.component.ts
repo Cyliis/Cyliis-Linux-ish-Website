@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { addWindow, removeWindow } from '../state/windows/windows.actions';
 import { BehaviorSubject, timer } from 'rxjs';
 import { structure } from './folder-structure.data';
+import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'app-cl',
@@ -11,7 +12,7 @@ import { structure } from './folder-structure.data';
 })
 export class ClComponent implements OnInit, AfterViewInit {
 
-  constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>, private windowsService : WindowsService) { }
 
   @ViewChild('consoleInput') consoleInput! : ElementRef
   @ViewChild('cl') clRef! : ElementRef
@@ -71,6 +72,7 @@ export class ClComponent implements OnInit, AfterViewInit {
     else if (command == 'bgimage') this.changeDesktopImage(commands)
     else if (command == 'cd') this.cd(commands.join(""))
     else if (command == 'clear') this.content = `<p></p>`
+    else if (command == 'chess') this.windowsService.openWindow('chess')
     else if (command == 'color') this.changeSystemColor(commands)
     else if (command == 'echo') this.content += commands.join(" ")
     else if (command == 'exit') this.store.dispatch(removeWindow({window : 'cl'}))
@@ -79,6 +81,7 @@ export class ClComponent implements OnInit, AfterViewInit {
     else if (command == 'history') this.content += this.history()
     else if (command == 'icons') this.setIcons(commands)
     else if (command == 'ls') this.ls()
+    else if (command == 'mag') this.content += this.mag()
     else if (command == 'neofetch') this.content += this.neoFetch()
     else if (command == 'shutdown') this.shutdown()
     else if (command == 'title') this.title = commands.join(" ")
@@ -225,18 +228,26 @@ export class ClComponent implements OnInit, AfterViewInit {
     let icons = 'MAG-' + localStorage.getItem('icons')
     return `
 <pre>
-<span class="mark">      ,clllllllllc'           cyliis</span>@<span class="mark">cyliis.ro</span>
-<span class="mark">   .:llllllllllllllll:        OS:</span> Cyliis 2017.6.9
-<span class="mark"> .clllll'        ;lllll'      Shell:</span> cycl
-<span class="mark">'cllll                        Resolution:</span> 1920x1280
-<span class="mark">llllll                        Theme:</span> ${theme} [GTK2/3]
-<span class="mark">llllll                        Icons:</span> ${icons}[GTK2/3]
-<span class="mark">;lllll            .......     CPU:</span> Intel i9-12900HX (16) @ 5.00GHz
-<span class="mark">'lllll'          .......      GPU:</span> NVIDIA GeForce RTX 4090
-<span class="mark">  llllll        .......       Memory:</span> 82MiB / 19043MiB
-<span class="mark">    lclllll...........        Number:</span> 19043
-<span class="mark">      ;:::::::::::::'
-        ''''''''''' </span>
+<span class="mark">             .'cllllllllllc''                   cyliis</span>@<span class="mark">cyliis.ro</span>
+<span class="mark">          .;clllllllllllllllllc,.               OS:</span> Cyliis 2017.6.9
+<span class="mark">       .:llllllllllllllllllllllllc'             Shell:</span> cycl
+<span class="mark">     .cllllllllllll.  .llllllllllllc            Resolution:</span> 1920x1280
+<span class="mark">     :llllllllll           .llllllllll.         Theme:</span> ${theme} [GTK2/3]
+<span class="mark">   clllllllll.              llllllllll          Icons:</span> ${icons}[GTK2/3]
+<span class="mark">   clllllllll.                                  CPU:</span> Intel i9-12900HX (16) @ 5.00GHz
+<span class="mark"> .lllllllll:                                    GPU:</span> NVIDIA GeForce RTX 4090
+<span class="mark"> clllllllll.             .......   .......      Memory:</span> 82MiB / 19043MiB
+<span class="mark"> llllllllll               .......  .......      Number:</span> 19043
+<span class="mark"> llllllllll                ............... </span>
+<span class="mark"> llllllllll.                .............  </span>
+<span class="mark"> ;lllllllll;                .............  </span>
+<span class="mark">   llllllllll               .............  </span>
+<span class="mark">   :llllllllll.           ,,..........     </span>
+<span class="mark">     ;clllllllll:'.     .';;'.........     </span>
+<span class="mark">     .;;:ccllllllllcc:;;;;,........        </span>
+<span class="mark">         ;;;;;;;;;;;;;;;;;'........        </span>
+<span class="mark">           ,;;;;;;;;,,'........            </span>
+<span class="mark">                 ..........                </span>
     </pre>` 
   }
 
@@ -272,5 +283,24 @@ export class ClComponent implements OnInit, AfterViewInit {
       this.resolveCommand(['echo', `"${selectedText}" copied to clipboard`])
     }
     el.focus()
+  }
+
+  mag() {
+    return `
+<pre>
+<span class="mark">
+0000       0000      00000         00000000
+00000     00000     000 000      000     000
+000000   000000    000   000    000      
+000 000 000 000    000000000    000    00000
+000  00000  000   000     000    000     000
+000   000   000 1 000     000 1    000000000
+</span>
+<b class="mark">Motricală Alin-Gabriel</b>
+<span class="mark">email:</span> motricala44@gmail.com
+<span class="mark">phone:</span> 0751347104
+<span class="mark">github:</span> github.com/FR13ND-ly
+<span class="mark">linkedin:</span> linkedin.com/in/alin-gabriel-motricala
+</pre>    ` 
   }
 }

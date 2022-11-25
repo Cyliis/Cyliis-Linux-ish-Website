@@ -51,6 +51,7 @@ export class DesktopComponent implements OnInit {
   toRemove : (HTMLElement | SVGElement)[] = []
 
   ngOnInit(): void {
+    if (this.windowsService.isMobile()) return
     const selecto = new Selecto({
       container: document.querySelector('app-desktop') as HTMLElement,
       selectableTargets: [".folder", document.querySelector(".folder") as HTMLElement],

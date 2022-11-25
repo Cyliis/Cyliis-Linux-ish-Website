@@ -114,6 +114,6 @@ export class WindowComponent implements AfterViewInit {
   }
   
   isUnresizeble() {
-    return ['portfolio', 'event', 'access-denied'].includes(this.name.toLowerCase()) 
+    return ['portfolio', 'event', 'access-denied', 'chess'].includes(this.name.toLowerCase()) 
   }
 }

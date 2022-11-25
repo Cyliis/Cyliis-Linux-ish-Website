@@ -1,0 +1,24 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.position {
+    width: 75px;
+    height: 75px;
+    display: grid;
+    place-items: center;
+    background-color: #fff;
+    color: #000;
+}
+
+.black {
+    background-color: rgb(var(--primary-color));
+    color: #fff;
+}
+
+.piece {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+}

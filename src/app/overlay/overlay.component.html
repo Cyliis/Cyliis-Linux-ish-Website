@@ -16,6 +16,7 @@
   <app-documents *ngIf="vs.windows.includes('documents')" [class.hide]="vs.minimalizeds.includes('documents')"></app-documents>
   <app-images *ngIf="vs.windows.includes('images')" [class.hide]="vs.minimalizeds.includes('images')"></app-images>
   <app-access-denied *ngIf="vs.windows.includes('access-denied')" [class.hide]="vs.minimalizeds.includes('access-denied')"></app-access-denied>
+  <app-chess *ngIf="vs.windows.includes('chess')" [class.hide]="vs.minimalizeds.includes('chess')"></app-chess>
 </ng-container>
 <div class="notifications" *ngIf="notifications$ | async as notifications">
   <a [href]="notification.url" target="_blank" (click)="onClose(notification.id, notificationRef)" [style.animation-delay.s]="i * .05" class="notification mat-elevation-z8" *ngFor="let notification of notifications; let i = index" #notificationRef>
