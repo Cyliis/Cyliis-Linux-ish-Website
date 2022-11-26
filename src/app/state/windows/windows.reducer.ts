@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store'
 import { addWindow, removeWindow, setInFront } from './windows.actions';
 
-export const initialState : Array<string> = ['chess'];
+export const initialState : Array<string> = [];
 
 export const windowsReducer = createReducer(
     initialState,

@@ -10,6 +10,12 @@
     place-items: center;
     background-color: #fff;
     color: #000;
+    cursor: pointer;
+    user-select: none;
+    transition: .2s;
+    &--selected {
+        background-color: yellow!important;
+    }
 }
 
 .black {
@@ -18,7 +24,7 @@
 }
 
 .piece {
-    cursor: pointer;
+    
     width: 40px;
     height: 40px;
 }

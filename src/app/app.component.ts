@@ -21,6 +21,9 @@ export class AppComponent implements OnInit {
       if (e.ctrlKey && e.altKey && e.key == 't') this.windowsService.openWindow('cl')
     };
     this.resolveUrl()
+    if (!localStorage.getItem('white_rabbit')) {
+      localStorage.setItem('white_rabbit', "Write an answer to decode")
+    }
   }
 
   onBoot() {

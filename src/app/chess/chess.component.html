@@ -1,7 +1,12 @@
 <app-window name="Chess">
-    <div class="board" >
-        <div class="position" [class.black]="getPos(i)" *ngFor="let piece of positions[index]; let i = index">
-            <img class="piece" (cdkDragReleased)="drop($event)" cdkDrag src="/assets/chess/{{piece}}.png" *ngIf="piece">
+    <div class="board">
+        <div 
+            class="position" 
+            (click)="onClick(i)"
+            [class.black]="getPos(i)"
+            [class.position--selected]="i == selectedPiece"  
+            *ngFor="let piece of positions[index]; let i = index">
+            <img class="piece" src="/assets/chess/{{piece}}.png" *ngIf="piece">
         </div>
     </div>
 </app-window>

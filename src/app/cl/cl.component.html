@@ -1,8 +1,8 @@
-<app-window name="cl" [showName]="title" (click)="onSelect($event, consoleInput)">
+<app-window name="cl" [showName]="title" [vim]="vim" (click)="onSelect($event, consoleInput)">
   <div class="cl" #cl>
     <div class="content" [innerHTML]="content"></div>
     <p *ngIf="init"></p>
-    <span>{{ dir$ | async }}</span>
+    <span class="dir" *ngIf="!vim">{{ dir$ | async }}</span>
     <input
       #consoleInput
       [(ngModel)]="inputs[indexOfInput]"

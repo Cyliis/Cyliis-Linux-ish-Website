@@ -102,7 +102,7 @@ export let structure = [
             },
             {
                 showText : 'admin',
-                indexOfDir : 1,
+                indexOfDir : 14,
                 access: false,
                 folder: true,
                 exec : () => WindowsService.injector.get(WindowsService).openWindow('access-denied')
@@ -253,6 +253,7 @@ export let structure = [
                 showText : 'CyCL',
                 name : 'cl',
                 type: 'cmd',
+                access: true,
                 folder: false,
                 exec : () => WindowsService.injector.get(WindowsService).openWindow('cl')
             }
@@ -415,6 +416,30 @@ export let structure = [
                 folder: true,
             },
             ...eventsStruct
+        ]
+    },
+    {
+        dir : "CyOS:\\>Users>admin>",
+        folders : [
+            {
+                showText : '.',
+                indexOfDir : 14,
+                access: true,
+                folder: true,
+            },
+            {
+                showText : '..',
+                indexOfDir : 1,
+                access: true,
+                folder: true,
+            },
+            {
+                showText : 'chess.exe',
+                indexOfDir : 14,
+                access: true,
+                folder: false,
+                exec: () => WindowsService.injector.get(WindowsService).openWindow('chess')
+            },
         ]
     },
 ]
