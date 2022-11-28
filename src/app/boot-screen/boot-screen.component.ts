@@ -54,7 +54,7 @@ export class BootScreenComponent implements OnInit {
     },
   ]
 
-  easterEgg: number = Math.floor(Math.random() * 10);
+  easterEgg: number = Math.floor(Math.random() * 15);
 
   content : string = `
 [       10.0.22000.978] Loading<br>`
@@ -82,6 +82,15 @@ export class BootScreenComponent implements OnInit {
     }
     else if (this.easterEgg == 7) {
       this.loading = [...this.loading, {action : () => this.content += "root@mag$: Have a good day<br>"}]
+    }
+    else if (this.easterEgg == 8) {
+      this.loading = [...this.loading, {action : () => this.content += "root@mag$: Who am I?<br>"}]
+    }
+    else if (this.easterEgg == 9) {
+      this.loading = [...this.loading, {action : () => this.content += "root@mag$: Who is John Galt?<br>"}]
+    }
+    else if (this.easterEgg == 10) {
+      this.loading = [...this.loading, {action : () => this.content += "root@mag$: The End is the Beginning and the Beginning is the End<br>"}]
     }
     this.loading.forEach((iteration : any, i : number) => {
       timer((i + 1) * 1000).subscribe(() => iteration.action())
