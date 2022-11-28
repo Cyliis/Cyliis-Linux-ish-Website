@@ -169,3 +169,21 @@ pre {
   color: #fff;
   background: rgb(var(--primary-color));
 }
+
+.dir {
+  color: #33D17A;
+}
+
+.folder {
+  color: #2d7bdb;
+}
+
+.restricted {
+  color: #C01C28;
+}
+
+.ls {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+}

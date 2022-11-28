@@ -92,6 +92,12 @@ export class BootScreenComponent implements OnInit {
     else if (this.easterEgg == 10) {
       this.loading = [...this.loading, {action : () => this.content += "root@mag$: The End is the Beginning and the Beginning is the End<br>"}]
     }
+    else if (this.easterEgg == 11) {
+      this.loading = [...this.loading, {action : () => this.content += "root@mag$: Sic Mundus Creatus Est<br>"}]
+    }
+    else if (this.easterEgg == 12) {
+      this.loading = [...this.loading, {action : () => this.content += "root@mag$: Déjà vu is a glitch in the Matrix<br>"}]
+    }
     this.loading.forEach((iteration : any, i : number) => {
       timer((i + 1) * 1000).subscribe(() => iteration.action())
     })

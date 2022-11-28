@@ -97,7 +97,7 @@
     filter: contrast(.8);
 }
 
-.fullscreen  {
+.fullscreen, .vim {
     left: 0;
     top: 0;
     width: 98vw!important;
@@ -107,7 +107,7 @@
 }
 
 .window.console {
-    background-color: #000;
+    background-color: hsla(318, 68%, 11%, .85);
     .window__top-bar {
         background-color: #212121;
         color: #fff;

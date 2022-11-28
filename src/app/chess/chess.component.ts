@@ -12,6 +12,8 @@ export class ChessComponent implements OnInit {
 
   index: number = 0;
 
+  selectedPiece: any
+
   positions : any = [
     [
       ...['black/r', 'black/n', 'black/b', 'black/q', 'black/k', 'black/b', 'black/n', 'black/r'],
@@ -34,5 +36,14 @@ export class ChessComponent implements OnInit {
 
   getPos(i : any) {
     return Math.floor(i + (i / 8)) % 2
+  }
+
+  onClick(i : any) {
+    if (this.selectedPiece == i) this.selectedPiece = undefined
+    else {
+      console.log(this.positions[this.index][i])
+      if (this.selectedPiece) {}
+      else if (this.positions[this.index][i]) this.selectedPiece = i
+    }
   }
 }

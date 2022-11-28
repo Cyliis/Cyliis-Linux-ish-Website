@@ -9,6 +9,7 @@
     [class.chess]="name == 'Chess'"
     [class.unresizble]="isUnresizeble()"
     [class.error]="error"
+    [class.vim]="vim"
     [class.unactive]="vs.windows.indexOf(name.toLowerCase()) != vs.windows.length - 1"
     [style.z-index]="vs.windows.indexOf(name.toLowerCase()) + 10"
     (mousedown)="onSetInFront()"
@@ -21,7 +22,7 @@
         <img class="window__icon" [src]="getImgUrl(name)">
         <span class="window__name">{{ showName ?? name }}</span>
       </section>
-      <section class="window__actions">
+      <section class="window__actions" *ngIf="!vim">
         <div class="window__minimalize-button" (click)="onMinimalize()"><mat-icon>minimize</mat-icon></div>
         <div class="window__full-screen-button" (click)="onFullScreen()"><mat-icon>fullscreen{{ fullscreen ? '_exit' : '' }}</mat-icon></div>
         <div class="window__close-button" (click)="onClose()"><mat-icon>close</mat-icon></div>

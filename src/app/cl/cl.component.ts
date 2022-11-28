@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { addWindow, removeWindow } from '../state/windows/windows.actions';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, timer } from 'rxjs';
 import { structure } from './folder-structure.data';
 import { WindowsService } from '../windows.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-cl',
@@ -12,7 +11,7 @@ import { WindowsService } from '../windows.service';
 })
 export class ClComponent implements OnInit, AfterViewInit {
 
-  constructor(private store: Store<any>, private windowsService : WindowsService) { }
+  constructor(private windowsService : WindowsService, private userService : UserService) { }
 
   @ViewChild('consoleInput') consoleInput! : ElementRef
   @ViewChild('cl') clRef! : ElementRef
@@ -27,11 +26,14 @@ export class ClComponent implements OnInit, AfterViewInit {
   init = true
   dir$ = new BehaviorSubject(this.folderStructure[this.folderIndex].dir)
   title = "CyCL"
+  vim : boolean = false
   fullscreen : boolean = false
   inputs = ['']
   indexOfInput = 0
+  level = 0
 
   ngOnInit(): void {
+    this.userService.init()
     
   }
 
@@ -50,11 +52,17 @@ export class ClComponent implements OnInit, AfterViewInit {
 
   onInput(e : any) {
     if (e.key == "Enter") {
+      if (this.vim) {
+        if (e.target.value == ':q') this.windowsService.closeWindow('cl')
+        this.content += `${e.target.value}</br>`
+        e.target.value = ''
+        return
+      }
       if (this.init) {
-        this.content += `<p></p>${this.dir$.value}${e.target.value}<br>`
+        this.content += `<p></p><span class="dir">${this.dir$.value}</span>${e.target.value}<br>`
         this.init = false
       }
-      else this.content += `${this.dir$.value}${e.target.value}<br>`
+      else this.content += `<span class="dir">${this.dir$.value}</span>${e.target.value}<br>`
       if (e.target.value.trim()) this.resolveCommand(e.target.value.split(" "))
       this.inputs[this.inputs.length - 1] = e.target.value
       this.indexOfInput = this.inputs.length
@@ -70,27 +78,118 @@ export class ClComponent implements OnInit, AfterViewInit {
     let command = commands.shift().toLowerCase()
     if (app?.exec) app?.exec()
     else if (command == 'bgimage') this.changeDesktopImage(commands)
+    else if (command == 'decode') this.decode(commands)
     else if (command == 'cd') this.cd(commands.join(""))
     else if (command == 'clear') this.content = `<p></p>`
-    else if (command == 'chess') this.windowsService.openWindow('chess')
     else if (command == 'color') this.changeSystemColor(commands)
     else if (command == 'echo') this.content += commands.join(" ")
-    else if (command == 'exit') this.store.dispatch(removeWindow({window : 'cl'}))
+    else if (command == 'exit') this.windowsService.closeWindow('cl')
     else if (command == 'ftype') this.ftype(commands)
     else if (command == 'help') this.content += this.help()
     else if (command == 'history') this.content += this.history()
     else if (command == 'icons') this.setIcons(commands)
-    else if (command == 'ls') this.ls()
+    else if (command == 'login') this.login(commands)
+    else if (command == 'logout') this.logout()
+    else if (command == 'ls') this.ls(commands)
     else if (command == 'mag') this.content += this.mag()
     else if (command == 'neofetch') this.content += this.neoFetch()
     else if (command == 'shutdown') this.shutdown()
     else if (command == 'title') this.title = commands.join(" ")
     else if (command == 'time') this.content += new Date()
     else if (command == 'ver') this.content += "<p></p>CyLIIS CyOS [Version 10.0.22000.978]"
+    else if (command == 'vim') this.initVim()
     else if (['del', 'erase', 'format', 'md', 'mkdir', 'rd', 'rmdir'].includes(command)) this.content += 'Access Denied'
     else this.content += `'${command}' is not recognized as an internal or external command, operable program or batch file.`
     this.content += "<p></p>"
     timer(0).subscribe(() =>this.clRef.nativeElement.scrollTop = this.clRef.nativeElement.scrollHeight)
+  }
+
+  initVim() {
+    this.vim = true
+    this.content = ``
+    this.title = "Vim"
+  }
+
+  decode(commands : any) : any {
+    if (!this.userService.getUser()) return this.content += `You don't currently have permission to execute this command.`
+    commands[0] = commands[0] ? commands[0].trim().toLowerCase() : false
+    if (this.level == 0) {
+      if (!commands[0]) this.content += 'Red right ....'
+      else if (commands[0] == 'hand') this.level++
+      else this.content += 'Wrong answer'
+    }
+    else if (this.level == 1) {
+      if (!commands[0]) this.content += 'Hannah + Mikkel'
+      else if (commands[0] == 'jonas') this.level++
+      else this.content += 'Wrong answer'
+    }
+    else if (this.level == 2) {
+      if (!commands[0]) this.content += `Who said "I'm gonna make him an offer he can't refuse"`
+      else if (commands[0] == 'godfather') this.level++
+      else this.content += 'Wrong answer'
+    }
+    else if (this.level == 3) {
+      if (!commands[0]) this.content += `Toto, I've a feeling we're not in ...... anymore.`
+      else if (commands[0] == 'kansas') this.level++
+      else this.content += 'Wrong answer'
+    }
+    else if (this.level == 4) {
+      if (!commands[0]) this.content += 'A census taker once tried to test me. I ate his liver with some fava beans and a nice .......'
+      else if (commands[0] == 'chianti') this.level++
+      else this.content += 'Wrong answer'
+    }
+    else if (this.level == 5) {
+      if (!commands[0]) this.content += 'sixth sense'
+      else if (commands[0] == 'proprioception') this.level++
+      else this.content += 'Wrong answer'
+    }
+    else if (this.level == 6) {
+      if (!commands[0]) this.content += 'Elementary, my dear ......'
+      else if (commands[0] == 'watson') this.level++
+      else this.content += 'Wrong answer'
+    }
+    else if (this.level == 7) {
+      if (!commands[0]) this.content += `To infinity and ......!`
+      else if (commands[0] == 'beyond') this.level++
+      else this.content += 'Wrong answer'
+    }
+    else if (this.level == 8) {
+      if (!commands[0]) this.content += 'Leader of FR13ND5'
+      else if (commands[0] == 'mrx') this.level++
+      else this.content += 'Wrong answer'
+    }
+    else if (this.level == 9) {
+      if (!commands[0]) this.content += 'aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xSlhhR2xmX2l3QTZMS084aGlENngtVVdqNmVPX053V3kvdmlldz91c3A9c2hhcmluZw=='
+      else if (commands[0] == 'mag') this.level++
+      else this.content += 'Wrong answer'
+    }
+    else if (this.level == 10) {
+      if (!commands[0]) this.content += 'aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xQVJtZmpyRzhudFpfV3VadEp3UndxR2p0cEdyQVNzOEYvdmlldz91c3A9c2hhcmluZw=='
+      else if (commands[0] == '34558914442') this.level++
+      else this.content += 'Wrong answer'
+    }
+    else if (this.level == 11) {
+      if (!commands[0]) this.content += 'Find the white rabbit'
+      else if (commands[0] == localStorage.getItem('white_rabbit')) this.level++
+      else this.content += 'Wrong answer'
+    }
+  }
+
+  login(commands : any) : any {
+    if (commands[0]) {
+      if (commands[0] != 'Dylan_2791') return this.content += "Wrong password"
+      else this.userService.login()
+    }
+    else {
+      this.content += `
+        Invalid syntax<br>
+        login [password]
+      `
+    }
+  }
+
+  logout() {
+    this.userService.logout()
   }
 
   cd(path : string) {
@@ -101,9 +200,13 @@ export class ClComponent implements OnInit, AfterViewInit {
       this.folderStructure[this.folderIndex].folders.forEach((el) : any => {
         if (el.showText.toLowerCase() == dir.toLowerCase()) {
           check = true
-          this.folderIndex = el.indexOfDir
-          this.dir$.next(this.folderStructure[this.folderIndex].dir)
-          if (!el.access) this.content += 'Access Denied'
+          if (el.access || (this.userService.getUser() && el.showText == 'admin')) {
+            this.folderIndex = el.indexOfDir
+            this.dir$.next(this.folderStructure[this.folderIndex].dir)
+          }
+          else {
+            this.content += 'Access Denied'
+          }
         } 
       })
       if (!check) {
@@ -128,9 +231,22 @@ export class ClComponent implements OnInit, AfterViewInit {
     })
   }
 
-  ls() {
+  ls(commads : any) {
+    if (commads[0] == "-l") return this.lsMerge()
+    let text = "<pre class='ls'>"
     this.folderStructure[this.folderIndex].folders.forEach((el) => {
-      this.content += `<pre>26/02/2004  01:25 PM    ${el.folder ? 'DIR' : '   '}          ${el.showText}</pre>`
+      let className = ''
+      if (el.folder) className = "folder"
+      if (!el.access) className = "restricted"
+      text += `<span class="${className}">${el.showText}      </span>`
+    })
+    text += "</pre>"
+    this.content += text
+  }
+
+  lsMerge() {
+    this.folderStructure[this.folderIndex].folders.forEach((el) => {
+      this.content += `<pre>26/02/2004  01:25 PM    ${el.folder ? '<span class="folder">DIR</span>' : '   '}          ${el.access ? el.showText : `<span class="restricted">${el.showText}</span>`} </pre>`
     })
   }
 
@@ -219,16 +335,12 @@ export class ClComponent implements OnInit, AfterViewInit {
       <pre>VER        Displays the CyOS version.</pre>`
   }
 
-  onOpen(window : any) {
-    this.store.dispatch(addWindow({window}))
-  }
-
   neoFetch() {
     let theme = 'MAG-' + ['Cyan', 'Green', 'Red', "Blue", 'Purple', 'Orange'][parseInt(localStorage.getItem('color')!)]
     let icons = 'MAG-' + localStorage.getItem('icons')
     return `
 <pre>
-<span class="mark">             .'cllllllllllc''                   cyliis</span>@<span class="mark">cyliis.ro</span>
+<span class="mark">             .'cllllllllllc''                   </span><span class="dir">cyliis</span>@<span class="dir">cyliis.ro</span>
 <span class="mark">          .;clllllllllllllllllc,.               OS:</span> Cyliis 2017.6.9
 <span class="mark">       .:llllllllllllllllllllllllc'             Shell:</span> cycl
 <span class="mark">     .cllllllllllll.  .llllllllllllc            Resolution:</span> 1920x1280
@@ -272,14 +384,15 @@ export class ClComponent implements OnInit, AfterViewInit {
   }
 
   onSelect(e : any, el : any) {
+    if (this.vim) return
     let selectedText = window.getSelection()?.toString()
     if (selectedText) {
       navigator.clipboard.writeText(selectedText!);
       if (this.init) {
-        this.content += `<p></p><p></p>${this.dir$.value}<br>`
+        this.content += `<p></p><p></p><span class="dir">${this.dir$.value}</span><br>`
         this.init = false
       }
-      else this.content += `<p></p>${this.dir$.value}<br>`
+      else this.content += `<p></p><span class="dir">${this.dir$.value}</span><br>`
       this.resolveCommand(['echo', `"${selectedText}" copied to clipboard`])
     }
     el.focus()
