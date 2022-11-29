@@ -1,4 +1,12 @@
-export let decode = [
+export let resolve = [
+    {
+        question: 'Elementary, my dear ......',
+        answer: () => 'watson'
+    },
+    {
+        question: 'To infinity and ......',
+        answer: () => 'beyond'
+    },
     {
         question: `Who said "I'm gonna make him an offer he can't refuse"?`,
         answer: () => 'godfather'
@@ -10,14 +18,6 @@ export let decode = [
     {
         question: 'A census taker once tried to test me. I ate his liver with some fava beans and a nice .......',
         answer: () => 'chianti'
-    },
-    {
-        question: 'Elementary, my dear ......',
-        answer: () => 'watson'
-    },
-    {
-        question: 'To infinity and ......',
-        answer: () => 'beyond'
     },
     {
         question: 'Red right ....',

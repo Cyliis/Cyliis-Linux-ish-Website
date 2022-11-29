@@ -55,7 +55,6 @@ export class UserService {
         userData.id = el.id
       }
     })
-    console.log(userData)
     return userData
   }
 
@@ -68,22 +67,57 @@ export class UserService {
     this.userUpdated.next(user)
   }
 
-  async nextDecodeLevel() {
+  async nextResolveLevel() {
     let user = this.getUser()
     await updateDoc(doc(this.db, `users/${user.id}`), {
-      decodeLevel : user.decodeLevel + 1
+      resolveLevel : user.resolveLevel + 1
     })
-    user.decodeLevel++
+    user.resolveLevel++
     this.userUpdated.next(user)
   }
 
   async createUser(user : any) {
-    await addDoc(collection(this.db, "users"), {
+    let userInfo = {
       username: user.displayName,
       email: user.email,
       uid: user.uid,
+      codes : {},
       chessLevel: 0,
-      decodeLevel: 0,
-    });
+      resolveLevel: 0,
+    }
+    await addDoc(collection(this.db, "users"), userInfo);
+    this.userUpdated.next(userInfo)
+  }
+
+  async setCode(code : "any") {
+    let user = this.getUser()
+    user.codes[code] = true
+    await updateDoc(doc(this.db, `users/${user.id}`), {codes : user.codes})
+  }
+
+  getUserState(user : any) {
+    let points = 0
+    points += user.chessLevel * 20
+    if (user.resolveLevel < 7) {
+      points += user.resolveLevel * 10
+    }
+    if (user.resolveLevel >= 7) {
+      points += 140
+      if (user.resolveLevel > 8) points += 40
+      if (user.resolveLevel > 8) {
+        points += (user.resolveLevel - 7) * 60
+      }
+    }
+      Object.keys(user.codes).forEach(() => points += 20)
+    return `<pre>${user.username}: <span class="mark">${points}</span> points</pre>`
+  }
+
+  async getLogs() {
+    let res : any = ''
+    let users = await getDocs(query(collection(this.db, `users`)))
+    users.forEach((user) => {
+      res += this.getUserState(user.data())
+    })
+    return res
   }
 }

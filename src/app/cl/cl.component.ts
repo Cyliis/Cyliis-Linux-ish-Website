@@ -3,7 +3,7 @@ import { BehaviorSubject, timer } from 'rxjs';
 import { structure } from './folder-structure.data';
 import { WindowsService } from '../windows.service';
 import { UserService } from '../user.service';
-import { decode } from './decode.data';
+import { resolve } from './resolve.data';
 
 @Component({
   selector: 'app-cl',
@@ -35,7 +35,6 @@ export class ClComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.userService.init()
-    
   }
 
   ngAfterViewInit(): void {
@@ -90,11 +89,14 @@ export class ClComponent implements OnInit, AfterViewInit {
     else if (command == 'history') this.content += this.history()
     else if (command == 'icons') this.setIcons(commands)
     else if (command == 'login') this.login(commands)
+    else if (command == 'logs') this.logs()
     else if (command == 'logout') this.logout()
     else if (command == 'ls') this.ls(commands)
     else if (command == 'mag') this.content += this.mag()
     else if (command == 'neofetch') this.content += this.neoFetch()
+    else if (command == 'resolve') this.resolve(commands)
     else if (command == 'shutdown') this.shutdown()
+    else if (command == 'state') this.state()
     else if (command == 'title') this.title = commands.join(" ")
     else if (command == 'time') this.content += new Date()
     else if (command == 'ver') this.content += "<p></p>CyLIIS CyOS [Version 10.0.22000.978]"
@@ -106,27 +108,66 @@ export class ClComponent implements OnInit, AfterViewInit {
   }
 
   initVim() {
+    console.log("aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb3RyaWNhbGFhbGluLw==")
     this.vim = true
     this.content = ``
     this.title = "Vim"
   }
 
-  decode(commands : any) : any {
+  resolve(commands : any) : any {
     if (!this.userService.getUser()) return this.content += `You don't currently have permission to execute this command.`
     let response = commands[0] ? commands[0].trim().toLowerCase() : false
-    let decodes = decode
-    let level = this.userService.getUser().decodeLevel
-    if (level == decodes.length) return this.content += `You finished criptography.`
-    if (!response) this.content += decodes[level].question
-    else if (response == decodes[level].answer()) {
+    let resolves = resolve
+    let level = this.userService.getUser().resolveLevel
+    if (level == resolves.length) return this.content += `You finished criptography.`
+    if (!response) this.content += resolves[level].question
+    else if (response == resolves[level].answer()) {
       this.content += 
       `Correct<br>`
-      this.userService.nextDecodeLevel()
-      if (level < decodes.length) {
-        this.content += `Next: ${decodes[level + 1].question}`
+      this.userService.nextResolveLevel()
+      if (level < resolves.length) {
+        this.content += `Next: ${resolves[level + 1].question}`
       }
     }
     else this.content += 'Wrong answer'
+  }
+
+  decode(commands : any) : any {
+    if (!this.userService.getUser()) return this.content += `You don't currently have permission to execute this command.`
+    if (!commands[0]) return this.content += `
+      Invalid syntax:<br>
+      decode [code]<br><br>
+
+      <b>Ex:</b> decode bW90cmljYWxh
+    `
+    if ([
+      'bW90cmljYWxhNDRAZ21haWwuY29t', 
+      'Y3lsaWlzLnJv', 
+      "aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb3RyaWNhbGFhbGluLw==",
+      "aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb3RyaWNhbGFhbGluLw==",
+      "aHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2luL2FsaW4tZ2FicmllbC1tb3RyaWNhbGEv",
+      "YWVzb3BjYXJs",
+      "ZnIxM25kbHk=",
+      "mag",
+      "c2ljIG11bmR1cyBjcmVhdHVzIGVzdA==",
+      "Y3lsaWlz",
+      "bGlpcw==",
+      "bW90cmljYWxh"
+    ].includes(commands[0])) {
+      this.content += `Your code was succesfuly converted into points.`
+      this.userService.setCode(commands[0])
+    }
+  }
+
+  async logs() {
+    this.content += "click on console to get results<br>"
+    this.content += await this.userService.getLogs()
+  }
+
+  state() : any {
+    let user = this.userService.getUser() 
+    if (!this.userService.getUser()) return this.content += `You don't currently have permission to execute this command.`
+    this.content += this.userService.getUserState(user)
   }
 
   login(commands : any) : any {
@@ -199,6 +240,7 @@ export class ClComponent implements OnInit, AfterViewInit {
   }
 
   lsMerge() {
+    console.log("c2ljIG11bmR1cyBjcmVhdHVzIGVzdA==")
     this.folderStructure[this.folderIndex].folders.forEach((el) => {
       this.content += `<pre>26/02/2004  01:25 PM    ${el.folder ? '<span class="folder">DIR</span>' : '   '}          ${el.access ? el.showText : `<span class="restricted">${el.showText}</span>`} </pre>`
     })
@@ -221,6 +263,7 @@ export class ClComponent implements OnInit, AfterViewInit {
   }
 
   shutdown() {
+    console.log("bGlpcw==")
     var myWindow : any = window.open("", "_self");
     myWindow.document.write("");
     localStorage.setItem('boot', '')
@@ -270,6 +313,7 @@ export class ClComponent implements OnInit, AfterViewInit {
       <pre>CLEAR      Clears the screen.</pre>
       <pre>COLOR      Sets system color.</pre>
       <pre>DEL        Deletes one or more files.</pre>
+      <pre>DECODE     Transforms code into points.</pre>
       <pre>ECHO       Displays messages, or turns command echoing on or off.</pre>
       <pre>ERASE      Clears the screen.</pre>
       <pre>EXIT       Quits the CyCL program (command interpreter).</pre>
@@ -284,14 +328,17 @@ export class ClComponent implements OnInit, AfterViewInit {
       <pre>MKDIR      Creates a directory.</pre>
       <pre>MKLINK     Creates Symbolic Links and Hard Links.</pre>
       <pre>RD         Removes a directory.</pre>
+      <pre>RESOLVE    Execute quiz process</pre>
       <pre>RMDIR      Removes a directory.</pre>
       <pre>SHUTDOWN   Shutdown of machine.</pre>
+      <pre>STATE      Shows user's state.</pre>
       <pre>TIME       Displays or sets the system time.</pre>
       <pre>TITLE      Sets the window title for a CyCL session.</pre>
       <pre>VER        Displays the CyOS version.</pre>`
   }
 
   neoFetch() {
+    console.log("Y3lsaWlz")
     let theme = 'MAG-' + ['Cyan', 'Green', 'Red', "Blue", 'Purple', 'Orange'][parseInt(localStorage.getItem('color')!)]
     let icons = 'MAG-' + localStorage.getItem('icons')
     return `
@@ -355,6 +402,7 @@ export class ClComponent implements OnInit, AfterViewInit {
   }
 
   mag() {
+    console.log("ZnIxM25kbHk=")
     return `
 <pre>
 <span class="mark">

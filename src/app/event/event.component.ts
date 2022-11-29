@@ -14,6 +14,7 @@ export class EventComponent {
   event$ = this.store.select('event')
 
   onAction(url : any) {
+    console.error("YWVzb3BjYXJs")
     window.open(url);
   }
 }

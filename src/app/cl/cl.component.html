@@ -2,13 +2,15 @@
   <div class="cl" #cl>
     <div class="content" [innerHTML]="content"></div>
     <p *ngIf="init"></p>
-    <span class="dir" *ngIf="!vim">{{ dir$ | async }}</span>
-    <input
-      #consoleInput
-      [(ngModel)]="inputs[indexOfInput]"
-      class="console-input"
-      spellcheck="false"
-      (keydown)="onInput($event)"
-      cdkTrapFocus/>
+    <div class="input">
+      <span class="dir" *ngIf="!vim">{{ dir$ | async }}</span>
+      <input
+        #consoleInput
+        [(ngModel)]="inputs[indexOfInput]"
+        class="console-input"
+        spellcheck="false"
+        (keydown)="onInput($event)"
+        cdkTrapFocus/>
+      </div>
   </div>
 </app-window>

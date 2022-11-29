@@ -81,6 +81,7 @@ export class BootScreenComponent implements OnInit {
       this.loading = [...this.loading, {action : () => this.content += 'root@mag$: Why so serious?<br>'}]
     }
     else if (this.easterEgg == 6) {
+      console.log("aHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2luL2FsaW4tZ2FicmllbC1tb3RyaWNhbGEv")
       this.loading = [...this.loading, {action : () => this.content += "root@mag$: Don't worry - a few bits tried to escape, but we caught them<br>"}]
     }
     else if (this.easterEgg == 7) {
@@ -96,7 +97,7 @@ export class BootScreenComponent implements OnInit {
       this.loading = [...this.loading, {action : () => this.content += "root@mag$: The End is the Beginning and the Beginning is the End<br>"}]
     }
     else if (this.easterEgg == 11) {
-      this.loading = [...this.loading, {action : () => this.content += "root@mag$: Sic Mundus Creatus Est<br>"}]
+      this.loading = [...this.loading, ...this.easterEggLoading]
     }
     else if (this.easterEgg == 12) {
       this.loading = [...this.loading, {action : () => this.content += "root@mag$: Déjà vu is a glitch in the Matrix<br>"}]
