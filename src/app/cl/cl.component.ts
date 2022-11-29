@@ -3,6 +3,7 @@ import { BehaviorSubject, timer } from 'rxjs';
 import { structure } from './folder-structure.data';
 import { WindowsService } from '../windows.service';
 import { UserService } from '../user.service';
+import { decode } from './decode.data';
 
 @Component({
   selector: 'app-cl',
@@ -112,72 +113,25 @@ export class ClComponent implements OnInit, AfterViewInit {
 
   decode(commands : any) : any {
     if (!this.userService.getUser()) return this.content += `You don't currently have permission to execute this command.`
-    commands[0] = commands[0] ? commands[0].trim().toLowerCase() : false
-    if (this.level == 0) {
-      if (!commands[0]) this.content += 'Red right ....'
-      else if (commands[0] == 'hand') this.level++
-      else this.content += 'Wrong answer'
+    let response = commands[0] ? commands[0].trim().toLowerCase() : false
+    let decodes = decode
+    let level = this.userService.getUser().decodeLevel
+    if (level == decodes.length) return this.content += `You finished criptography.`
+    if (!response) this.content += decodes[level].question
+    else if (response == decodes[level].answer()) {
+      this.content += 
+      `Correct<br>`
+      this.userService.nextDecodeLevel()
+      if (level < decodes.length) {
+        this.content += `Next: ${decodes[level + 1].question}`
+      }
     }
-    else if (this.level == 1) {
-      if (!commands[0]) this.content += 'Hannah + Mikkel'
-      else if (commands[0] == 'jonas') this.level++
-      else this.content += 'Wrong answer'
-    }
-    else if (this.level == 2) {
-      if (!commands[0]) this.content += `Who said "I'm gonna make him an offer he can't refuse"`
-      else if (commands[0] == 'godfather') this.level++
-      else this.content += 'Wrong answer'
-    }
-    else if (this.level == 3) {
-      if (!commands[0]) this.content += `Toto, I've a feeling we're not in ...... anymore.`
-      else if (commands[0] == 'kansas') this.level++
-      else this.content += 'Wrong answer'
-    }
-    else if (this.level == 4) {
-      if (!commands[0]) this.content += 'A census taker once tried to test me. I ate his liver with some fava beans and a nice .......'
-      else if (commands[0] == 'chianti') this.level++
-      else this.content += 'Wrong answer'
-    }
-    else if (this.level == 5) {
-      if (!commands[0]) this.content += 'sixth sense'
-      else if (commands[0] == 'proprioception') this.level++
-      else this.content += 'Wrong answer'
-    }
-    else if (this.level == 6) {
-      if (!commands[0]) this.content += 'Elementary, my dear ......'
-      else if (commands[0] == 'watson') this.level++
-      else this.content += 'Wrong answer'
-    }
-    else if (this.level == 7) {
-      if (!commands[0]) this.content += `To infinity and ......!`
-      else if (commands[0] == 'beyond') this.level++
-      else this.content += 'Wrong answer'
-    }
-    else if (this.level == 8) {
-      if (!commands[0]) this.content += 'Leader of FR13ND5'
-      else if (commands[0] == 'mrx') this.level++
-      else this.content += 'Wrong answer'
-    }
-    else if (this.level == 9) {
-      if (!commands[0]) this.content += 'aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xSlhhR2xmX2l3QTZMS084aGlENngtVVdqNmVPX053V3kvdmlldz91c3A9c2hhcmluZw=='
-      else if (commands[0] == 'mag') this.level++
-      else this.content += 'Wrong answer'
-    }
-    else if (this.level == 10) {
-      if (!commands[0]) this.content += 'aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xQVJtZmpyRzhudFpfV3VadEp3UndxR2p0cEdyQVNzOEYvdmlldz91c3A9c2hhcmluZw=='
-      else if (commands[0] == '34558914442') this.level++
-      else this.content += 'Wrong answer'
-    }
-    else if (this.level == 11) {
-      if (!commands[0]) this.content += 'Find the white rabbit'
-      else if (commands[0] == localStorage.getItem('white_rabbit')) this.level++
-      else this.content += 'Wrong answer'
-    }
+    else this.content += 'Wrong answer'
   }
 
   login(commands : any) : any {
     if (commands[0]) {
-      if (commands[0] != 'Dylan_2791') return this.content += "Wrong password"
+      if (commands[0] != 'Dylan_2791') return this.content += `Wrong password<br> Hint: Find password in bootscreen`
       else this.userService.login()
     }
     else {
@@ -323,6 +277,8 @@ export class ClComponent implements OnInit, AfterViewInit {
       <pre>FTYPE      Displays or modifies file types used in file extension associations.</pre>
       <pre>HELP       Provides Help information for CyOS commands.</pre>
       <pre>ICONS      Sets system icon pack.</pre>
+      <pre>LOGIN      Sign in.</pre>
+      <pre>LOGOUT     Sign out.</pre>
       <pre>LS         Displays a list of files and subdirectories in a directory.</pre>
       <pre>MD         Creates a directory.</pre>
       <pre>MKDIR      Creates a directory.</pre>

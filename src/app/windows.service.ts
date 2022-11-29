@@ -106,6 +106,8 @@ export class WindowsService {
         return `assets/icons/${theme}disk-cy.webp`;
       case 'disk-d':
         return `assets/icons/${theme}disk-d.webp`;
+      case 'chess':
+        return `assets/icons/chess.png`;
       default:
         return `assets/icons/${theme}settings.webp`;
     }

@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     };
     this.resolveUrl()
     if (!localStorage.getItem('white_rabbit')) {
-      localStorage.setItem('white_rabbit', "Write an answer to decode")
+      localStorage.setItem('white_rabbit', "Write an answer to decode[Whithout spaces!!!]")
     }
   }
 

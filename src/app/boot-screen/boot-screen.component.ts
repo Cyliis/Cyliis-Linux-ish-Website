@@ -52,6 +52,9 @@ export class BootScreenComponent implements OnInit {
     {
       action : () => this.content += 'root@elliot$: Password: Dylan_2791<br>'
     },
+    {
+      action : () => this.content += 'root@elliot$: You may need the password<br>'
+    },
   ]
 
   easterEgg: number = Math.floor(Math.random() * 15);
@@ -68,7 +71,7 @@ export class BootScreenComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    if (!this.easterEgg) {
+    if (!this.easterEgg || this.easterEgg == 1 || this.easterEgg == 2 || this.easterEgg == 13 || this.easterEgg == 14) {
       this.loading = [...this.loading, ...this.easterEggLoading]
     }
     else if (this.easterEgg == 4) {

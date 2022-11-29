@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs'
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
-import { getDatabase, ref, update, push, onValue, get, remove, equalTo } from "firebase/database";
+import { addDoc, collection, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class UserService {
 
   provider = new GoogleAuthProvider();
   private auth = getAuth()
-  
-  private db = getDatabase();
+
+  db = getFirestore();
 
   login() {
     signInWithPopup(this.auth, this.provider)
@@ -27,10 +27,9 @@ export class UserService {
   init() {
     onAuthStateChanged(this.auth, async (user : any) => {
       if (user) {
-        console.log(user)
-        this.userUpdated.next({...user})
-        if (await this.userExists(user.uid)) console.log('a')
-        // else this.createUser(user)
+        let userInfo = await this.getRealUser(user)
+        if (userInfo) this.userUpdated.next(userInfo)
+        else this.createUser(user) 
       }
       else this.userUpdated.next(false)
     })
@@ -41,20 +40,50 @@ export class UserService {
     return this.userUpdated.value
   }
 
-
-  async userExists(userId : any) {
-    return !!(await get(ref(this.db, `users/${userId}`))).val()
-  }
-
   logout() {
     signOut(this.auth)
     this.userUpdated.next(false)
   }
 
-  createUser(data : any) {
-    let user = {
-      name : data.displayName,
-      id : data.uid
-    }
+  async getRealUser(user : any) {
+    let userData : any = false
+    let queryData = query(collection(this.db, "users"), where("email", "==", user.email))
+    let data = await getDocs(queryData)
+    data.forEach((el : any) => {
+      if (el.data()) {
+        userData = el.data()
+        userData.id = el.id
+      }
+    })
+    console.log(userData)
+    return userData
+  }
+
+  async nextChessLevel() {
+    let user = this.getUser()
+    await updateDoc(doc(this.db, `users/${user.id}`), {
+      chessLevel : user.chessLevel + 1
+    })
+    user.chessLevel++
+    this.userUpdated.next(user)
+  }
+
+  async nextDecodeLevel() {
+    let user = this.getUser()
+    await updateDoc(doc(this.db, `users/${user.id}`), {
+      decodeLevel : user.decodeLevel + 1
+    })
+    user.decodeLevel++
+    this.userUpdated.next(user)
+  }
+
+  async createUser(user : any) {
+    await addDoc(collection(this.db, "users"), {
+      username: user.displayName,
+      email: user.email,
+      uid: user.uid,
+      chessLevel: 0,
+      decodeLevel: 0,
+    });
   }
 }
