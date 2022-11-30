@@ -36,7 +36,7 @@ export let resolve = [
         answer: () => '34558914442'
     },
     {
-        question: 'Find the white rabbit',
+        question: 'Find the white rabbit in html',
         answer: () => localStorage.getItem('white_rabbit')
     }
 ]
