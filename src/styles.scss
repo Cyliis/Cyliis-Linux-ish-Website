@@ -170,11 +170,7 @@ pre {
   background: rgb(var(--primary-color));
 }
 
-.dir {
-  color: #33D17A;
-}
-
-.folder {
+.folder, .dir {
   color: #2d7bdb;
 }
 
@@ -186,4 +182,12 @@ pre {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(4, 1fr);
+}
+
+.origin {
+  color: #33D17A;
+}
+
+.func {
+  color: #fff;
 }

@@ -52,10 +52,13 @@ export class BootScreenComponent implements OnInit {
       action : () => this.content += 'root@elliot$: Time elapsed: 24.08771<br>'
     },
     {
-      action : () => this.content += 'root@elliot$: Password: Dylan_2791<br>'
+      action : () => this.content += 'root@elliot$: th_code: Dylan_2791<br>'
     },
     {
-      action : () => this.content += 'root@elliot$: You may need the password<br>'
+      action : () => this.content += 'root@elliot$: You may need the th_code<br>'
+    },
+    {
+      action : () => {}
     },
   ]
 
@@ -66,10 +69,15 @@ export class BootScreenComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   onKeyDown(event : any) {
-    if (event.key == "ArrowUp" || event.key == "ArrowDown") this.selected = this.selected ? 0 : 1
-    else if (event.key == "Enter") {
-      if (this.selected) this.boot.emit()
-      else this.openOldSite()
+    if (this.loaded) {
+      if (event.key == "ArrowUp" || event.key == "ArrowDown") this.selected = this.selected ? 0 : 1
+      else if (event.key == "Enter") {
+        if (this.selected) this.boot.emit()
+        else this.openOldSite()
+      }
+    }
+    else if (event.keyCode == 32) {
+      this.onSkip()
     }
   }
   async ngOnInit() {
@@ -108,6 +116,10 @@ export class BootScreenComponent implements OnInit {
       timer((i + 1) * 1000).subscribe(() => iteration.action())
     })
     timer(this.loading.length * 1000 + 2000).subscribe(() => this.loaded = true)
+  }
+
+  onSkip() {
+    this.loaded = true
   }
 
   openOldSite() {

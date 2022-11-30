@@ -34,3 +34,14 @@
         color: black;
     }
 }
+
+.skip {
+    right: 5rem;
+    bottom: 5rem;
+    border: 3px solid #fff;
+    border-radius: 6px;
+    padding: .5rem;
+    position: absolute;
+    box-sizing: border-box;
+    cursor: pointer;
+}

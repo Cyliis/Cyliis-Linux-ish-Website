@@ -3,7 +3,7 @@
     <div class="content" [innerHTML]="content"></div>
     <p *ngIf="init"></p>
     <div class="input">
-      <span class="dir" *ngIf="!vim">{{ dir$ | async }}</span>
+      <div class="dir" *ngIf="!vim" [innerHTML]="dir$ | async"></div> 
       <input
         #consoleInput
         [(ngModel)]="inputs[indexOfInput]"

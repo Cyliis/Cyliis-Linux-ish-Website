@@ -6,7 +6,7 @@ import { WindowsService } from "../windows.service"
 
 let eventsStruct = events.map((event : any) => {
     return {
-        showText: `${event.title}.evnt`,
+        showText: `<span class='func'>$</span>{event.title}.evnt`,
         access: true,
         name: 'event',
         indexOfDir: 5,
@@ -18,7 +18,7 @@ let eventsStruct = events.map((event : any) => {
 
 let documentStruct = [...team, ...alumni].map((member : any) => {
     return {
-        showText: `${member.name}.prtfl`,
+        showText: `<span class='func'>$</span>{member.name}.prtfl`,
         access: true,
         name: 'portofolio',
         indexOfDir: 5,
@@ -30,7 +30,7 @@ let documentStruct = [...team, ...alumni].map((member : any) => {
 
 let galleryStruct = gallery.map((image : any, i : number) => {
     return {
-        showText : `${image.name}.img`,
+        showText : `<span class='func'>$</span>{image.name}.img`,
         access: true,
         name: 'image',
         indexOfDir: 5,
@@ -42,7 +42,7 @@ let galleryStruct = gallery.map((image : any, i : number) => {
 
 export let structure = [
     {
-        dir : "cyliis@cyliis:~$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span><span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -86,7 +86,7 @@ export let structure = [
         ],
     },
     {
-        dir : "cyliis@cyliis:~/Users$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -116,7 +116,7 @@ export let structure = [
         ],
     },
     {
-        dir : "cyliis@cyliis:~/Users/Public$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -178,7 +178,7 @@ export let structure = [
         ],
     },
     {
-        dir : "cyliis@cyliis:~/Users/Public/Contacts$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public/Contacts<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -207,7 +207,7 @@ export let structure = [
         ],
     },
     {
-        dir : "cyliis@cyliis:~/Users/Public/Desktop$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public/Desktop<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -260,7 +260,7 @@ export let structure = [
         ]
     },
     {
-        dir : "cyliis@cyliis:~/Users/Public/Documents$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public/Documents<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -278,7 +278,7 @@ export let structure = [
         ]
     },
     {
-        dir : "cyliis@cyliis:~/Users/Public/Favorites$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public/Favorites<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -295,7 +295,7 @@ export let structure = [
         ]
     },
     {
-        dir : "cyliis@cyliis:~/Users/Public/Links$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public/Links<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -312,7 +312,7 @@ export let structure = [
         ]
     },
     {
-        dir : "cyliis@cyliis:~/Users/Public/Music$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public/Music<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -329,7 +329,7 @@ export let structure = [
         ]
     },
     {
-        dir : "cyliis@cyliis:~/Users/Public/Images$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public/Images<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -347,7 +347,7 @@ export let structure = [
         ]
     },
     {
-        dir : "cyliis@cyliis:~/Users/Public/Desktop/Gallery$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public/Desktop/Gallery<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -365,7 +365,7 @@ export let structure = [
         ]
     },
     {
-        dir : "cyliis@cyliis:~/Users/Public/Desktop/Team$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public/Desktop/Team<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -383,7 +383,7 @@ export let structure = [
         ]
     },
     {
-        dir : "cyliis@cyliis:~/Users/Public/Desktop/Alumni$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public/Desktop/Alumni<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -401,7 +401,7 @@ export let structure = [
         ]
     },
     {
-        dir : "cyliis@cyliis:~/Users/Public/Desktop/Events$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public/Desktop/Events<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',
@@ -419,7 +419,7 @@ export let structure = [
         ]
     },
     {
-        dir : "cyliis@cyliis:~/Users/admin$",
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/admin<span class='func'>$</span>",
         folders : [
             {
                 showText : '.',

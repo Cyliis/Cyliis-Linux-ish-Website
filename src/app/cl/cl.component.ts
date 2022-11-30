@@ -59,10 +59,10 @@ export class ClComponent implements OnInit, AfterViewInit {
         return
       }
       if (this.init) {
-        this.content += `<p></p><span class="dir">${this.dir$.value}</span>${e.target.value}<br>`
+        this.content += `<p></p><span class="dir">${this.dir$.value}</span> ${e.target.value}<br>`
         this.init = false
       }
-      else this.content += `<span class="dir">${this.dir$.value}</span>${e.target.value}<br>`
+      else this.content += `<span class="dir">${this.dir$.value}</span> ${e.target.value}<br>`
       if (e.target.value.trim()) this.resolveCommand(e.target.value.split(" "))
       this.inputs[this.inputs.length - 1] = e.target.value
       this.indexOfInput = this.inputs.length
@@ -165,13 +165,13 @@ export class ClComponent implements OnInit, AfterViewInit {
 
   login(commands : any) : any {
     if (commands[0]) {
-      if (commands[0] != 'Dylan_2791') return this.content += `Wrong password<br> Hint: Find password in bootscreen`
+      if (commands[0] != 'Dylan_2791') return this.content += `Wrong th_code<br> Hint: Find th_code in bootscreen`
       else this.userService.login()
     }
     else {
       this.content += `
         Invalid syntax<br>
-        login [password]
+        login [th_code]
       `
     }
   }
@@ -183,7 +183,11 @@ export class ClComponent implements OnInit, AfterViewInit {
   cd(path : string) {
     let dirs = path.split("/").join('\\').split('\\')
     let initIndex = this.folderIndex
-    console.log(dirs)
+    if (dirs[0] == '~' || dirs[0] == "home") {
+      this.folderIndex = 0
+      this.dir$.next(this.folderStructure[this.folderIndex].dir)
+      return
+    }
     dirs.forEach((dir: string) => {
       let check = false
       this.folderStructure[this.folderIndex].folders.forEach((el) : any => {
