@@ -138,7 +138,6 @@ export class ClComponent implements OnInit, AfterViewInit {
   }
 
   async decode(commands : any) : Promise<any> {
-    
     if (!this.userService.getUser()) return this.content += `You don't currently have permission to execute this command.`
     if (!commands[0]) return this.content += `
       Invalid syntax:<br>
@@ -147,14 +146,15 @@ export class ClComponent implements OnInit, AfterViewInit {
       <b>Ex:</b> decode bW90cmljYWxh
     `
     if ((await this.userService.getCodes()).includes(commands[0])) {
-      this.content += `Your code was succesfuly converted into points.`
+      this.content += `Your code was succesfuly converted into points.<br><br>`
       this.userService.setCode(commands[0])
     }
   }
 
   async logs() {
-    this.content += "click on console to get results<br>"
+    this.content += "<br>click on console to get results<br><br>"
     this.content += await this.userService.getLogs()
+    this.content += "<br>"
   }
 
   state() : any {
