@@ -42,7 +42,7 @@ let galleryStruct = gallery.map((image : any, i : number) => {
 
 export let structure = [
     {
-        dir : "CyOS:\\>",
+        dir : "cyliis@cyliis:~$",
         folders : [
             {
                 showText : '.',
@@ -86,7 +86,7 @@ export let structure = [
         ],
     },
     {
-        dir : "CyOS:\\>Users>",
+        dir : "cyliis@cyliis:~/Users$",
         folders : [
             {
                 showText : '.',
@@ -116,7 +116,7 @@ export let structure = [
         ],
     },
     {
-        dir : "CyOS:\\>Users>Public>",
+        dir : "cyliis@cyliis:~/Users/Public$",
         folders : [
             {
                 showText : '.',
@@ -178,7 +178,7 @@ export let structure = [
         ],
     },
     {
-        dir : "CyOS:\\>Users>Public>Contacts>",
+        dir : "cyliis@cyliis:~/Users/Public/Contacts$",
         folders : [
             {
                 showText : '.',
@@ -207,7 +207,7 @@ export let structure = [
         ],
     },
     {
-        dir : "CyOS:\\>Users>Public>Desktop>",
+        dir : "cyliis@cyliis:~/Users/Public/Desktop$",
         folders : [
             {
                 showText : '.',
@@ -260,7 +260,7 @@ export let structure = [
         ]
     },
     {
-        dir : "CyOS:\\>Users>Public>Documents>",
+        dir : "cyliis@cyliis:~/Users/Public/Documents$",
         folders : [
             {
                 showText : '.',
@@ -278,7 +278,7 @@ export let structure = [
         ]
     },
     {
-        dir : "CyOS:\\>Users>Public>Favorites>",
+        dir : "cyliis@cyliis:~/Users/Public/Favorites$",
         folders : [
             {
                 showText : '.',
@@ -295,7 +295,7 @@ export let structure = [
         ]
     },
     {
-        dir : "CyOS:\\>Users>Public>Links>",
+        dir : "cyliis@cyliis:~/Users/Public/Links$",
         folders : [
             {
                 showText : '.',
@@ -312,7 +312,7 @@ export let structure = [
         ]
     },
     {
-        dir : "CyOS:\\>Users>Public>Music>",
+        dir : "cyliis@cyliis:~/Users/Public/Music$",
         folders : [
             {
                 showText : '.',
@@ -329,7 +329,7 @@ export let structure = [
         ]
     },
     {
-        dir : "CyOS:\\>Users>Public>Images>",
+        dir : "cyliis@cyliis:~/Users/Public/Images$",
         folders : [
             {
                 showText : '.',
@@ -347,7 +347,7 @@ export let structure = [
         ]
     },
     {
-        dir : "CyOS:\\>Users>Public>Desktop>Gallery>",
+        dir : "cyliis@cyliis:~/Users/Public/Desktop/Gallery$",
         folders : [
             {
                 showText : '.',
@@ -365,7 +365,7 @@ export let structure = [
         ]
     },
     {
-        dir : "CyOS:\\>Users>Public>Desktop>Team>",
+        dir : "cyliis@cyliis:~/Users/Public/Desktop/Team$",
         folders : [
             {
                 showText : '.',
@@ -383,7 +383,7 @@ export let structure = [
         ]
     },
     {
-        dir : "CyOS:\\>Users>Public>Desktop>Alumni>",
+        dir : "cyliis@cyliis:~/Users/Public/Desktop/Alumni$",
         folders : [
             {
                 showText : '.',
@@ -401,7 +401,7 @@ export let structure = [
         ]
     },
     {
-        dir : "CyOS:\\>Users>Public>Desktop>Events>",
+        dir : "cyliis@cyliis:~/Users/Public/Desktop/Events$",
         folders : [
             {
                 showText : '.',
@@ -419,7 +419,7 @@ export let structure = [
         ]
     },
     {
-        dir : "CyOS:\\>Users>admin>",
+        dir : "cyliis@cyliis:~/Users/admin$",
         folders : [
             {
                 showText : '.',

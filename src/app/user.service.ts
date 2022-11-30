@@ -77,7 +77,7 @@ export class UserService {
   }
 
   async createUser(user : any) {
-    let userInfo = {
+    let userInfo : any = {
       username: user.displayName,
       email: user.email,
       uid: user.uid,
@@ -85,7 +85,8 @@ export class UserService {
       chessLevel: 0,
       resolveLevel: 0,
     }
-    await addDoc(collection(this.db, "users"), userInfo);
+    let newUser = await addDoc(collection(this.db, "users"), userInfo);
+    userInfo.id = newUser.id
     this.userUpdated.next(userInfo)
   }
 

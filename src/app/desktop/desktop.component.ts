@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { WindowsService } from '../windows.service';
 import Selecto from "selecto";
-import { BehaviorSubject, timer } from 'rxjs';
+import { BehaviorSubject, filter, fromEvent, timer } from 'rxjs';
 import { CdkDragMove } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -71,13 +71,14 @@ export class DesktopComponent implements OnInit {
         el.classList.remove("folder--selected");
     });
     });
-    document.onkeydown = (e) => {
-      if (e.key == 'Enter') {
-        this.selected.forEach((el : any) => {
-          timer(50).subscribe(() =>this.windowsService.openWindow(el.dataset['app']))
-        }) 
-      }
-    };
+    fromEvent(document, "keydown").pipe(
+      filter((e : any) => e.target == document.body && e.key == 'Enter')
+    )
+    .subscribe((e) => {
+      this.selected.forEach((el : any) => {
+        timer(50).subscribe(() =>this.windowsService.openWindow(el.dataset['app']))
+      }) 
+    })
   }
 
   onOpen(window : string) {
