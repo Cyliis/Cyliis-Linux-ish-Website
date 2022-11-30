@@ -25,14 +25,13 @@ export class ChessComponent implements OnInit {
 
   position$ : Subject<any> = new Subject()
 
-  ngOnInit(): void {
-    console.log("bW90cmljYWxhNDRAZ21haWwuY29t")
+  async ngOnInit() {
+    console.log((await this.userService.getCodes())[0])
     if (this.index == this.games.length) {
       alert("You finished all puzzles")
       timer(0).subscribe(() => this.windowsService.closeWindow('chess'))
     } 
     else {
-      console.log('a')
       timer(0).subscribe(() => this.position$.next(this.games[this.index].positions[0]))
     }
   }

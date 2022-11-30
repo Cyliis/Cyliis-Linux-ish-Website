@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs'
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
-import { addDoc, collection, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -110,6 +110,12 @@ export class UserService {
     }
       Object.keys(user.codes).forEach(() => points += 20)
     return `<pre>${user.username}: <span class="mark">${points}</span> points</pre>`
+  }
+
+  async getCodes() {
+    let res: any = [];
+    (await getDocs(query(collection(this.db, 'codes')))).forEach((el : any) => res = el.data().codes)
+    return res
   }
 
   async getLogs() {

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-event',
@@ -9,12 +10,12 @@ import { Store } from '@ngrx/store';
 })
 export class EventComponent {
 
-  constructor(private store : Store<any>) { }
+  constructor(private store : Store<any>, private userService : UserService) { }
 
   event$ = this.store.select('event')
 
-  onAction(url : any) {
-    console.error("YWVzb3BjYXJs")
+  async onAction(url : any) {
+    console.log((await this.userService.getCodes())[4])
     window.open(url);
   }
 }

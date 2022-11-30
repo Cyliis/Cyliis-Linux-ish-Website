@@ -1,5 +1,6 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { timer } from 'rxjs';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-boot-screen',
@@ -8,7 +9,8 @@ import { timer } from 'rxjs';
 })
 export class BootScreenComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService : UserService) { }
+
   @Output() boot = new EventEmitter()
 
   loaded : boolean = false
@@ -70,7 +72,7 @@ export class BootScreenComponent implements OnInit {
       else this.openOldSite()
     }
   }
-  ngOnInit(): void {
+  async ngOnInit() {
     if (!this.easterEgg || this.easterEgg == 1 || this.easterEgg == 2 || this.easterEgg == 13 || this.easterEgg == 14) {
       this.loading = [...this.loading, ...this.easterEggLoading]
     }
@@ -81,7 +83,7 @@ export class BootScreenComponent implements OnInit {
       this.loading = [...this.loading, {action : () => this.content += 'root@mag$: Why so serious?<br>'}]
     }
     else if (this.easterEgg == 6) {
-      console.log("aHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2luL2FsaW4tZ2FicmllbC1tb3RyaWNhbGEv")
+      console.log((await this.userService.getCodes())[3])
       this.loading = [...this.loading, {action : () => this.content += "root@mag$: Don't worry - a few bits tried to escape, but we caught them<br>"}]
     }
     else if (this.easterEgg == 7) {

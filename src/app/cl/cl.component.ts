@@ -92,8 +92,8 @@ export class ClComponent implements OnInit, AfterViewInit {
     else if (command == 'logs') this.logs()
     else if (command == 'logout') this.logout()
     else if (command == 'ls') this.ls(commands)
-    else if (command == 'mag') this.content += this.mag()
-    else if (command == 'neofetch') this.content += this.neoFetch()
+    else if (command == 'mag') this.mag()
+    else if (command == 'neofetch') this.neoFetch()
     else if (command == 'resolve') this.resolve(commands)
     else if (command == 'shutdown') this.shutdown()
     else if (command == 'state') this.state()
@@ -107,11 +107,11 @@ export class ClComponent implements OnInit, AfterViewInit {
     timer(0).subscribe(() =>this.clRef.nativeElement.scrollTop = this.clRef.nativeElement.scrollHeight)
   }
 
-  initVim() {
-    console.log("aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb3RyaWNhbGFhbGluLw==")
+  async initVim() {
     this.vim = true
     this.content = ``
     this.title = "Vim"
+    console.log((await this.userService.getCodes())[2])
   }
 
   resolve(commands : any) : any {
@@ -132,7 +132,8 @@ export class ClComponent implements OnInit, AfterViewInit {
     else this.content += 'Wrong answer'
   }
 
-  decode(commands : any) : any {
+  async decode(commands : any) : Promise<any> {
+    
     if (!this.userService.getUser()) return this.content += `You don't currently have permission to execute this command.`
     if (!commands[0]) return this.content += `
       Invalid syntax:<br>
@@ -140,20 +141,7 @@ export class ClComponent implements OnInit, AfterViewInit {
 
       <b>Ex:</b> decode bW90cmljYWxh
     `
-    if ([
-      'bW90cmljYWxhNDRAZ21haWwuY29t', 
-      'Y3lsaWlzLnJv', 
-      "aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb3RyaWNhbGFhbGluLw==",
-      "aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb3RyaWNhbGFhbGluLw==",
-      "aHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2luL2FsaW4tZ2FicmllbC1tb3RyaWNhbGEv",
-      "YWVzb3BjYXJs",
-      "ZnIxM25kbHk=",
-      "mag",
-      "c2ljIG11bmR1cyBjcmVhdHVzIGVzdA==",
-      "Y3lsaWlz",
-      "bGlpcw==",
-      "bW90cmljYWxh"
-    ].includes(commands[0])) {
+    if ((await this.userService.getCodes()).includes(commands[0])) {
       this.content += `Your code was succesfuly converted into points.`
       this.userService.setCode(commands[0])
     }
@@ -190,6 +178,7 @@ export class ClComponent implements OnInit, AfterViewInit {
   cd(path : string) {
     let dirs = path.split("/").join('\\').split('\\')
     let initIndex = this.folderIndex
+    console.log(dirs)
     dirs.forEach((dir: string) => {
       let check = false
       this.folderStructure[this.folderIndex].folders.forEach((el) : any => {
@@ -226,7 +215,7 @@ export class ClComponent implements OnInit, AfterViewInit {
     })
   }
 
-  ls(commads : any) {
+  ls(commads : any) : any {
     if (commads[0] == "-l") return this.lsMerge()
     let text = "<pre class='ls'>"
     this.folderStructure[this.folderIndex].folders.forEach((el) => {
@@ -239,11 +228,12 @@ export class ClComponent implements OnInit, AfterViewInit {
     this.content += text
   }
 
-  lsMerge() {
-    console.log("c2ljIG11bmR1cyBjcmVhdHVzIGVzdA==")
+  async lsMerge() {
+    
     this.folderStructure[this.folderIndex].folders.forEach((el) => {
       this.content += `<pre>26/02/2004  01:25 PM    ${el.folder ? '<span class="folder">DIR</span>' : '   '}          ${el.access ? el.showText : `<span class="restricted">${el.showText}</span>`} </pre>`
     })
+    console.log((await this.userService.getCodes())[7])
   }
 
   setIcons(commands : any) {
@@ -262,8 +252,8 @@ export class ClComponent implements OnInit, AfterViewInit {
     } 
   }
 
-  shutdown() {
-    console.log("bGlpcw==")
+  async shutdown() {
+    console.log((await this.userService.getCodes())[9])
     var myWindow : any = window.open("", "_self");
     myWindow.document.write("");
     localStorage.setItem('boot', '')
@@ -337,11 +327,10 @@ export class ClComponent implements OnInit, AfterViewInit {
       <pre>VER        Displays the CyOS version.</pre>`
   }
 
-  neoFetch() {
-    console.log("Y3lsaWlz")
+  async neoFetch() {
     let theme = 'MAG-' + ['Cyan', 'Green', 'Red', "Blue", 'Purple', 'Orange'][parseInt(localStorage.getItem('color')!)]
     let icons = 'MAG-' + localStorage.getItem('icons')
-    return `
+    this.content += `
 <pre>
 <span class="mark">             .'cllllllllllc''                   </span><span class="dir">cyliis</span>@<span class="dir">cyliis.ro</span>
 <span class="mark">          .;clllllllllllllllllc,.               OS:</span> Cyliis 2017.6.9
@@ -364,6 +353,7 @@ export class ClComponent implements OnInit, AfterViewInit {
 <span class="mark">           ,;;;;;;;;,,'........            </span>
 <span class="mark">                 ..........                </span>
     </pre>` 
+    console.log((await this.userService.getCodes())[8])
   }
 
   setBackgroundImage(index : number) {
@@ -401,9 +391,8 @@ export class ClComponent implements OnInit, AfterViewInit {
     el.focus()
   }
 
-  mag() {
-    console.log("ZnIxM25kbHk=")
-    return `
+  async mag() {
+    this.content += `
 <pre>
 <span class="mark">
 0000       0000      00000         00000000
@@ -419,5 +408,6 @@ export class ClComponent implements OnInit, AfterViewInit {
 <span class="mark">github:</span> github.com/FR13ND-ly
 <span class="mark">linkedin:</span> linkedin.com/in/alin-gabriel-motricala
 </pre>    ` 
+    console.log((await this.userService.getCodes())[5])
   }
 }
