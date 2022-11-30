@@ -95,6 +95,7 @@ export class ClComponent implements OnInit, AfterViewInit {
     else if (command == 'mag') this.content += this.mag()
     else if (command == 'neofetch') this.content += this.neoFetch()
     else if (command == 'resolve') this.resolve(commands)
+    else if (command == 'rm') this.content += ":))"
     else if (command == 'shutdown') this.shutdown()
     else if (command == 'state') this.state()
     else if (command == 'title') this.title = commands.join(" ")
@@ -120,13 +121,17 @@ export class ClComponent implements OnInit, AfterViewInit {
     let resolves = resolve
     let level = this.userService.getUser().resolveLevel
     if (level == resolves.length) return this.content += `You finished criptography.`
-    if (!response) this.content += resolves[level].question
+    if (!response) this.content += `
+      Invalid syntax:<br>
+      resolve [response]<br><br>
+      Q: <span class="mark">${resolves[level].question}</span>
+      `
     else if (response == resolves[level].answer()) {
       this.content += 
       `Correct<br>`
       this.userService.nextResolveLevel()
       if (level < resolves.length) {
-        this.content += `Next: ${resolves[level + 1].question}`
+        this.content += `Next: <span class="mark">${resolves[level + 1].question}</span>`
       }
     }
     else this.content += 'Wrong answer'
