@@ -238,7 +238,6 @@ export class ClComponent implements OnInit, AfterViewInit {
   }
 
   async lsMerge() {
-    
     this.folderStructure[this.folderIndex].folders.forEach((el) => {
       this.content += `<pre>26/02/2004  01:25 PM    ${el.folder ? '<span class="folder">DIR</span>' : '   '}          ${el.access ? el.showText : `<span class="restricted">${el.showText}</span>`} </pre>`
     })
@@ -395,7 +394,7 @@ export class ClComponent implements OnInit, AfterViewInit {
         this.init = false
       }
       else this.content += `<p></p><span class="dir">${this.dir$.value}</span><br>`
-      this.resolveCommand(['echo', `"${selectedText}" copied to clipboard`])
+      this.resolveCommand(['echo', `selection copied to clipboard`])
     }
     el.focus()
   }
