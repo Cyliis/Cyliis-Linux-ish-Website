@@ -40,6 +40,10 @@ export class UserService {
     return this.userUpdated.value
   }
 
+  getUserUpdateListener() {
+    return this.userUpdated.asObservable()
+  }
+
   logout() {
     signOut(this.auth)
     this.userUpdated.next(false)

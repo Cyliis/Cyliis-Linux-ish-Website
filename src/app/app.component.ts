@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { map, tap } from 'rxjs';
+import { UserService } from './user.service';
 import { WindowsService } from './windows.service';
 
 @Component({
@@ -8,10 +11,21 @@ import { WindowsService } from './windows.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private windowsService : WindowsService) {}
+  constructor(private windowsService : WindowsService, private userService : UserService, private sanitizer : DomSanitizer) {}
   
   loaded! : boolean
   
+  bunny = this.sanitizer.bypassSecurityTrustHtml(`<!--  
+  (\\_/)  
+  (o.o) - I am going to LocalStorage
+  (___)0 
+-->`)
+
+  showBunny$ = this.userService.getUserUpdateListener().pipe(
+    map((res : any) => res?.resolveLevel == 9)
+  )
+
+
   ngOnInit() {
     this.loaded = !!localStorage.getItem('boot') || this.windowsService.isMobile()
     this.onSetTheme()
@@ -46,6 +60,12 @@ export class AppComponent implements OnInit {
   onSetPrimaryColor() {
     let index = +localStorage.getItem('color')!;
     document.body.classList.add(`primary-color-${index}`)
+  }
+
+  showWhiteRabbit() {
+    console.log('a')
+    console.log(this.userService.getUser())
+    return this.userService.getUser()?.chessLevel == 9
   }
 
   resolveUrl() {
