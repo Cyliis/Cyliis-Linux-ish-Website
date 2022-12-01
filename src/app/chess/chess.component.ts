@@ -41,12 +41,12 @@ export class ChessComponent implements OnInit {
   }
 
   onClick(i : any, position : any) {
-    let piece = position[i]
-    if (this.selectedPiece == i) this.selectedPiece = undefined
-    else if (piece && piece[0] == 'w') this.selectedPiece = i
+    let pos = position[i]
+    if (this.selectedPiece == i) this.selectedPiece = -1
+    else if (pos.piece && pos.piece[0] == 'w') this.selectedPiece = i
     else {      
       if (this.selectedPiece) this.resolvePosition(i, position)
-      else if (piece && piece[0] != 'b') this.selectedPiece = i
+      else if (pos.piece && pos.piece[0] != 'b') this.selectedPiece = i
     }
   }
 

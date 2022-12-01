@@ -6,7 +6,7 @@ import { WindowsService } from "../windows.service"
 
 let eventsStruct = events.map((event : any) => {
     return {
-        showText: `<span class='func'>$</span>{event.title}.evnt`,
+        showText: `${event.title}.evnt`,
         access: true,
         name: 'event',
         indexOfDir: 5,
@@ -18,7 +18,7 @@ let eventsStruct = events.map((event : any) => {
 
 let documentStruct = [...team, ...alumni].map((member : any) => {
     return {
-        showText: `<span class='func'>$</span>{member.name}.prtfl`,
+        showText: `${member.name}.prtfl`,
         access: true,
         name: 'portofolio',
         indexOfDir: 5,
@@ -30,7 +30,7 @@ let documentStruct = [...team, ...alumni].map((member : any) => {
 
 let galleryStruct = gallery.map((image : any, i : number) => {
     return {
-        showText : `<span class='func'>$</span>{image.name}.img`,
+        showText : `${image.name}.img`,
         access: true,
         name: 'image',
         indexOfDir: 5,
