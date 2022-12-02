@@ -31,7 +31,7 @@ export class WindowsService {
   }
 
   openWindow(window: any): void {
-    if (['downloads', 'disk-cy', 'disk-d'].includes(window))
+    if (['disk-cy', 'disk-d'].includes(window))
       return this.openWindow('access-denied');
     if (this.minimizeds.includes(window)) {
       this.store.dispatch(maximizeWindow({ window }));

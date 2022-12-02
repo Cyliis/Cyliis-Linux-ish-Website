@@ -106,6 +106,7 @@ export class WindowComponent implements AfterViewInit {
       'events',
       'gallery',
       'images',
+      'downloads',
       'team',
     ].includes(this.name.toLowerCase())
   }

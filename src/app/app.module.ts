@@ -27,6 +27,7 @@ import { BootScreenComponent } from './boot-screen/boot-screen.component';
 import { FormsModule } from '@angular/forms';
 import { WindowsService } from './windows.service';
 import { ChessComponent } from './chess/chess.component';
+import { DownloadsComponent } from './downloads/downloads.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ChessComponent } from './chess/chess.component';
     AccessDeniedComponent,
     BootScreenComponent,
     ChessComponent,
+    DownloadsComponent,
   ],
   imports: [
     BrowserModule,

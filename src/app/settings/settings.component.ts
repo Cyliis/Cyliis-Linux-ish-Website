@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,14 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService : UserService) { }
+
   backgroundImages = [
     "/assets/bg/bg-1.webp",
-    "https://www.gifcen.com/wp-content/uploads/2022/04/wallpaper-gif-4.gif",
-    "https://i.pinimg.com/originals/5d/16/b2/5d16b293438a635ecfcfa78596cad135.gif",
-    "https://c.tenor.com/zMdZBjJ7gPkAAAAd/aesthetic-wallpaper.gif",
-    "https://wallpapercave.com/wp/wp3684404.gif",
-    "https://i.pinimg.com/originals/d7/33/34/d733345e4f11231904e7634a04439e21.gif"
+    "/assets/bg/bg-2.webp",
+    // "https://i.pinimg.com/originals/5d/16/b2/5d16b293438a635ecfcfa78596cad135.gif",
+    // "https://c.tenor.com/zMdZBjJ7gPkAAAAd/aesthetic-wallpaper.gif",
+    // "https://wallpapercave.com/wp/wp3684404.gif",
+    // "https://i.pinimg.com/originals/d7/33/34/d733345e4f11231904e7634a04439e21.gif"
   ]
 
   colors = [
@@ -26,10 +28,20 @@ export class SettingsComponent implements OnInit {
     "#ff9800"
   ]
 
+  user$ : any = this.userService.getUserUpdateListener()
+
   selectedColor = parseInt(localStorage.getItem('color')!)
   selectedBackgroundImage = parseInt(localStorage.getItem('bg')!)
 
   ngOnInit(): void {
+  }
+
+  onLogin() {
+    this.userService.login()
+  }
+
+  onLogout() {
+    this.userService.logout()
   }
 
   onChangeTheme() {

@@ -63,7 +63,7 @@ export class ClComponent implements OnInit, AfterViewInit {
         this.init = false
       }
       else this.content += `<span class="dir">${this.dir$.value}</span> ${e.target.value}<br>`
-      if (e.target.value.trim()) this.resolveCommand(e.target.value.split(" "))
+      if (e.target.value.trim()) this.resolveCommand(e.target.value.trim().replace(/\s\s+/g, ' ').split(" "))
       this.inputs[this.inputs.length - 1] = e.target.value
       this.indexOfInput = this.inputs.length
       this.inputs.push('')
@@ -79,7 +79,7 @@ export class ClComponent implements OnInit, AfterViewInit {
     if (app?.exec) app?.exec()
     else if (command == 'bgimage') this.changeDesktopImage(commands)
     else if (command == 'decode') this.decode(commands)
-    else if (command == 'cd') this.cd(commands.join(""))
+    else if (command == 'cd') this.cd(commands.join(" "))
     else if (command == 'clear') this.content = `<p></p>`
     else if (command == 'color') this.changeSystemColor(commands)
     else if (command == 'echo') this.content += commands.join(" ")
@@ -102,7 +102,6 @@ export class ClComponent implements OnInit, AfterViewInit {
     else if (command == 'time') this.content += new Date()
     else if (command == 'ver') this.content += "<p></p>CyLIIS CyOS [Version 10.0.22000.978]"
     else if (command == 'vim') this.initVim()
-    else if (['del', 'erase', 'format', 'md', 'mkdir', 'rd', 'rmdir'].includes(command)) this.content += 'Access Denied'
     else this.content += `'${command}' is not recognized as an internal or external command, operable program or batch file.`
     this.content += "<p></p>"
     timer(0).subscribe(() =>this.clRef.nativeElement.scrollTop = this.clRef.nativeElement.scrollHeight)
@@ -141,9 +140,9 @@ export class ClComponent implements OnInit, AfterViewInit {
     if (!this.userService.getUser()) return this.content += `You don't currently have permission to execute this command.`
     if (!commands[0]) return this.content += `
       Invalid syntax:<br>
-      decode [code]<br><br>
+      decode <span class="mark">[code]</span><br><br>
 
-      <b>Ex:</b> decode bW90cmljYWxh
+      <span class="mark">Ex:</span> decode bW90cmljYWxh
     `
     if ((await this.userService.getCodes()).includes(commands[0])) {
       this.content += `Your code was succesfuly converted into points.<br><br>`
@@ -152,7 +151,7 @@ export class ClComponent implements OnInit, AfterViewInit {
   }
 
   async logs() {
-    this.content += "<br>click on console to get results<br><br>"
+    this.content += "<br>click here to get results<br><br>"
     this.content += await this.userService.getLogs()
     this.content += "<br>"
   }
@@ -164,6 +163,7 @@ export class ClComponent implements OnInit, AfterViewInit {
   }
 
   login(commands : any) : any {
+    if (this.userService.getUser()) return this.content += `You're already authenticated.`
     if (commands[0]) {
       if (commands[0] != 'Dylan_2791') return this.content += `Wrong th_code<br> Hint: Find th_code in bootscreen`
       else this.userService.login()
@@ -310,24 +310,18 @@ export class ClComponent implements OnInit, AfterViewInit {
       <pre>CD         Displays the name of or changes the current directory.</pre>
       <pre>CLEAR      Clears the screen.</pre>
       <pre>COLOR      Sets system color.</pre>
-      <pre>DEL        Deletes one or more files.</pre>
       <pre>DECODE     Transforms code into points.</pre>
-      <pre>ECHO       Displays messages, or turns command echoing on or off.</pre>
-      <pre>ERASE      Clears the screen.</pre>
+      <pre>ECHO       Displays typed text.</pre>
       <pre>EXIT       Quits the CyCL program (command interpreter).</pre>
-      <pre>FORMAT     Formats a disk for use with CyOS.</pre>
       <pre>FTYPE      Displays or modifies file types used in file extension associations.</pre>
       <pre>HELP       Provides Help information for CyOS commands.</pre>
       <pre>ICONS      Sets system icon pack.</pre>
       <pre>LOGIN      Sign in.</pre>
       <pre>LOGOUT     Sign out.</pre>
       <pre>LS         Displays a list of files and subdirectories in a directory.</pre>
-      <pre>MD         Creates a directory.</pre>
-      <pre>MKDIR      Creates a directory.</pre>
-      <pre>MKLINK     Creates Symbolic Links and Hard Links.</pre>
-      <pre>RD         Removes a directory.</pre>
+      <pre>NEOFETCH   Shows system details.</pre>
       <pre>RESOLVE    Execute quiz process</pre>
-      <pre>RMDIR      Removes a directory.</pre>
+      <pre>RM         Removes a directory.</pre>
       <pre>SHUTDOWN   Shutdown of machine.</pre>
       <pre>STATE      Shows user's state.</pre>
       <pre>TIME       Displays or sets the system time.</pre>

@@ -1,9 +1,16 @@
-.content {
+.settings {
   display: flex;
-  flex-direction: column;
   box-sizing: border-box;
   padding: 1rem;
   padding-top: 1rem;
+  padding-right: .5rem;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  
 }
 
 .bg-images {
@@ -36,8 +43,9 @@ h1 {
   line-height: .7;
 }
 
-.change-theme-button {
-  float: right;
+.actions {
+  display: flex;
+  flex-direction: column;
 }
 
 .background-image {
@@ -47,6 +55,7 @@ h1 {
   object-fit: contain;
   overflow: hidden;
   border-radius: 12px;
+  user-select: none;
   position: relative;
   img {
     width: 100%;
