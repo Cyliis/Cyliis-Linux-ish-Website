@@ -45,6 +45,11 @@ export class DesktopComponent implements OnInit {
       showName : 'CyCL',
       pos : localStorage.getItem('clPos')
     },
+    {
+      imageUrl : "/assets/icons/quiz.webp",
+      name : 'resolve',
+      showName : "Resolve.exe"
+    },
   ]
 
   selected : (HTMLElement | SVGElement)[] = []

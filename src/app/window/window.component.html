@@ -29,9 +29,10 @@
       </section>
     </div>
     <div class="window__inner">
-      <div class="window__navigation-pane" *ngIf="isFolder()">
+      <div class="navigation-pane" *ngIf="isFolder()">
         <div
-          class="window__navigation-pane-item"
+          class="navigation-pane-item"
+          [class.navigation-pane-item--selected]="navigationPaneItem.showName == name"
           *ngFor="let navigationPaneItem of navigationPaneItems"
           (mouseup)="onOpenNavigationPaneItem(navigationPaneItem.name, $event)">
             <img [src]="getImgUrl(navigationPaneItem.name)">

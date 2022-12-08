@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { map, tap } from 'rxjs';
+import { map, tap, timer } from 'rxjs';
 import { UserService } from './user.service';
 import { WindowsService } from './windows.service';
 
@@ -9,7 +9,7 @@ import { WindowsService } from './windows.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterContentInit {
 
   constructor(private windowsService : WindowsService, private userService : UserService, private sanitizer : DomSanitizer) {}
   
@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
     this.onSetTheme()
     this.onSetBackgroundImage()
     this.onSetPrimaryColor()
+    this.userService.init()
     document.onkeydown = (e) => {
       if (e.ctrlKey && e.altKey && e.key == 't') this.windowsService.openWindow('cl')
     };
@@ -38,6 +39,10 @@ export class AppComponent implements OnInit {
     if (!localStorage.getItem('white_rabbit')) {
       localStorage.setItem('white_rabbit', "Write an answer to decode[Whithout spaces!!!]")
     }
+  }
+
+  ngAfterContentInit(): void {
+    this.removeAds()
   }
 
   onBoot() {
@@ -63,8 +68,6 @@ export class AppComponent implements OnInit {
   }
 
   showWhiteRabbit() {
-    console.log('a')
-    console.log(this.userService.getUser())
     return this.userService.getUser()?.chessLevel == 9
   }
 
@@ -82,5 +85,9 @@ export class AppComponent implements OnInit {
       'cl',
       'settings'
     ].includes(paths[0])) this.windowsService.openWindow(paths[0])
+  }
+
+  removeAds() {
+    timer(1000).subscribe(() => document.getElementsByTagName('style').item(5)?.remove())
   }
 }

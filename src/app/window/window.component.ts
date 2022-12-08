@@ -95,7 +95,7 @@ export class WindowComponent implements AfterViewInit {
 
   onOpenNavigationPaneItem(item : string, e : MouseEvent) {
     if (item == this.name.toLowerCase()) return
-    if (e.which != 2) this.windowsService.closeWindow(this.name)
+    if (e.which != 2 && !['disk-cy', 'disk-d'].includes(item.toLowerCase())) this.windowsService.closeWindow(this.name)
     this.windowsService.openWindow(item)
   }
 

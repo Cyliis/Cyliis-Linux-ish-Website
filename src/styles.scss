@@ -16,6 +16,16 @@ $cyliis-theme: mat.define-light-theme(
   )
 );
 
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $cyliis-primary,
+      accent: $cyliis-accent,
+      warn: $cyliis-warn,
+    ),
+  )
+);
+
 @include mat.all-component-themes($cyliis-theme);
 
 :root {
@@ -29,6 +39,7 @@ $cyliis-theme: mat.define-light-theme(
   --bg-color-primary: #000;
   --bg-color-secondary: rgb(38, 38, 38);
   --text-color: #fff;
+  @include mat.all-component-themes($dark-theme);
 }
 
 .background-image {
@@ -136,6 +147,7 @@ pre {
     width: 100%;
     height: 90px;
     border-radius: 6px;
+    user-select: none;
     transition: .2s;
   }
   &:hover {
@@ -147,6 +159,7 @@ pre {
   &:focus {
     background-color: rgba(var(--primary-color), .3);
     user-select: initial;
+    cursor: pointer;
   }
 }
 

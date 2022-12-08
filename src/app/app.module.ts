@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import { WindowsService } from './windows.service';
 import { ChessComponent } from './chess/chess.component';
 import { DownloadsComponent } from './downloads/downloads.component';
+import { ResolveComponent } from './resolve/resolve.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { DownloadsComponent } from './downloads/downloads.component';
     BootScreenComponent,
     ChessComponent,
     DownloadsComponent,
+    ResolveComponent,
   ],
   imports: [
     BrowserModule,

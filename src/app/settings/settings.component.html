@@ -18,10 +18,10 @@
         </div>
         <div class="actions">
             <button class="change-theme-button" mat-icon-button (click)="onChangeTheme()"><mat-icon>brightness_4</mat-icon></button>
-            <!-- <ng-container *ngIf="{ user : user$ | async } as vs">
+            <ng-container *ngIf="{ user : user$ | async } as vs">
                 <button mat-icon-button (click)="onLogout()" *ngIf="vs.user"><mat-icon>logout</mat-icon></button>
                 <button mat-icon-button (click)="onLogin()" *ngIf="!vs.user"><mat-icon>login</mat-icon></button>
-            </ng-container> -->
+            </ng-container>
         </div>
     </div>
 </app-window>

@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PlatformModule } from '@angular/cdk/platform';
 import { A11yModule } from '@angular/cdk/a11y';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   exports: [
@@ -17,7 +18,8 @@ import { A11yModule } from '@angular/cdk/a11y';
     MatInputModule,
     MatTooltipModule,
     PlatformModule,
-    A11yModule
+    A11yModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }

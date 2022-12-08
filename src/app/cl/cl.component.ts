@@ -31,10 +31,8 @@ export class ClComponent implements OnInit, AfterViewInit {
   fullscreen : boolean = false
   inputs = ['']
   indexOfInput = 0
-  level = 0
 
   ngOnInit(): void {
-    this.userService.init()
   }
 
   ngAfterViewInit(): void {
@@ -88,7 +86,7 @@ export class ClComponent implements OnInit, AfterViewInit {
     else if (command == 'help') this.content += this.help()
     else if (command == 'history') this.content += this.history()
     else if (command == 'icons') this.setIcons(commands)
-    else if (command == 'login') this.login(commands)
+    else if (command == 'login') this.login()
     else if (command == 'logs') this.logs()
     else if (command == 'logout') this.logout()
     else if (command == 'ls') this.ls(commands)
@@ -119,18 +117,22 @@ export class ClComponent implements OnInit, AfterViewInit {
     let response = commands[0] ? commands[0].trim().toLowerCase() : false
     let resolves = resolve
     let level = this.userService.getUser().resolveLevel
-    if (level == resolves.length) return this.content += `You finished criptography.`
+    if (level == resolves.length) return this.content += `You've finished criptography.`
     if (!response) this.content += `
       Invalid syntax:<br>
       resolve [response]<br><br>
       Q: <span class="mark">${resolves[level].question}</span>
       `
-    else if (response == resolves[level].answer()) {
+    else if (resolves[level].answer().includes(response)) {
       this.content += 
       `Correct<br>`
       this.userService.nextResolveLevel()
+      level++
       if (level < resolves.length) {
         this.content += `Next: <span class="mark">${resolves[level + 1].question}</span>`
+      }
+      else {
+        this.content += `You've finished typography</span>`
       }
     }
     else this.content += 'Wrong answer'
@@ -162,21 +164,13 @@ export class ClComponent implements OnInit, AfterViewInit {
     this.content += this.userService.getUserState(user)
   }
 
-  login(commands : any) : any {
+  login() : any {
     if (this.userService.getUser()) return this.content += `You're already authenticated.`
-    if (commands[0]) {
-      if (commands[0] != 'Dylan_2791') return this.content += `Wrong th_code<br> Hint: Find th_code in bootscreen`
-      else this.userService.login()
-    }
-    else {
-      this.content += `
-        Invalid syntax<br>
-        login [th_code]
-      `
-    }
+    this.userService.login()
   }
 
-  logout() {
+  logout() : any {
+    if (!this.userService.getUser()) return this.content += `You're not authenticated.`
     this.userService.logout()
   }
 

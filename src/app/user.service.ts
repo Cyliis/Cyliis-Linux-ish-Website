@@ -19,16 +19,13 @@ export class UserService {
 
   login() {
     signInWithPopup(this.auth, this.provider)
-    .then((result : any) => {
-      this.userUpdated.next(result)
-    });
   }
 
   init() {
     onAuthStateChanged(this.auth, async (user : any) => {
       if (user) {
         let userInfo = await this.getRealUser(user)
-        if (userInfo) this.userUpdated.next(userInfo)
+        if (userInfo.uid) this.userUpdated.next(userInfo)
         else this.createUser(user) 
       }
       else this.userUpdated.next(false)
@@ -46,7 +43,6 @@ export class UserService {
 
   logout() {
     signOut(this.auth)
-    this.userUpdated.next(false)
   }
 
   async getRealUser(user : any) {
@@ -59,7 +55,15 @@ export class UserService {
         userData.id = el.id
       }
     })
-    return userData
+    return {
+      username: userData.username,
+      email: userData.email,
+      id: userData.id,
+      uid: userData.uid,
+      codes: userData.codes,
+      chessLevel: userData.chessLevel,
+      resolveLevel: userData.resolveLevel,
+    }
   }
 
   async nextChessLevel() {
@@ -91,6 +95,7 @@ export class UserService {
     }
     let newUser = await addDoc(collection(this.db, "users"), userInfo);
     userInfo.id = newUser.id
+    console.log(userInfo)
     this.userUpdated.next(userInfo)
   }
 
@@ -113,7 +118,7 @@ export class UserService {
         points += (user.resolveLevel - 7) * 60
       }
     }
-      Object.keys(user.codes).forEach(() => points += 20)
+    Object.keys(user.codes).forEach(() => points += 20)
     return `<pre>${user.username}: <span class="mark">${points}</span> points</pre>`
   }
 

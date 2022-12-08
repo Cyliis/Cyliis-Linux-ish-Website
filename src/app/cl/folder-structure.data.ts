@@ -104,8 +104,7 @@ export let structure = [
                 showText : 'admin',
                 indexOfDir : 14,
                 access: false,
-                folder: true,
-                exec : () => WindowsService.injector.get(WindowsService).openWindow('access-denied')
+                folder: true
             },
             {
                 showText : 'Public',
@@ -151,10 +150,9 @@ export let structure = [
             },
             {
                 showText : 'Downloads',
-                indexOfDir : 2,
-                access: false,
+                indexOfDir : 15,
+                access: true,
                 folder: true,
-                exec : () => WindowsService.injector.get(WindowsService).openWindow('access-denied')
             },
             {
                 showText : 'Favorites',
@@ -439,6 +437,30 @@ export let structure = [
                 access: true,
                 folder: false,
                 exec: () => WindowsService.injector.get(WindowsService).openWindow('chess')
+            },
+        ]
+    },
+    {
+        dir : "<span class='origin'>cyliis@cyliis:~</span>/Users/Public/Downloads<span class='func'>$</span>",
+        folders : [
+            {
+                showText : '.',
+                indexOfDir : 15,
+                access: true,
+                folder: true,
+            },
+            {
+                showText : '..',
+                indexOfDir : 2,
+                access: true,
+                folder: true,
+            },
+            {
+                showText : 'resolve.exe',
+                indexOfDir : 15,
+                access: true,
+                folder: false,
+                exec: () => WindowsService.injector.get(WindowsService).openWindow('resolve')
             },
         ]
     },
