@@ -12,5 +12,4 @@ export class PortfolioComponent {
   constructor(private store : Store<any>) { }
 
   member$ = this.store.select('member')
-
 }

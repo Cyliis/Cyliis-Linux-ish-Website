@@ -1,5 +1,5 @@
-import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { timer } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { fromEvent, timer } from 'rxjs';
 import { UserService } from '../user.service';
 
 @Component({
@@ -67,50 +67,51 @@ export class BootScreenComponent implements OnInit {
   content : string = `
 [       10.0.22000.978] Loading<br>`
 
-  @HostListener('document:keydown', ['$event'])
-  onKeyDown(event : any) {
-    if (this.loaded) {
-      if (event.key == "ArrowUp" || event.key == "ArrowDown") this.selected = this.selected ? 0 : 1
-      else if (event.key == "Enter") {
-        if (this.selected) this.boot.emit()
-        else this.openOldSite()
-      }
-    }
-    else if (event.keyCode == 32) {
-      this.onSkip()
-    }
-  }
   async ngOnInit() {
-    if (!this.easterEgg || this.easterEgg == 1 || this.easterEgg == 2 || this.easterEgg == 13 || this.easterEgg == 14) {
-      this.loading = [...this.loading, ...this.easterEggLoading]
-    }
-    else if (this.easterEgg == 4) {
-      this.loading = [...this.loading, {action : () => this.content += 'root@mag$: Follow the white rabbit<br>'}]
-    }
-    else if (this.easterEgg == 5) {
-      this.loading = [...this.loading, {action : () => this.content += 'root@mag$: Why so serious?<br>'}]
-    }
-    else if (this.easterEgg == 6) {
-      console.log((await this.userService.getCodes())[3])
-      this.loading = [...this.loading, {action : () => this.content += "root@mag$: Don't worry - a few bits tried to escape, but we caught them<br>"}]
-    }
-    else if (this.easterEgg == 7) {
-      this.loading = [...this.loading, {action : () => this.content += "root@mag$: Have a good day<br>"}]
-    }
-    else if (this.easterEgg == 8) {
-      this.loading = [...this.loading, {action : () => this.content += "root@mag$: Who am I?<br>"}]
-    }
-    else if (this.easterEgg == 9) {
-      this.loading = [...this.loading, {action : () => this.content += "root@mag$: Who is John Galt?<br>"}]
-    }
-    else if (this.easterEgg == 10) {
-      this.loading = [...this.loading, {action : () => this.content += "root@mag$: The End is the Beginning and the Beginning is the End<br>"}]
-    }
-    else if (this.easterEgg == 11) {
-      this.loading = [...this.loading, ...this.easterEggLoading]
-    }
-    else if (this.easterEgg == 12) {
-      this.loading = [...this.loading, {action : () => this.content += "root@mag$: Déjà vu is a glitch in the Matrix<br>"}]
+    fromEvent(document, 'keydown').subscribe((event : any) => {
+      if (this.loaded) {
+        if (event.key == "ArrowUp" || event.key == "ArrowDown") this.selected = this.selected ? 0 : 1
+        else if (event.key == "Enter") {
+          if (this.selected) this.boot.emit()
+          else this.openOldSite()
+        }
+      }
+      else if (event.keyCode == 32) {
+        this.onSkip()
+      }
+    })
+    switch (this.easterEgg) {
+      case 0: case 1: case 2: case 13: case 14:
+        this.loading = [...this.loading, ...this.easterEggLoading]
+        break
+      case 4:
+        this.loading = [...this.loading, {action : () => this.content += 'root@mag$: Follow the white rabbit<br>'}]
+        break
+      case 5:
+        this.loading = [...this.loading, {action : () => this.content += 'root@mag$: Why so serious?<br>'}]
+        break
+      case 6:
+        console.log((await this.userService.getCodes())[3])
+        this.loading = [...this.loading, {action : () => this.content += "root@mag$: Don't worry - a few bits tried to escape, but we caught them<br>"}]
+        break
+      case 7:
+        this.loading = [...this.loading, {action : () => this.content += "root@mag$: Have a good day<br>"}]
+        break
+      case 8:
+        this.loading = [...this.loading, {action : () => this.content += "root@mag$: Who am I?<br>"}]
+        break
+      case 9:
+        this.loading = [...this.loading, {action : () => this.content += "root@mag$: Who is John Galt?<br>"}]
+        break
+      case 10:
+        this.loading = [...this.loading, {action : () => this.content += "root@mag$: The End is the Beginning and the Beginning is the End<br>"}]
+        break
+      case 11:
+        this.loading = [...this.loading, ...this.easterEggLoading]
+        break
+      case 12:
+        this.loading = [...this.loading, {action : () => this.content += "root@mag$: Déjà vu is a glitch in the Matrix<br>"}]
+        break
     }
     this.loading.forEach((iteration : any, i : number) => {
       timer((i + 1) * 1000).subscribe(() => iteration.action())

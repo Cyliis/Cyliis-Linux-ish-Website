@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { setInFront } from '../state/windows/windows.actions';
 import { WindowsService } from '../windows.service';
@@ -12,15 +12,12 @@ import { WindowsService } from '../windows.service';
 export class WindowComponent implements AfterViewInit {
 
   constructor(private store: Store<any>, private windowsService : WindowsService) { }
-  
-  @ViewChild('window') window! : ElementRef
 
   windows$ = this.store.select('windows')
   minimizeds$ = this.store.select('minimizeds')
 
   @Input() name! : string
   @Input() showName! : string
-  @Input() error : boolean = false
   @Input() vim : boolean = false
   fullscreen : boolean = false
 
@@ -50,11 +47,6 @@ export class WindowComponent implements AfterViewInit {
       name : 'disk-d',
       imageUrl : 'assets/icons/disk-d.png'
     },
-    {
-      showName : 'Events',
-      name : 'events',
-      imageUrl : 'assets/icons/folder.png'
-    },
   ]
 
   ngAfterViewInit(): void {
@@ -82,7 +74,7 @@ export class WindowComponent implements AfterViewInit {
   }
 
   onSetInFront() {
-    this.store.dispatch(setInFront({window : this.name.toLowerCase()}))
+    this.windowsService.openWindow(this.name.toLowerCase())
   }
 
   onDragStart() {

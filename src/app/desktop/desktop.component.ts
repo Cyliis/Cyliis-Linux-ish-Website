@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
 import { WindowsService } from '../windows.service';
 import Selecto from "selecto";
-import { BehaviorSubject, filter, fromEvent, timer } from 'rxjs';
-import { CdkDragMove } from '@angular/cdk/drag-drop';
+import { filter, fromEvent, timer } from 'rxjs';
 
 @Component({
   selector: 'app-desktop',
@@ -53,7 +52,6 @@ export class DesktopComponent implements OnInit {
   ]
 
   selected : (HTMLElement | SVGElement)[] = []
-  toRemove : (HTMLElement | SVGElement)[] = []
 
   ngOnInit(): void {
     if (this.windowsService.isMobile()) return

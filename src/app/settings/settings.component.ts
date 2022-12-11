@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 
 @Component({
@@ -6,17 +6,13 @@ import { UserService } from '../user.service';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent {
 
   constructor(private userService : UserService) { }
 
   backgroundImages = [
     "/assets/bg/bg-1.webp",
     "/assets/bg/bg-2.webp",
-    // "https://i.pinimg.com/originals/5d/16/b2/5d16b293438a635ecfcfa78596cad135.gif",
-    // "https://c.tenor.com/zMdZBjJ7gPkAAAAd/aesthetic-wallpaper.gif",
-    // "https://wallpapercave.com/wp/wp3684404.gif",
-    // "https://i.pinimg.com/originals/d7/33/34/d733345e4f11231904e7634a04439e21.gif"
   ]
 
   colors = [
@@ -32,9 +28,6 @@ export class SettingsComponent implements OnInit {
 
   selectedColor = parseInt(localStorage.getItem('color')!)
   selectedBackgroundImage = parseInt(localStorage.getItem('bg')!)
-
-  ngOnInit(): void {
-  }
 
   onLogin() {
     this.userService.login()

@@ -4,14 +4,11 @@
 $cyliis-primary: mat.define-palette(mat.$indigo-palette);
 $cyliis-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
-$cyliis-warn: mat.define-palette(mat.$red-palette);
-
 $cyliis-theme: mat.define-light-theme(
   (
     color: (
       primary: $cyliis-primary,
       accent: $cyliis-accent,
-      warn: $cyliis-warn,
     ),
   )
 );
@@ -21,7 +18,6 @@ $dark-theme: mat.define-dark-theme(
     color: (
       primary: $cyliis-primary,
       accent: $cyliis-accent,
-      warn: $cyliis-warn,
     ),
   )
 );
@@ -39,7 +35,7 @@ $dark-theme: mat.define-dark-theme(
   --bg-color-primary: #000;
   --bg-color-secondary: rgb(38, 38, 38);
   --text-color: #fff;
-  @include mat.all-component-themes($dark-theme);
+  @include mat.all-component-colors($dark-theme);
 }
 
 .background-image {
@@ -48,18 +44,6 @@ $dark-theme: mat.define-dark-theme(
   }
   &-1 {
     --bg-image: url("/assets/bg/bg-2.webp");
-  }
-  &-2 {
-    --bg-image: url("https://i.pinimg.com/originals/5d/16/b2/5d16b293438a635ecfcfa78596cad135.gif");
-  }
-  &-3 {
-    --bg-image: url("https://c.tenor.com/zMdZBjJ7gPkAAAAd/aesthetic-wallpaper.gif");
-  }
-  &-4 {
-    --bg-image: url("https://wallpapercave.com/wp/wp3684404.gif");
-  }
-  &-5 {
-    --bg-image: url("https://i.pinimg.com/originals/d7/33/34/d733345e4f11231904e7634a04439e21.gif");
   }
 }
 
@@ -108,18 +92,7 @@ pre {
   margin: 0;
 }
 
-.cdk-drag-preview {
-  box-sizing: border-box;
-  border-radius: 4px;
-}
 
-.cdk-drag-placeholder {
-  opacity: 0;
-}
-
-.cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
 
 .folder-content {
   display: flex;
@@ -172,35 +145,4 @@ pre {
 @keyframes appear {
   from { transform: scale(0);}
   to { transform: scale(1);}
-}
-
-.mark {
-  color: rgb(var(--primary-color));
-}
-
-::selection {
-  color: #fff;
-  background: rgb(var(--primary-color));
-}
-
-.folder, .dir {
-  color: #2d7bdb;
-}
-
-.restricted {
-  color: #C01C28;
-}
-
-.ls {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.origin {
-  color: #33D17A;
-}
-
-.func {
-  color: #fff;
 }

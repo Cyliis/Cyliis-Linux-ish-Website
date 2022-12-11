@@ -61,21 +61,18 @@ export let structure = [
                 indexOfDir : 0,
                 access: false,
                 folder: true,
-                exec : () => WindowsService.injector.get(WindowsService).openWindow('access-denied')
             },
             {
                 showText : 'Program Files(x86)',
                 indexOfDir : 0,
                 access: false,
                 folder: true,
-                exec : () => WindowsService.injector.get(WindowsService).openWindow('access-denied')
             },
             {
                 showText : 'System',
                 indexOfDir : 0,
                 access: false,
                 folder: true,
-                exec : () => WindowsService.injector.get(WindowsService).openWindow('access-denied')
             },
             {
                 showText : 'Users',

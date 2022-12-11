@@ -1,11 +1,9 @@
-<ng-container *ngIf="event$ | async as event">
-    <app-window name="Event" [showName]="event.title">
-        <div class="event">
-            <div class="event__details" (click)="onAction(event.url)">
-                <span class="event__date"><mat-icon>schedule</mat-icon>{{ event.date }}</span>
-                <h1 class="event__title">{{ event.title }}</h1>
-            </div>
-            <img class="event__image" [src]="event.imageUrl">
+<app-window name="Event" [showName]="event.title" *ngIf="event$ | async as event">
+    <div class="event">
+        <div class="event__details" (click)="onAction(event.url)">
+            <span class="event__date"><mat-icon>schedule</mat-icon>{{ event.date }}</span>
+            <h1 class="event__title">{{ event.title }}</h1>
         </div>
-    </app-window>
-</ng-container>
+        <img class="event__image" [src]="event.imageUrl">
+    </div>
+</app-window>

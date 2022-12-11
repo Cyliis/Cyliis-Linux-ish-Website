@@ -24,3 +24,33 @@
     gap: .5rem;
 }
 
+.mark {
+    color: rgb(var(--primary-color));
+  }
+  
+::selection {
+color: #fff;
+background: rgb(var(--primary-color));
+}
+
+.folder, .dir {
+color: #2d7bdb;
+}
+
+.restricted {
+color: #C01C28;
+}
+
+.ls {
+display: grid;
+width: 100%;
+grid-template-columns: repeat(4, 1fr);
+}
+
+.origin {
+color: #33D17A;
+}
+
+.func {
+color: #fff;
+}

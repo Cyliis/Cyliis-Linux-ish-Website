@@ -1,5 +1,6 @@
 import { Platform } from '@angular/cdk/platform';
 import { Injectable, Injector } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { timer } from 'rxjs';
 import { setEvent } from './state/event/event.actions';
@@ -16,9 +17,11 @@ import {
   providedIn: 'root',
 })
 export class WindowsService {
+  
   static injector: Injector;
   minimizeds: any;
-  constructor(private store: Store<any>, private platform : Platform) {
+
+  constructor(private store: Store<any>, private platform : Platform, private _snackBar: MatSnackBar) {
     this.store.select('minimizeds').subscribe((m) => (this.minimizeds = m));
   }
 
@@ -31,8 +34,10 @@ export class WindowsService {
   }
 
   openWindow(window: any): void {
-    if (['disk-cy', 'disk-d'].includes(window))
-      return this.openWindow('access-denied');
+    if (['disk-cy', 'disk-d'].includes(window)) {
+      this._snackBar.open("Access Denied", "", {duration : 3000});
+      return
+    }
     if (this.minimizeds.includes(window)) {
       this.store.dispatch(maximizeWindow({ window }));
     } else {
@@ -98,8 +103,6 @@ export class WindowsService {
         return `assets/icons/${theme}event.webp`;
       case 'cyliis':
         return `assets/icons/${theme}cyliis.webp`;
-      case 'access-denied':
-        return `assets/icons/${theme}error.webp`;
       case 'downloads':
         return `assets/icons/${theme}downloads.webp`;
       case 'disk-cy':

@@ -1,7 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, delay, interval, timer } from 'rxjs';
+import { BehaviorSubject, interval, timer } from 'rxjs';
 import { setInFront } from '../state/windows/windows.actions';
 import { WindowsService } from '../windows.service';
 

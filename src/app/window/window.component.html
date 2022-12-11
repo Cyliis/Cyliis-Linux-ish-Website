@@ -1,22 +1,23 @@
 
-<ng-container *ngIf="{ windows: windows$ | async, minimizeds: minimizeds$ | async } as vs" >
+<ng-container *ngIf="windows$ | async as windows" >
   <div
     class="window mat-elevation-z2"
-    [class.console]="name == 'cl'"
-    [class.portfolio]="name == 'Portfolio'"
-    [class.image]="name == 'Image'"
-    [class.event]="name == 'Event'"
-    [class.chess]="name == 'Chess'"
-    [class.unresizble]="isUnresizeble()"
-    [class.error]="error"
-    [class.vim]="vim"
-    [class.unactive]="vs.windows.indexOf(name.toLowerCase()) != vs.windows.length - 1"
-    [style.z-index]="vs.windows.indexOf(name.toLowerCase()) + 10"
-    (mousedown)="onSetInFront()"
+    [ngClass]="{
+      'console' : name == 'cl',
+      'portfolio' : name == 'Portfolio',
+      'image' : name == 'Image',
+      'event' : name == 'Event',
+      'chess' : name == 'Chess',
+      'unresizble' : isUnresizeble(),
+      'vim' : vim,
+      'unactive' : windows.indexOf(name.toLowerCase()) != windows.length - 1
+    }"
+    [style.z-index]="windows.indexOf(name.toLowerCase()) + 10"
     cdkDrag 
     cdkDragBoundary="main"
+    #window
     (cdkDragStarted)="onDragStart()"
-    #window>
+    (mousedown)="onSetInFront()">
     <div class="window__top-bar" cdkDragHandle (dblclick)="onFullScreen()">
       <section class="window__description">
         <img class="window__icon" [src]="getImgUrl(name)">

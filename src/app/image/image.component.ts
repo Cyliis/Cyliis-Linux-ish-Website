@@ -15,7 +15,6 @@ export class ImageComponent implements OnInit {
   constructor(private store : Store<any>) { }
   
   ngOnInit(): void {
-    
     document.onkeydown = (e) => {
       if (e.key == "ArrowLeft") {
         this.imageIndex$.pipe(first()).subscribe((i) => this.previous(i))

@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PlatformModule } from '@angular/cdk/platform';
-import { A11yModule } from '@angular/cdk/a11y';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatInputModule,
     MatTooltipModule,
     PlatformModule,
-    A11yModule,
     MatSnackBarModule
   ]
 })

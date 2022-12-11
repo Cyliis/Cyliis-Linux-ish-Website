@@ -14,24 +14,17 @@
           *ngFor="let minimized of list"
           cdkDrag
           cdkDragBoundary=".bar__apps"
-          (mouseup)="
-            onMaximize(
+          (mouseup)="onMaximize(
               minimized,
               vs.minimizeds,
               vs.windows.indexOf(minimized) == vs.windows.length - 1,
-              $event
-            )
-          "
-        >
-          <mat-icon class="app__close-button" (click)="onClose(minimized)"
-            >close</mat-icon
-          >
+              $event)">
+          <mat-icon class="app__close-button" (click)="onClose(minimized)">close</mat-icon>
           <img
             class="app__img"
             [matTooltip]="minimized"
             matTooltipPosition="right"
-            [src]="getIcon(minimized)"
-          />
+            [src]="getIcon(minimized)"/>
         </div>
       </div>
     </div>

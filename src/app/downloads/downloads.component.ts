@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'app-downloads',
   templateUrl: './downloads.component.html',
-  styleUrls: ['./downloads.component.scss']
+  styleUrls: ['./downloads.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DownloadsComponent implements OnInit {
+export class DownloadsComponent {
 
   constructor(private windowsService : WindowsService) { }
 
@@ -16,9 +17,6 @@ export class DownloadsComponent implements OnInit {
       name : 'Resolve'
     }
   ]
-
-  ngOnInit(): void {
-  }
 
   onOpen(name : any) {
     this.windowsService.openWindow(name.toLowerCase())

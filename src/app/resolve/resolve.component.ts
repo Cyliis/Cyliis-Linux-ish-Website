@@ -1,7 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BehaviorSubject, filter, map, Subject, tap, timer } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { resolve } from '../cl/resolve.data';
 import { UserService } from '../user.service';
 import { WindowsService } from '../windows.service';
@@ -12,7 +12,7 @@ import { WindowsService } from '../windows.service';
   templateUrl: './resolve.component.html',
   styleUrls: ['./resolve.component.scss']
 })
-export class ResolveComponent implements OnInit {
+export class ResolveComponent {
 
   constructor(private windowsService : WindowsService, private userService : UserService, private _snackBar: MatSnackBar) { }
 
@@ -30,12 +30,6 @@ export class ResolveComponent implements OnInit {
       return user
     })
   )
-
-  
-
-  ngOnInit(): void {
-    console.log('a')
-  }
 
   onSubmit(form : NgForm, user : any) {
     let answer = form.form.value['answer'].trim().toLowerCase()

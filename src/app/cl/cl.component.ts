@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, timer } from 'rxjs';
 import { structure } from './folder-structure.data';
 import { WindowsService } from '../windows.service';
@@ -8,7 +8,8 @@ import { resolve } from './resolve.data';
 @Component({
   selector: 'app-cl',
   templateUrl: './cl.component.html',
-  styleUrls: ['./cl.component.scss']
+  styleUrls: ['./cl.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ClComponent implements OnInit, AfterViewInit {
 

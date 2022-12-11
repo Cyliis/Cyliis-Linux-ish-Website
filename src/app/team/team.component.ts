@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { WindowsService } from '../windows.service';
 import { team } from './team.data';
 
@@ -11,7 +10,7 @@ import { team } from './team.data';
 })
 export class TeamComponent {
 
-  constructor(private store : Store<any>, private windowsService : WindowsService) { }
+  constructor(private windowsService : WindowsService) { }
 
   team = [...team]
 
