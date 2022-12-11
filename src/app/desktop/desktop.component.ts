@@ -43,12 +43,7 @@ export class DesktopComponent implements OnInit {
       imageUrl : this.windowsService.getIcon('cl'),
       showName : 'CyCL',
       pos : localStorage.getItem('clPos')
-    },
-    {
-      imageUrl : "/assets/icons/quiz.webp",
-      name : 'resolve',
-      showName : "Resolve.exe"
-    },
+    }
   ]
 
   selected : (HTMLElement | SVGElement)[] = []
