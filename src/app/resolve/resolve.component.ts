@@ -22,12 +22,13 @@ export class ResolveComponent {
   message$ = new BehaviorSubject<any>(undefined)
 
   user$ = this.userService.getUserUpdateListener().pipe(
-    map((user) : any => {
+    map((user) : any => { 
+      let res : any = {...user}
       if (user?.resolveLevel == this.resolves.length){
-        this.message$.next("You've finished typography")
-        user.resolveLevel = 0
+        this.message$.next("You've finished criptography")
+        res.resolveLevel = 0
       }
-      return user
+      return res
     })
   )
 

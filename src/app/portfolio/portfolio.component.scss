@@ -40,6 +40,9 @@
             &:hover {
                 background-color: rgba(var(--primary-color), .3);
             }
+            &:active {
+                outline: 1px solid rgb(var(--primary-color));
+            }
             div {
                 width: 17px;
                 height: 17px;

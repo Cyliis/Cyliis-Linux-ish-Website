@@ -29,15 +29,16 @@
         cursor: pointer;
         transform: scale(4);
         transition: .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        opacity: .6;
         &:hover {
-            transform: scale(4) translateX(-3px);
+            opacity: 1;
         }
     }
     &:hover {
         opacity: 1;
     }
     &:active mat-icon {
-        transform: scale(4) translateX(-4px);
+        transform: scale(4) translateX(-3px);
     }
 }
 
@@ -49,11 +50,8 @@
 .right {
     right: 0;
     mat-icon {
-        &:hover {
-            transform: scale(4) translateX(3px);
-        }
         &:active {
-            transform: scale(4) translateX(4px);
+            transform: scale(4) translateX(3px);
         }
     }
 }

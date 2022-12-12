@@ -1,4 +1,4 @@
-<app-window name="cl" [showName]="title" [vim]="vim" (click)="onSelect($event, consoleInput)">
+<app-window name="cl" [showName]="title">
   <div class="cl" #cl>
     <div class="content" [innerHTML]="content"></div>
     <p *ngIf="init"></p>

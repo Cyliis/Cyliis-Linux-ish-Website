@@ -1,7 +1,7 @@
 
 <ng-container *ngIf="windows$ | async as windows" >
   <div
-    class="window mat-elevation-z2"
+    class="window"
     [ngClass]="{
       'console' : name == 'cl',
       'portfolio' : name == 'Portfolio',
@@ -9,7 +9,7 @@
       'event' : name == 'Event',
       'chess' : name == 'Chess',
       'unresizble' : isUnresizeble(),
-      'vim' : vim,
+      'vim' : showName == 'Vim',
       'unactive' : windows.indexOf(name.toLowerCase()) != windows.length - 1
     }"
     [style.z-index]="windows.indexOf(name.toLowerCase()) + 10"
@@ -23,7 +23,7 @@
         <img class="window__icon" [src]="getImgUrl(name)">
         <span class="window__name">{{ showName ?? name }}</span>
       </section>
-      <section class="window__actions" *ngIf="!vim">
+      <section class="window__actions">
         <div class="window__minimalize-button" (click)="onMinimalize()"><mat-icon>minimize</mat-icon></div>
         <div class="window__full-screen-button" (click)="onFullScreen()"><mat-icon>fullscreen{{ fullscreen ? '_exit' : '' }}</mat-icon></div>
         <div class="window__close-button" (click)="onClose()"><mat-icon>close</mat-icon></div>
@@ -37,7 +37,7 @@
           *ngFor="let navigationPaneItem of navigationPaneItems"
           (mouseup)="onOpenNavigationPaneItem(navigationPaneItem.name, $event)">
             <img [src]="getImgUrl(navigationPaneItem.name)">
-            {{ navigationPaneItem.showName }}
+            <span>{{ navigationPaneItem.showName }}</span>
         </div>
       </div>
       <div class="window__content">

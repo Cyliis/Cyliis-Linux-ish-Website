@@ -32,12 +32,17 @@
     &:hover {
         background-color: rgba(var(--primary-color), .2);
     }
-    &:active {
-        .folder__image {
-            opacity: .8;
-        }
+    &:active &__image {
+        opacity: .8;
     }
     &:focus, &--selected {
         background-color: rgba(var(--primary-color), .4);
-    }    
+        &:hover {
+            background-color: rgba(var(--primary-color), .5);
+        }
+        &:active {
+            background-color: rgba(var(--primary-color), .6);
+        }
+    }
+
 }

@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { BehaviorSubject, timer } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { BehaviorSubject, from, fromEvent, Subscription, timer } from 'rxjs';
 import { structure } from './folder-structure.data';
 import { WindowsService } from '../windows.service';
 import { UserService } from '../user.service';
@@ -11,7 +11,7 @@ import { resolve } from './resolve.data';
   styleUrls: ['./cl.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ClComponent implements OnInit, AfterViewInit {
+export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private windowsService : WindowsService, private userService : UserService) { }
 
@@ -33,8 +33,7 @@ export class ClComponent implements OnInit, AfterViewInit {
   inputs = ['']
   indexOfInput = 0
 
-  ngOnInit(): void {
-  }
+  subscription! : Subscription
 
   ngAfterViewInit(): void {
     timer(10).subscribe(() => this.setInputFocus())
@@ -43,6 +42,13 @@ export class ClComponent implements OnInit, AfterViewInit {
     let window: any = document.querySelector(`app-cl .window`)
     window.style.transform = `translateX(${marginLeft}vw)` 
     window.style.transform += `translateY(${marginTop}vh)` 
+    this.subscription = fromEvent(document, 'keydown').subscribe(() => {
+      this.consoleInput.nativeElement.focus()
+    })
+  }
+
+  ngOnInit(): void {
+    
   }
 
   setInputFocus() {
@@ -373,19 +379,8 @@ export class ClComponent implements OnInit, AfterViewInit {
     );
   }
 
-  onSelect(e : any, el : any) {
-    if (this.vim) return
-    let selectedText = window.getSelection()?.toString()
-    if (selectedText) {
-      navigator.clipboard.writeText(selectedText!);
-      if (this.init) {
-        this.content += `<p></p><p></p><span class="dir">${this.dir$.value}</span><br>`
-        this.init = false
-      }
-      else this.content += `<p></p><span class="dir">${this.dir$.value}</span><br>`
-      this.resolveCommand(['echo', `selection copied to clipboard`])
-    }
-    el.focus()
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
   }
 
   async mag() {

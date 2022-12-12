@@ -18,7 +18,6 @@ export class WindowComponent implements AfterViewInit {
 
   @Input() name! : string
   @Input() showName! : string
-  @Input() vim : boolean = false
   fullscreen : boolean = false
 
   navigationPaneItems = [

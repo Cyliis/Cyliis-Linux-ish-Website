@@ -34,7 +34,7 @@ export class UserService {
   }
 
   getUser() {
-    return this.userUpdated.value
+    return {...this.userUpdated.value}
   }
 
   getUserUpdateListener() {
