@@ -1,6 +1,6 @@
 <div class="desktop">
   <div
-    class="folder"
+    class="app"
     *ngFor="let file of files"
     (click)="onOpenMob(file.name)"
     (dblclick)="onOpen(file.name)"
@@ -11,7 +11,7 @@
     cdkDrag
     cdkDragBoundary="app-desktop"
     #app>
-    <img class="folder__image" [src]="file.imageUrl" />
-    <p class="folder__name">{{ file.showName }}</p>
+    <img class="app__image" [src]="file.imageUrl" />
+    <p class="app__name">{{ file.showName }}</p>
   </div>
 </div>

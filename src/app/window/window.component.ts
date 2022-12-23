@@ -27,11 +27,6 @@ export class WindowComponent implements AfterViewInit {
       imageUrl : 'assets/icons/downloads.png'
     },
     {
-      showName : 'Documents',
-      name : 'documents',
-      imageUrl : 'assets/icons/documents.png'
-    },
-    {
       showName : 'Images',
       name : 'images',
       imageUrl : 'assets/icons/image.png'

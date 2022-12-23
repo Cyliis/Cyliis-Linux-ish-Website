@@ -1,21 +1,24 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { fromEvent, timer } from 'rxjs';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { fromEvent, timer, delay, filter } from 'rxjs';
 import { UserService } from '../user.service';
+import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'app-boot-screen',
   templateUrl: './boot-screen.component.html',
   styleUrls: ['./boot-screen.component.scss']
 })
-export class BootScreenComponent implements OnInit {
+export class BootScreenComponent implements OnInit, OnDestroy {
 
-  constructor(private userService : UserService) { }
+  constructor(private windowsService: WindowsService, private userService : UserService) { }
 
   @Output() boot = new EventEmitter()
 
   loaded : boolean = false
   
   selected : number = 0
+
+  @Input() loadWindow! : boolean
 
   loading : any = [
     {
@@ -67,8 +70,18 @@ export class BootScreenComponent implements OnInit {
   content : string = `
 [       10.0.22000.978] Loading<br>`
 
+  sub : any
   async ngOnInit() {
-    fromEvent(document, 'keydown').subscribe((event : any) => {
+    fromEvent(window, "load")
+    .pipe(
+      delay(1200),
+      filter(() => !!localStorage.getItem('boot') || this.windowsService.isMobile())
+    )
+    .subscribe(() => {
+      this.boot.emit()
+    });
+    this.sub = fromEvent(document, 'keydown')
+    .subscribe((event : any) => {
       if (this.loaded) {
         if (event.key == "ArrowUp" || event.key == "ArrowDown") this.selected = this.selected ? 0 : 1
         else if (event.key == "Enter") {
@@ -125,5 +138,9 @@ export class BootScreenComponent implements OnInit {
 
   openOldSite() {
     location.href = "http://cyliis.ro"
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe() 
   }
 }

@@ -79,7 +79,7 @@ export class SettingsComponent {
   }
 
   onResetFoldersPosition() {
-    document.querySelectorAll('.folder').forEach((el : any) => {
+    document.querySelectorAll('.app').forEach((el : any) => {
       el.style.transform = ''
       localStorage.setItem(el.dataset['app'] + 'Pos', '')
     })

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { BehaviorSubject, from, fromEvent, Subscription, timer } from 'rxjs';
+import { BehaviorSubject, fromEvent, Subscription, timer } from 'rxjs';
 import { structure } from './folder-structure.data';
 import { WindowsService } from '../windows.service';
 import { UserService } from '../user.service';
@@ -91,6 +91,7 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
     else if (command == 'exit') this.windowsService.closeWindow('cl')
     else if (command == 'ftype') this.ftype(commands)
     else if (command == 'help') this.content += this.help()
+    else if (command == 'hint') this.hint()
     else if (command == 'history') this.content += this.history()
     else if (command == 'icons') this.setIcons(commands)
     else if (command == 'login') this.login()
@@ -297,11 +298,7 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
     else {
       this.content += `
         0 = MAG-Cyliis<br>
-        1 = https://www.gifcen.com/wp-content/uploads/2022/04/wallpaper-gif-4.gif<br>
-        2 = https://i.pinimg.com/originals/5d/16/b2/5d16b293438a635ecfcfa78596cad135.gif<br>
-        3 = https://c.tenor.com/zMdZBjJ7gPkAAAAd/aesthetic-wallpaper.gif<br>
-        4 = https://wallpapercave.com/wp/wp3684404.gif<br>
-        5 = https://i.pinimg.com/originals/d7/33/34/d733345e4f11231904e7634a04439e21.gif`
+        1 = CT-Acelot`
     }
   }
 
@@ -316,6 +313,7 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
       <pre>EXIT       Quits the CyCL program (command interpreter).</pre>
       <pre>FTYPE      Displays or modifies file types used in file extension associations.</pre>
       <pre>HELP       Provides Help information for CyOS commands.</pre>
+      <pre>HINT       Get some help for treasure hunt.</pre>
       <pre>ICONS      Sets system icon pack.</pre>
       <pre>LOGIN      Sign in.</pre>
       <pre>LOGOUT     Sign out.</pre>
@@ -401,5 +399,27 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
 <span class="mark">linkedin:</span> linkedin.com/in/alin-gabriel-motricala
 </pre>    ` 
     console.log((await this.userService.getCodes())[5])
+  }
+
+  hint() : any {
+    console.log('a')
+    let user = this.userService.getUser()
+    if (!user) return this.content += 'You need to login'
+    if (user.resolveLevel == 7) {
+      this.content += 'Base64'
+    }
+    else if (user.resolveLevel == 8) {
+      this.content += 'Maybe .png is the wrong format?'
+    }
+    else if (user.resolveLevel == 9) {
+      this.content += 'When you find the rabbit, password will be what you want'
+    }
+    else if (user.chessLevel == 0) {
+      this.content += 'Chess is hiding deep inside'
+    }
+    else {
+      this.content += 'Find adventures'
+    }
+    console.log(this.content)
   }
 }

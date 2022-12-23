@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
 import { WindowsService } from '../windows.service';
 import Selecto from "selecto";
 import { filter, fromEvent, timer } from 'rxjs';
@@ -52,7 +52,7 @@ export class DesktopComponent implements OnInit {
     if (this.windowsService.isMobile()) return
     const selecto = new Selecto({
       container: document.querySelector('app-desktop') as HTMLElement,
-      selectableTargets: [".folder", document.querySelector(".folder") as HTMLElement],
+      selectableTargets: [".app", document.querySelector(".app") as HTMLElement],
       continueSelect: false,
       toggleContinueSelect: "shift",
       hitRate: 1
@@ -63,10 +63,10 @@ export class DesktopComponent implements OnInit {
     selecto.on("select", e => {
       this.selected = e.selected
       e.added.forEach(el => {
-        el.classList.add("folder--selected");
+        el.classList.add("app--selected");
       })
       e.removed.forEach(el => {
-        el.classList.remove("folder--selected");
+        el.classList.remove("app--selected");
     });
     });
     fromEvent(document, "keydown").pipe(

@@ -50,7 +50,7 @@ export class ResolveComponent {
   }
 
   onNext() {
-    if (this.message$.value == "You've finished typography") return
+    if (this.message$.value == "You've finished criptography") return
     this.message$.next('')
   }
 }

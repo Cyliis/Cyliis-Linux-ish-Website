@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { fromEvent, map, timer } from 'rxjs';
+import { delay, fromEvent, map, timer } from 'rxjs';
 import { UserService } from './user.service';
 import { WindowsService } from './windows.service';
 
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     private sanitizer: DomSanitizer
   ) {}
 
-  loaded!: boolean;
+  loaded: boolean = false;
 
   bunny = this.sanitizer.bypassSecurityTrustHtml(`<!--  
   (\\_/)  
@@ -28,9 +28,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     .getUserUpdateListener()
     .pipe(map((res: any) => res?.resolveLevel == 9));
 
-  ngOnInit() {
-    this.loaded =
-      !!localStorage.getItem('boot') || this.windowsService.isMobile();
+  ngOnInit() { 
     this.onSetTheme();
     this.onSetBackgroundImage();
     this.onSetPrimaryColor();

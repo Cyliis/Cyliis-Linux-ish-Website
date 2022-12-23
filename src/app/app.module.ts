@@ -20,7 +20,6 @@ import { ImageComponent } from './image/image.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { AboutComponent } from './about/about.component';
 import { EventComponent } from './event/event.component';
-import { DocumentsComponent } from './documents/documents.component';
 import { ImagesComponent } from './images/images.component';
 import { BootScreenComponent } from './boot-screen/boot-screen.component';
 import { FormsModule } from '@angular/forms';
@@ -46,7 +45,6 @@ import { ResolveComponent } from './resolve/resolve.component';
     PortfolioComponent,
     AboutComponent,
     EventComponent,
-    DocumentsComponent,
     ImagesComponent,
     BootScreenComponent,
     ChessComponent,
