@@ -27,11 +27,11 @@
 .sponsors {
     display: flex;
     justify-content: center;
-    gap: .5rem;
+    gap: 1rem;
     margin-bottom: 20px;
     flex-wrap: wrap;
     img {
-        border: 5px solid rgba(var(--primary-color), .6);
+        outline: 5px solid rgba(var(--primary-color), .6);
         background-color: rgba(var(--primary-color), .2);
         border-radius: 6px;
         padding: 1rem;

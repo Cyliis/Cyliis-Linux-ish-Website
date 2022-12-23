@@ -118,16 +118,17 @@
     @include mat.elevation(2);
 }
 
-.fullscreen, .vim {
+.fullscreen {
     left: 0;
     top: 0;
     width: 98vw!important;
     height: 96vh!important;
     transform: none!important;
     resize: none;
-    .window__actions {
-        display: none;
-    }
+}
+
+.fullscreen.vim .window__actions {
+    display: none;
 }
 
 .window.console {

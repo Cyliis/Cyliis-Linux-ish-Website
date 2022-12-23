@@ -71,7 +71,8 @@ export class DesktopComponent implements OnInit {
     });
     fromEvent(document, "keydown").pipe(
       filter((e : any) => e.target == document.body && e.key == 'Enter'),
-      concatMap(() => from(this.selected).pipe(delay(100)))
+      switchMap(el => from(this.selected)),
+      concatMap((el) => of(el).pipe(delay(50)))
 
     )
     .subscribe((e : any) => this.windowsService.openWindow(e.dataset['app']))
