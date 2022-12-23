@@ -1,7 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, interval, timer } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, interval, timer } from 'rxjs';
 import { setInFront } from '../state/windows/windows.actions';
 import { WindowsService } from '../windows.service';
 
@@ -20,25 +20,27 @@ export class BarComponent implements OnInit {
   time$ = new BehaviorSubject(new Date())
 
   list : string[] = []
+
   ngOnInit(): void {
     interval(1000).subscribe(() => this.time$.next(new Date()))
-    this.windows$.subscribe(
-      (res) => {
-        if (!this.list.length) this.list = [...res]
-        if (res.length != this.list.length) {
-          if (res.length > this.list.length) {
-            this.list.push(res[res.length - 1])
-          }
-          else {
-            this.list.forEach((el : string) => {
-              if (!res.includes(el)) document.querySelector('.' + el)?.classList.add('disappear')
-            })
-            timer(400).subscribe(() => {
-              this.list = this.list.filter((el : string) => res.includes(el))
-            })
-          }
+    this.windows$.subscribe((res) => {
+      if (!this.list.length) this.list = [...res]
+      if (res.length != this.list.length) {
+        if (res.length > this.list.length) {
+          this.list.push(res[res.length - 1])
         }
-      })
+        else {
+          this.list.forEach((el : string) => {
+            if (!res.includes(el)) {
+              document.querySelector('.bar-app-' + el)?.classList.add('disappear')
+            }
+          })
+          timer(400).subscribe(() => {
+            this.list = this.list.filter((el : string) => res.includes(el))
+          })
+        }
+      }
+    })
   }
 
   onMaximize(window : string, minimizeds : any, selected : any, e : MouseEvent) {

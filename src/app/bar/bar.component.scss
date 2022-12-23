@@ -106,7 +106,7 @@
     }
 }
 
-.app {
+.bar-app {
     display: flex;
     flex-direction: column;
     padding: 0 .1rem;
@@ -136,7 +136,7 @@
         transition: .2s cubic-bezier(.175, .885, .32, 1.275);
     }
     &:hover {
-        .app__close-button {
+        .bar-app__close-button {
             transform: scale(.5);
         }
         background-color: rgba(255, 255, 255, 0.4);
@@ -144,7 +144,7 @@
     &--selected {
         background-color: rgba(255, 255, 255, 0.6);
     }
-    &:hover.app--selected {
+    &:hover.bar-app--selected {
         background-color: rgba(255, 255, 255, 0.7);
     }
     &:active &__img {
@@ -153,7 +153,7 @@
     &--minimized {
         background-color:  rgba(255, 255, 255, .1);
     }    
-    &:hover.app--minimized.app--selected {
+    &:hover.bar-app--minimized.bar-app--selected {
         background-color: rgba(255, 255, 255, 0.5);
     }
 }

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
 import { WindowsService } from '../windows.service';
 import Selecto from "selecto";
-import { filter, fromEvent, timer } from 'rxjs';
+import { concatMap, debounceTime, delay, filter, from, fromEvent, of, switchMap, throttleTime, timer } from 'rxjs';
 
 @Component({
   selector: 'app-desktop',
@@ -70,13 +70,11 @@ export class DesktopComponent implements OnInit {
     });
     });
     fromEvent(document, "keydown").pipe(
-      filter((e : any) => e.target == document.body && e.key == 'Enter')
+      filter((e : any) => e.target == document.body && e.key == 'Enter'),
+      concatMap(() => from(this.selected).pipe(delay(100)))
+
     )
-    .subscribe((e) => {
-      this.selected.forEach((el : any) => {
-        timer(50).subscribe(() =>this.windowsService.openWindow(el.dataset['app']))
-      }) 
-    })
+    .subscribe((e : any) => this.windowsService.openWindow(e.dataset['app']))
   }
 
   onOpen(window : string) {
