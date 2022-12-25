@@ -6,7 +6,7 @@
     </div>
 </div>
 <div *ngIf="!loaded" class="boot-screen">
-    <pre [innerHTML]="content"></pre>
+    <pre class="content" [innerHTML]="content"></pre>
     <div class="skip" (click)="onSkip()">
         press ⎵ to skip
     </div>

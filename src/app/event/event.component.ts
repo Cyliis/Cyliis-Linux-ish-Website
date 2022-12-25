@@ -15,7 +15,7 @@ export class EventComponent {
   event$ = this.store.select('event')
 
   async onAction(url : any) {
-    console.log((await this.userService.getCodes())[4])
     window.open(url);
+    console.warn((await this.userService.getCodes())[9])
   }
 }

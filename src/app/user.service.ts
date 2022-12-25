@@ -95,7 +95,6 @@ export class UserService {
     }
     let newUser = await addDoc(collection(this.db, "users"), userInfo);
     userInfo.id = newUser.id
-    console.log(userInfo)
     this.userUpdated.next(userInfo)
   }
 
@@ -118,7 +117,7 @@ export class UserService {
         points += (user.resolveLevel - 7) * 60
       }
     }
-    Object.keys(user.codes).forEach(() => points += 20)
+    Object.keys(user.codes).forEach(() => points += 30)
     return `<pre>${user.username}: <span class="mark">${points}</span> points</pre>`
   }
 

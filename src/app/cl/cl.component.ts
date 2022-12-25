@@ -11,7 +11,7 @@ import { resolve } from './resolve.data';
   styleUrls: ['./cl.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ClComponent implements AfterViewInit, OnDestroy {
 
   constructor(private windowsService : WindowsService, private userService : UserService) { }
 
@@ -47,10 +47,6 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
 
-  ngOnInit(): void {
-    
-  }
-
   setInputFocus() {
     this.consoleInput.nativeElement.focus()
   }
@@ -83,7 +79,7 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
     let command = commands.shift().toLowerCase()
     if (app?.exec) app?.exec()
     else if (command == 'bgimage') this.changeDesktopImage(commands)
-    else if (command == 'decode') this.decode(commands)
+    else if (command == 'promocode') this.promocode(commands)
     else if (command == 'cd') this.cd(commands.join(" "))
     else if (command == 'clear') this.content = `<p></p>`
     else if (command == 'color') this.changeSystemColor(commands)
@@ -117,7 +113,7 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
     this.vim = true
     this.content = ``
     this.title = "Vim"
-    console.log((await this.userService.getCodes())[2])
+    console.log((await this.userService.getCodes())[1])
   }
 
   resolve(commands : any) : any {
@@ -146,13 +142,13 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
     else this.content += 'Wrong answer'
   }
 
-  async decode(commands : any) : Promise<any> {
+  async promocode(commands : any) : Promise<any> {
     if (!this.userService.getUser()) return this.content += `You don't currently have permission to execute this command.`
     if (!commands[0]) return this.content += `
       Invalid syntax:<br>
-      decode <span class="mark">[code]</span><br><br>
+      promocode <span class="mark">[code]</span><br><br>
 
-      <span class="mark">Ex:</span> decode bW90cmljYWxh
+      <span class="mark">Ex:</span> promocode bW90cmljYWxhNDRAZ21haWwuY29t
     `
     if ((await this.userService.getCodes()).includes(commands[0])) {
       this.content += `Your code was succesfuly converted into points.<br><br>`
@@ -243,7 +239,7 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
     this.folderStructure[this.folderIndex].folders.forEach((el) => {
       this.content += `<pre>26/02/2004  01:25 PM    ${el.folder ? '<span class="folder">DIR</span>' : '   '}          ${el.access ? el.showText : `<span class="restricted">${el.showText}</span>`} </pre>`
     })
-    console.log((await this.userService.getCodes())[7])
+    console.log((await this.userService.getCodes())[2])
   }
 
   setIcons(commands : any) {
@@ -263,11 +259,12 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async shutdown() {
-    console.log((await this.userService.getCodes())[9])
+    console.log((await this.userService.getCodes())[3])
     var myWindow : any = window.open("", "_self");
     myWindow.document.write("");
     localStorage.setItem('boot', '')
     timer(1000).subscribe(() => myWindow.close())
+    
   }
 
   changeSystemColor(commands : any) {
@@ -308,7 +305,6 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
       <pre>CD         Displays the name of or changes the current directory.</pre>
       <pre>CLEAR      Clears the screen.</pre>
       <pre>COLOR      Sets system color.</pre>
-      <pre>DECODE     Transforms code into points.</pre>
       <pre>ECHO       Displays typed text.</pre>
       <pre>EXIT       Quits the CyCL program (command interpreter).</pre>
       <pre>FTYPE      Displays or modifies file types used in file extension associations.</pre>
@@ -319,6 +315,7 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
       <pre>LOGOUT     Sign out.</pre>
       <pre>LS         Displays a list of files and subdirectories in a directory.</pre>
       <pre>NEOFETCH   Shows system details.</pre>
+      <pre>PROMOCODE  Transforms promocodes into points.</pre>
       <pre>RESOLVE    Execute quiz process</pre>
       <pre>RM         Removes a directory.</pre>
       <pre>SHUTDOWN   Shutdown of machine.</pre>
@@ -354,7 +351,7 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
 <span class="mark">           ,;;;;;;;;,,'........            </span>
 <span class="mark">                 ..........                </span>
     </pre>` 
-    console.log((await this.userService.getCodes())[8])
+    console.log((await this.userService.getCodes())[4])
   }
 
   setBackgroundImage(index : number) {
@@ -398,11 +395,9 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
 <span class="mark">github:</span> github.com/FR13ND-ly
 <span class="mark">linkedin:</span> linkedin.com/in/alin-gabriel-motricala
 </pre>    ` 
-    console.log((await this.userService.getCodes())[5])
   }
 
   hint() : any {
-    console.log('a')
     let user = this.userService.getUser()
     if (!user) return this.content += 'You need to login'
     if (user.resolveLevel == 7) {
@@ -420,6 +415,5 @@ export class ClComponent implements OnInit, AfterViewInit, OnDestroy {
     else {
       this.content += 'Find adventures'
     }
-    console.log(this.content)
   }
 }

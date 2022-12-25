@@ -48,6 +48,7 @@
     animation: tie-slide-in-up .2s 1.2s forwards;
 }
 
+
 @keyframes tie-slide-in-up {
     from {
         transform: translate3d(0, 50px, 0);
@@ -57,4 +58,13 @@
         transform: translate3d(0, 0, 0);
         opacity: 1;
     }
-  }
+}
+
+@media only screen and (max-width: 600px) {
+    .boot-screen {
+        padding: 2rem;
+    }
+    .skip {
+        display: none;
+    }
+}

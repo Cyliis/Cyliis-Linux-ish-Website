@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { WindowsService } from '../windows.service';
 import Selecto from "selecto";
-import { concatMap, debounceTime, delay, filter, from, fromEvent, of, switchMap, throttleTime, timer } from 'rxjs';
+import { concatMap, delay, filter, from, fromEvent, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-desktop',
@@ -11,7 +11,7 @@ import { concatMap, debounceTime, delay, filter, from, fromEvent, of, switchMap,
 })
 export class DesktopComponent implements OnInit {
 
-  constructor(private windowsService : WindowsService, private el : ElementRef) { }
+  constructor(private windowsService : WindowsService) { }
 
   files = [
     {
@@ -62,18 +62,13 @@ export class DesktopComponent implements OnInit {
     })
     selecto.on("select", e => {
       this.selected = e.selected
-      e.added.forEach(el => {
-        el.classList.add("app--selected");
-      })
-      e.removed.forEach(el => {
-        el.classList.remove("app--selected");
-    });
+      e.added.forEach(el => el.classList.add("app--selected"))
+      e.removed.forEach(el => el.classList.remove("app--selected"));
     });
     fromEvent(document, "keydown").pipe(
       filter((e : any) => e.target == document.body && e.key == 'Enter'),
       switchMap(el => from(this.selected)),
       concatMap((el) => of(el).pipe(delay(50)))
-
     )
     .subscribe((e : any) => this.windowsService.openWindow(e.dataset['app']))
   }

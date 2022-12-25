@@ -25,10 +25,10 @@ export class BootScreenComponent implements OnInit, OnDestroy {
       action : () => this.content += '[       10.0.22000.978] The bits are breeding<br>'
     },
     {
-      action : () => this.content += "[       10.0.22000.978] Making sure all the i's have dots...<br>"
+      action : () => this.content += "[       10.0.22000.978] Making sure all the <wbr>i's have dots...<br>"
     },
     {
-      action : () => this.content += '[       10.0.22000.978] Connecting Neurotoxin Storage Tank...<br>'
+      action : () => this.content += '[       10.0.22000.978] Connecting Neurotoxin <wbr>Storage Tank...<br>'
     },
   ]
 
@@ -37,16 +37,16 @@ export class BootScreenComponent implements OnInit, OnDestroy {
       action : () => this.content += 'root@elliot$: ping (222.12.154.102)<br>'
     },
     {
-      action : () => this.content += 'root@elliot$: 64 bytes ev.e-bnk.org (222.12.154.102): icmp_req=1 ttl=1<br>'
+      action : () => this.content += 'root@elliot$: 64 bytes ev.e-bnk.org <wbr>(222.12.154.102): icmp_req=1 ttl=1<br>'
     },
     {
-      action : () => this.content += 'root@elliot$: 1 packets transmitted, 1 received, 0% packet loss, time<br>'
+      action : () => this.content += 'root@elliot$: 1 packets transmitted, <wbr>1 received, 0% packet loss, time<br>'
     },
     {
-      action : () => this.content += 'root@elliot$: elpscrk -list pswList.list-add Dylan; June 3rd, Stonehen<br>'
+      action : () => this.content += 'root@elliot$: elpscrk -list pswList.list-add <wbr>Dylan; June 3rd, Stonehen<br>'
     },
     {
-      action : () => this.content += 'root@elliot$: List Count: 9875894 Type: alphanum<br>'
+      action : () => this.content += 'root@elliot$: List Count: 9875894 <wbr>Type: alphanum<br>'
     },
     {
       action : () => this.content += 'root@elliot$: Scanning Complete<br>'
@@ -55,10 +55,10 @@ export class BootScreenComponent implements OnInit, OnDestroy {
       action : () => this.content += 'root@elliot$: Time elapsed: 24.08771<br>'
     },
     {
-      action : () => this.content += 'root@elliot$: th_code: Dylan_2791<br>'
+      action : () => this.content += 'root@elliot$: Promocode: Y3lsaWlz<br>'
     },
     {
-      action : () => this.content += 'root@elliot$: You may need the th_code<br>'
+      action : () => this.content += 'root@elliot$: May the force be with you<br>'
     },
     {
       action : () => {}
@@ -104,13 +104,13 @@ export class BootScreenComponent implements OnInit, OnDestroy {
         this.loading = [...this.loading, {action : () => this.content += 'root@mag$: Why so serious?<br>'}]
         break
       case 6:
-        console.log((await this.userService.getCodes())[3])
         this.loading = [...this.loading, {action : () => this.content += "root@mag$: Don't worry - a few bits tried to escape, but we caught them<br>"}]
         break
       case 7:
         this.loading = [...this.loading, {action : () => this.content += "root@mag$: Have a good day<br>"}]
         break
       case 8:
+        console.log((await this.userService.getCodes())[6])
         this.loading = [...this.loading, {action : () => this.content += "root@mag$: Who am I?<br>"}]
         break
       case 9:
@@ -137,7 +137,7 @@ export class BootScreenComponent implements OnInit, OnDestroy {
   }
 
   openOldSite() {
-    location.href = "http://cyliis.ro"
+    location.href = "https://cyliis.ro"
   }
 
   ngOnDestroy(): void {
