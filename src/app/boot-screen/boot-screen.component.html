@@ -1,13 +1,13 @@
-<div class="boot-screen" *ngIf="loaded">
+<ng-container *ngIf="loaded">
     <h1 class="title">Boot Options:</h1>
     <div class="options">
         <div class="option" (mouseover)="selected = 0" [class.option--selected]="!selected" (click)="openOldSite()">Old site</div>
         <div class="option" (mouseover)="selected = 1" [class.option--selected]="selected" (click)="boot.emit()">New Site</div>
     </div>
-</div>
-<div *ngIf="!loaded" class="boot-screen">
+</ng-container>
+<ng-container *ngIf="!loaded">
     <pre class="content" [innerHTML]="content"></pre>
     <div class="skip" (click)="onSkip()">
         press ⎵ to skip
     </div>
-</div>
+</ng-container>

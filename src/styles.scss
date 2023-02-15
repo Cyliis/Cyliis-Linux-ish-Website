@@ -1,42 +1,5 @@
-@use "@angular/material" as mat;
-@include mat.core();
-
-$cyliis-primary: mat.define-palette(mat.$indigo-palette);
-$cyliis-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-$cyliis-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $cyliis-primary,
-      accent: $cyliis-accent,
-    ),
-  )
-);
-
-$dark-theme: mat.define-dark-theme(
-  (
-    color: (
-      primary: $cyliis-primary,
-      accent: $cyliis-accent,
-    ),
-  )
-);
-
-@include mat.all-component-themes($cyliis-theme);
-
-:root {
-  --bg-color-primary: #fff;
-  --bg-color-secondary: #ccc;
-  --primary-color: 0, 255, 255;
-  --text-color: #212121;
-}
-
-.dark-theme {
-  --bg-color-primary: #000;
-  --bg-color-secondary: rgb(38, 38, 38);
-  --text-color: #fff;
-  @include mat.all-component-colors($dark-theme);
-}
+@use '/src/assets/styles/utilites';
+@use '/src/assets/styles/themes';
 
 .background-image {
   &-0 {
@@ -84,97 +47,23 @@ body {
   background-size: cover;
 }
 
-.hide {
-  display: none!important;
-}
-
-pre {
-  margin: 0;
-}
-
-.folder-content {
+.workspace {
   display: flex;
-  align-items: flex-start;
+  width: 100vw;
+  height: 100vh;
+  padding: 1vw;
   box-sizing: border-box;
-  overflow: auto;
-  flex-wrap: wrap;
-  padding: .5rem;
-  gap: .5rem;
 }
 
-.file {
-  text-align: center;
-  user-select: none;
-  width: 15%;
-  max-width: 100px;
-  min-width: 80px;
-  padding: .5rem;
-  border-radius: 2px;
-  height: fit-content;
-  position: relative;
-  &__image {
-    object-fit: cover;
-    overflow: hidden;
-    width: 100%;
-    height: 90px;
-    border-radius: 6px;
-    user-select: none;
-    transition: .2s;
-  }
-  &__name {
-    font-size: .8rem;
-  }
-  &:hover {
-    .file__image {
-      border-radius: 20px;
-      user-select: none;
-    }
-    background-color: rgba(var(--primary-color), .2);
-  }
-  &:focus {
-    background-color: rgba(var(--primary-color), .3);
-    user-select: initial;
-    .file__image {
-      border-radius: 16px;
-    }
-  }
-  &:focus:active {
-    background-color: rgba(var(--primary-color), .4);
-  }
+app-desktop {
+  width: 100%;
 }
 
-.selecto-selection {
-  z-index: 0!important;
+.white-rabbit {
   display: none;
-  border: 1px solid rgb(var(--primary-color))!important;
-  background: rgb(var(--primary-color), .5)!important;
 }
 
 @keyframes appear {
   from { transform: scale(0);}
   to { transform: scale(1);}
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar {
-  width: 20px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgba(var(--primary-color), .2);
-  border-radius: 20px;
-  border: 6px solid transparent;
-  background-clip: content-box;
-  min-height: 100px;
-  transition: .2s;
-  &:hover {
-    opacity: 100%;
-    background-color: rgba(var(--primary-color), .4);
-  }
-  &:active {
-    background-color: rgba(var(--primary-color), .5);
-  }
 }

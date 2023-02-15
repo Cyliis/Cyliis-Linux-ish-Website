@@ -1,7 +1,9 @@
 <app-boot-screen *ngIf="!loaded" (boot)="onBoot()"></app-boot-screen>
 <main *ngIf="loaded">
   <app-overlay></app-overlay>
-  <app-bar></app-bar>
-  <app-desktop></app-desktop>
+  <section class="workspace">
+    <app-bar></app-bar>
+    <app-desktop></app-desktop>
+  </section>
 </main>
 <div class="white-rabbit" [innerHTML]="bunny" *ngIf="showBunny$ | async"></div>
